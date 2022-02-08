@@ -15,7 +15,9 @@
 \newcommand{\contribution}{\pdfbookmark[1]{Личный вклад}{contribution}\underline{\textbf{\contributionTXT}}}
 \newcommand{\publications}{\pdfbookmark[1]{Публикации}{publications}\underline{\textbf{\publicationsTXT}}}
 
-\input{common/characteristic} % Характеристика работы по структуре во введении и в автореферате не отличается (ГОСТ Р 7.0.11, пункты 5.3.1 и 9.2.1), потому её загружаем из одного и того же внешнего файла, предварительно задав форму выделения некоторым параметрам
+% Характеристика работы по структуре во введении и в автореферате не отличается (ГОСТ Р 7.0.11, пункты 5.3.1 и 9.2.1), 
+% потому её загружаем из одного и того же внешнего файла, предварительно задав форму выделения некоторым параметрам
+\input{common/characteristic} 
 
 %Диссертационная работа была выполнена при поддержке грантов \dots
 
@@ -25,7 +27,9 @@
 %литературы содержит \textbf{ХХX}~наименование.
 
 \pdfbookmark{Содержание работы}{description}                          % Закладка pdf
+
 \section*{Содержание работы}
+
 Во \underline{\textbf{введении}} обосновывается актуальность
 исследований, проводимых в~рамках данной диссертационной работы,
 приводится обзор научной литературы по~изучаемой проблеме,
@@ -37,36 +41,36 @@
 
 \underline{\textbf{Первая глава}} посвящена \dots
 
-картинку можно добавить так:
-\begin{figure}[ht]
-    \centerfloat{
-        \hfill
-        \subcaptionbox{\LaTeX}{%
-            \includegraphics[scale=0.27]{latex}}
-        \hfill
-        \subcaptionbox{Knuth}{%
-            \includegraphics[width=0.25\linewidth]{knuth1}}
-        \hfill
-    }
-    \caption{Подпись к картинке.}\label{fig:latex}
-\end{figure}
+% картинку можно добавить так:
+% \begin{figure}[ht]
+%     \centerfloat{
+%         \hfill
+%         \subcaptionbox{\LaTeX}{%
+%             \includegraphics[scale=0.27]{latex}}
+%         \hfill
+%         \subcaptionbox{Knuth}{%
+%             \includegraphics[width=0.25\linewidth]{knuth1}}
+%         \hfill
+%     }
+%     \caption{Подпись к картинке.}\label{fig:latex}
+% \end{figure}
 
-Формулы в строку без номера добавляются так:
-\[
-    \lambda_{T_s} = K_x\frac{d{x}}{d{T_s}}, \qquad
-    \lambda_{q_s} = K_x\frac{d{x}}{d{q_s}},
-\]
+% Формулы в строку без номера добавляются так:
+% \[
+%     \lambda_{T_s} = K_x\frac{d{x}}{d{T_s}}, \qquad
+%     \lambda_{q_s} = K_x\frac{d{x}}{d{q_s}},
+% \]
 
 \underline{\textbf{Вторая глава}} посвящена исследованию
 
 \underline{\textbf{Третья глава}} посвящена исследованию
 
-Можно сослаться на свои работы в автореферате. Для этого в файле
-\verb!Synopsis/setup.tex! необходимо присвоить положительное значение
-счётчику \verb!\setcounter{usefootcite}{1}!. В таком случае ссылки на
-работы других авторов будут подстрочными.
-Изложенные в третьей главе результаты опубликованы в~\cite{vakbib1, vakbib2}.
-Использование подстрочных ссылок внутри таблиц может вызывать проблемы.
+% Можно сослаться на свои работы в автореферате. Для этого в файле
+% \verb!Synopsis/setup.tex! необходимо присвоить положительное значение
+% счётчику \verb!\setcounter{usefootcite}{1}!. В таком случае ссылки на
+% работы других авторов будут подстрочными.
+% Изложенные в третьей главе результаты опубликованы в~\cite{vakbib1, vakbib2}.
+% Использование подстрочных ссылок внутри таблиц может вызывать проблемы.
 
 В \underline{\textbf{четвертой главе}} приведено описание
 
@@ -76,9 +80,9 @@
 \input{common/concl}
 
 \pdfbookmark{Литература}{bibliography}                                % Закладка pdf
-При использовании пакета \verb!biblatex! список публикаций автора по теме
-диссертации формируется в разделе <<\publications>>\ файла
-\verb!common/characteristic.tex!  при помощи команды \verb!\nocite!
+% При использовании пакета \verb!biblatex! список публикаций автора по теме
+% диссертации формируется в разделе <<\publications>>\ файла
+% \verb!common/characteristic.tex!  при помощи команды \verb!\nocite!
 
 \ifdefmacro{\microtypesetup}{\microtypesetup{protrusion=false}}{} % не рекомендуется применять пакет микротипографики к автоматически генерируемому списку литературы
 \urlstyle{rm}                               % ссылки URL обычным шрифтом
@@ -104,18 +108,18 @@
     \nocite{scbib1}%
     %
     %% authorpathent
-    \nocite{patbib1}%
+    % \nocite{patbib1}%
     %
     %% authorprogram
-    \nocite{progbib1}%
+    % \nocite{progbib1}%
     %
     %% authorconf
-    \nocite{confbib1}%
-    \nocite{confbib2}%
+    % \nocite{confbib1}%
+    % \nocite{confbib2}%
     %
     %% authorother
-    \nocite{bib1}%
-    \nocite{bib2}%
+    % \nocite{bib1}%
+    % \nocite{bib2}%
 
     \ifnumgreater{\value{usefootcite}}{0}{
         \begin{refcontext}[labelprefix={}]
