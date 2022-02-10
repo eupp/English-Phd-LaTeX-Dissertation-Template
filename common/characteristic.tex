@@ -55,7 +55,7 @@
 {\actuality} 
 В современном мире многопоточные программные системы распространены повсеместно. 
 Разработка и тестирование программного обеспечения для таких систем на порядок 
-сложнее и трудозатратнее, чем для последовательных систем. 
+сложнее и трудозатратнее чем для последовательных систем. 
 По этой причине крайне актуальной становится проблема 
 формальной спецификации и верификации этого программного обеспечения. 
 
@@ -69,17 +69,15 @@
 о поведении многопоточных программ как для человека, 
 так и для программных средств для автоматической и интерактивной верификации программ. 
 
-\emph{Структуры событий} являются одним из семантических доменов, 
+\emph{Структуры событий} являются одним из семантических доменов 
 относящихся к классу моделей истинной конкурентности.
-Классическая теория структур событий была разработана 
-G.Winskel и коллегами для описания семантики 
+Классическая теория структур событий была разработана G.Winskel для описания семантики 
 исчисления взаимодействующих систем (Calculus of Communicating Systems, CCS).
-К сожалению, исчисление взаимодействующих систем является 
-достаточно простой моделью параллельных вычислений,
+Тем не менее, данное исчисление является достаточно простой моделью параллельных вычислений,
 которое, в частности, не позволяет описывать 
 \emph{слабые сценарии поведения} многопоточных программ.
 Данные сценарии возникают на современных системах вследствии 
-применения компиляторами и аппаратным обеспечением
+применения компиляторами и процессорами
 различных оптимизаций при сборке и выполнении программ. 
 
 Чтобы преодолеть этот недостаток S.Chakraborty и V.Vafeiadis 
@@ -99,9 +97,221 @@ G.Winskel и коллегами для описания семантики
 но с другой стороны допускает разработку на её основе 
 инструментов для автоматической и интерактивной верификации программ. 
 
+{\progress}
+
+Теория структуры событий была разработана G.Winskel
+в 1980-1990 годы для задания денотационной семантики 
+исчисления взаимодействующих систем (Calculus of Communicating Systems, CCS)%
+~\autocite{Winskel:ICALP1982}.
+Относительно недавно эта теория также была использована 
+для задания семантики пи-исчисления процессов ($\pi$-calculus)%
+~\autocite{Varacca-Nobuko:TCS10,Crafa-al:FSCCS12,Hildebrandt-al:LATA2017}.
+
+Модели многопоточных программ, которые оперируют с разделяемой памятью 
+и допускают слабые сценарии поведения, называются \emph{слабыми моделями памяти}.
+Теория слабых моделей памяти также активно развивалась начиная с 1990-ых годов. 
+На сегодняшний день существует множество моделей памяти 
+описывающих поведение мультипроцессоров, 
+многопоточных языков программирования и распределенных систем. 
+Эти модели, в свою очередь, можно разделить на несколько классов. 
+Модели \emph{сохраняющие программный порядок} образуют широкий класс, 
+включающий, в том числе, ограниченный фрагмент модели памяти языков \CPP~\autocite{Lahav-al:PLDI17},
+модель \TSO процессоров семейства \Intel~\autocite{Sewell-al:CACM10},
+а также модели распределенных систем, 
+например, модель последовательной согласованности (causal consistency)~\autocite{Lahav-Boker:PLDI2020}
+и модель согласованности в конечном счёте (eventual consistency)~\autocite{Jagadeesan-al:ESOP2018}.
+Модели архитектур процессоров, например \ARMv{8}~\autocite{Pulte-al:POPL18} 
+и \POWER~\autocite{Sarkar-al:PLDI11}, 
+как правило принадлежат к классу моделей \emph{сохраняющих синтаксические зависимости}. 
+Основное ограничение моделей принадлежащих к данным классам заключается в том, 
+что они не поддерживают некоторые трансформации программ, 
+применяемые оптимизирующими компиляторами. 
+Поэтому эти модели не вполной мере отвечают требованиям, 
+предъявляемым к моделям памяти для таких языков как \CPP и \Java. 
+С целью преодоления этих ограничений исследователями 
+были предложено несколько моделей, в том числе 
+\Prm~\autocite{Kang-al:POPL17}, \Wkm~\autocite{Chakraborty-Vafeiadis:POPL19}, 
+\MRD~\autocite{Paviotti-al:ESOP20}, \PwP~\autocite{Jagadeesan-al:OOPSLA2020},
+которые обычно относят к классу моделей \emph{сохраняющих семантические зависимости}.
+
+Классы моделей сохраняющих программный порядок и синтаксические зависимости 
+относительно хорошо изучены, в то время как свойства класса моделей 
+сохраняющих семантические зависимости по-прежнему активно исследуются.
+В частности, для моделей данного класса практический не исследованы
+вопросы построения эффективных инструментов автоматической и интерактивной верификации. 
+
+Также существует несколько работ, делающих попытку адаптировать 
+теорию структур событий для формализации слабых моделей памяти%
+~\autocite{Jeffrey-Riely:LICS16,PichonPharabod-Sewell:POPL16,Chakraborty-Vafeiadis:POPL19,Paviotti-al:ESOP20}. 
+Тем не менее, все эти работы вводят новые классы структур событий, 
+несовместимые с классическими определениями, что 
+затрудняет применение уже существующей теории структур событий. 
+
+%     Program order preserving models enjoy 
+%     a variety of useful properties and allow wide class 
+%     of optimization to be applied to programs, 
+%     with an important exception of load/store reordering.
+%     The latter, in particular, imposes performance penalties
+%     on implementation of these models on top of modern hardware, 
+%     \eg \ARM and \POWER. 
+
+%     Nevertheless, models of this class are widespread and commonly known.
+%     Among them are memory model of a restricted fragment 
+%     of the C language, known as \RCMM~\cite{Lahav-al:PLDI17}, 
+%     and \TSO model of \Intel hardware~\cite{Sewell-al:CACM10}.    
+
+
+
 % \begin{itemize}
-%   \item 
+  
+%   \item In \emph{program order preserving models} 
+%     instructions appear to take effect according 
+%     to their \emph{program order}, which is 
+%     guaranteed to be total within each thread. 
+%     Models of this class forbid the outcome ${[r_1=1,r_2=1]}$
+%     for program \ref{prog:lb} and its variations 
+%     \ref{prog:lb-dep}, \ref{prog:lb-fakedep} shown below.  
+
+%     \begin{minipage}{0.4\linewidth}
+%       \begin{equation*}
+%         \inarrII{
+%           \readInst{}{r_1}{x}  \\
+%           \writeInst{}{y}{r_1} \\
+%         }{
+%           \readInst{}{r_2}{y}  \\
+%           \writeInst{}{x}{r_2} \\
+%         }                      \\
+%         \tag{LB-DEP}\label{prog:lb-dep}
+%       \end{equation*}
+%     \end{minipage}\hfill
+%     % 
+%     \begin{minipage}{0.5\linewidth}
+%       \begin{equation*}
+%         \inarrII{
+%           \readInst{}{r_1}{x}          \\
+%           \writeInst{}{y}{1 + r_1 * 0} \\
+%         }{
+%           \readInst{}{r_2}{y}     \\
+%           \writeInst{}{x}{r_2}    \\
+%         }                         \\
+%         \tag{LB-FAKEDEP}\label{prog:lb-fakedep}
+%       \end{equation*}
+%     \end{minipage}
+
+%     Note that reads are still allowed to read ``stale'' values
+%     as opposed to sequentially consistent memory. 
+%     For example, program order preservation does not 
+%     forbid to assign outcome ${[r_1 = 1, r_2 = 0]}$ 
+%     to the program \ref{prog:mp}, 
+%     while sequential consistency forbids it.
+
+%     \begin{equation*}
+%       \inarrII{
+%         \writeInst{}{x}{1}    \\
+%         \writeInst{}{y}{1}    \\
+%       }{
+%         \readInst{}{r_1}{y}    \\
+%         \readInst{}{r_2}{x}    \\
+%       }                        \\
+%       \tag{MP}\label{prog:mp}
+%     \end{equation*}    
+
+%     Program order preserving models enjoy 
+%     a variety of useful properties and allow wide class 
+%     of optimization to be applied to programs, 
+%     with an important exception of load/store reordering.
+%     The latter, in particular, imposes performance penalties
+%     on implementation of these models on top of modern hardware, 
+%     \eg \ARM and \POWER. 
+
+%     Nevertheless, models of this class are widespread and commonly known.
+%     Among them are memory model of a restricted fragment 
+%     of the C language, known as \RCMM~\cite{Lahav-al:PLDI17}, 
+%     and \TSO model of \Intel hardware~\cite{Sewell-al:CACM10}.    
+    
+%   \item \emph{Syntax dependency preserving models} 
+%     relax total program order to partial 
+%     \emph{preserved program order}, 
+%     which relates instructions only if there 
+%     exists \emph{syntactic dependency} between them. 
+%     For example, in program \ref{prog:lb} there are
+%     no syntactic dependencies between instructions, 
+%     and thus the outcome ${[r_1=1,r_2=1]}$ is allowed. 
+%     Contrary, in programs \ref{prog:lb-dep} and \ref{prog:lb-fakedep}
+%     there exists syntactic dependencies, and thus 
+%     outcome ${[r_1=1,r_2=1]}$ is forbidden. 
+        
+%     Although models of this class allow reordering 
+%     of independent load/store pairs, they forbid 
+%     another important optimization --- constant folding.
+%     This can be evident by consulting \ref{prog:lb-fakedep} again: 
+%     after an application of constant folding the instructions 
+%     of the left thread become independent, thus 
+%     jusifying outcome ${[r_1=1,r_2=1]}$.
+    
+%     Despite this fact syntax dependency preserving models
+%     are widely used as models of hardware architectures, 
+%     \eg \ARM~\cite{Pulte-al:POPL18}, \RISC~\cite{RISC}, 
+%     \POWER~\cite{Sarkar-al:PLDI11}, 
+%     because typical processors do not imploy such complex 
+%     optimizations as constant folding.
+    
+%  \item Finally, \emph{semantic dependency preserving models}
+%    relax syntactic dependencies tracking to 
+%    \emph{semantic dependency} tracking. 
+%    Giving program \ref{prog:lb-fakedep} these models would conclude 
+%    that there is no semantic dependency between instructions 
+%    of the left thread (indeed, the store to $y$ does not 
+%    depend on the value read from $x$), and thus 
+%    outcome ${[r_1=1,r_2=1]}$ should be allowed. 
+%    In program \ref{prog:lb-dep}, on the other hand,
+%    there exists a semantic dependency and thus 
+%    the weak outcome remains forbidden.
+   
+%    The models of this class aim to support wide range 
+%    of optimizations, including load/store reordering 
+%    and constant folding. Several semantical dependency
+%    tracking models, \eg \Promising~\cite{Kang-al:POPL17}, 
+%    \Weakestmo~\cite{Chakraborty-Vafeiadis:POPL19}, 
+%    \MRD~\cite{Paviotti-al:ESOP20}, 
+%    \PwT~\cite{Jagadeesan-al:OOPSLA2020}, 
+%    were developed independently and proposed 
+%    as memory models for the \CPP and \Java languages.    
+
 % \end{itemize}
+
+
+% Модели, \emph{сохраняющие программный порядок}, включает 
+
+
+% Эти модели, в свою очередь, можно разделить на несколько классов. 
+% Модели, \emph{сохраняющие программный порядок}, включает 
+
+
+
+
+% С 1990-х годов велась работа по
+% разработке семантики многопоточности с учетом слабых сценариев поведения.
+% Формальные модели для наиболее распространенных процессорных архитектур (x86, Power, ARM)
+% были разработаны J. Alglave, S. Ishtiaq, L. Maranget, F. Zappa Nardelli, S. Sarkar, P. Sewell и др.
+% исследователями\cscite{Alglave-al:TOPLAS14,Sewell-al:CACM10,Owens-al:TPHOL09}.
+% Новые версии моделей продолжают появляться в связи с развитием процессорных архитектур.
+% В частности, в 2016 и 2017 годах были представлены модели памяти для архитектур ARMv8.0 и
+% ARMv8.3\cscite{Flur-al:POPL16,Pulte-al:POPL18}.
+%% В настоящее время также ведутся работы по формализации моделей памяти графических процессоров.
+% В 1995 году была стандартизована слабая модель памяти для языка Java\cscite{Manson-al:POPL05};
+% в дальнейшем модель существенно менялась вплоть до 2005 года.
+% В 2011 году появилась аксиоматическая модель памяти для языков C/C++\cscite{Batty-al:POPL11}.
+%% Так модель памяти Java некорректна по отношению к базовым оптимизациям, а модель памяти C/С++ разрешает сценарии поведения
+%% программ, в которых появляются т.н. \emph{значения из воздуха} (Out-Of-Thin-Air values),
+%% что делает некорректными даже базовые рассуждения о программах.
+
+% В 2017 году исследователи J. Kang, C.-K. Hur, O. Lahav, V. Vafeiadis и D. Dreyer
+% представили обещающую модель памяти (promising memory model, $\Promise$)\cscite{Kang-al:POPL17}, которая является перспективным
+% решением проблемы задания семантики для языка с многопоточностью. Авторы 
+% доказали, что модель допускает большинство необходимых оптимизаций, а также показали корректность
+% эффективных схем компиляции в архитектуры x86 и Power. Открытым остался вопрос о корректности компиляции
+% в архитектуру ARM.
 
 % Обзор, введение в тему, обозначение места данной работы в
 % мировых исследованиях и~т.\:п., можно использовать ссылки на~другие
@@ -179,9 +389,9 @@ G.Winskel и коллегами для описания семантики
 {\influence} 
 
 Новая семантика на основе теории структур событий 
-для класса слабых моделей памяти, сохраняющих программный порядок,
+для класса слабых моделей памяти сохраняющих программный порядок
 соединяет классическую теорию структур событий 
-с теорией слабых моделей памяти, и позволяет применить известные результаты 
+с теорией слабых моделей памяти и позволяет применить известные результаты 
 о структурах событий в новой предметной области.  
 Формализация этой семантики в системе \coq открывает 
 путь к дальнейшей разработке средств 
@@ -190,16 +400,16 @@ G.Winskel и коллегами для описания семантики
  
 Новые свойства свободы от буфферезации записей (load buffering freedom)
 и локальности сертификации (certification locality), 
-добавленные в новую версию модели \WkmS, 
+которые были добавлены в новую версию модели \WkmS, 
 также могут быть добавлены и в другие модели памяти 
 с целью разработки методов автоматической верификации программ в этих моделях. 
 
 Новый алгоритм проверки моделей может быть использован на практике
-для верификации и отладки многопоточных алгоритмов и структур данных 
+для отладки и верификации многопоточных алгоритмов и структур данных 
 с учетом слабых сценариев исполнения, допустимых стандартом языка \CLANG. 
 
 {\reliability} полученных результатов обеспечивается 
-формальными доказательствами, разработанных в том числе с использованием
+формальными доказательствами, разработанными в том числе с использованием
 систем интерактивного доказательства теорем, 
 а также инженерными экспериментами. 
 Результаты находятся в соответствии с результатами, полученными другими авторами.
