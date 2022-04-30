@@ -11,6 +11,8 @@
 
 \input{Dissertation/setup}      % Упрощённые настройки шаблона
 
+\input{common/defs}           % кастомные макросы
+
 \input{common/newnames}         % Новые переменные, для всего проекта
 
 \input{common/data}             % Основные сведения
@@ -65,9 +67,19 @@
 }{\counterwithin{figure}{chapter}}
 \ifnumequal{\value{contnumtab}}{1}{\counterwithout{table}{chapter}
 }{\counterwithin{table}{chapter}}
-\include{Dissertation/part1}           % Глава 1
-\include{Dissertation/part2}           % Глава 2
-\include{Dissertation/part3}           % Глава 3
+
+\include{Dissertation/review}           % Глава 1: Обзор
+\include{Dissertation/porf-eventstruct} % Глава 2: Структуры событий для моделей,
+                                        %          сохраняющих программный порядок
+\include{Dissertation/weakestmo-imm}    % Глава 2: Модель Weakestmo и корректность компиляции 
+\include{Dissertation/weakestmo2}       % Глава 3: Модель Weakestmo2 и свойства свободы от 
+                                        %          буфферезации операций чтения и локальности сертификации
+\include{Dissertation/mc-weakestmo2}    % Глава 4: Верификация методом проверки модели для Weakestmo2
+
+%% \include{Dissertation/part1}           
+%% \include{Dissertation/part2}           
+%% \include{Dissertation/part3}
+
 \include{Dissertation/conclusion}      % Заключение
 \include{Dissertation/acronyms}        % Список сокращений и условных обозначений
 \include{Dissertation/dictionary}      % Словарь терминов
@@ -83,7 +95,7 @@
 \renewcommand*{\afterchapternum}{\par\nobreak\vskip \midchapskip}
 \renewcommand\thechapter{\Asbuk{chapter}} % Чтобы приложения русскими буквами нумеровались
 
-\include{Dissertation/appendix}        % Приложения
+%% \include{Dissertation/appendix}        % Приложения
 
 \setcounter{totalappendix}{\value{chapter}} % Подсчёт количества приложений
 
