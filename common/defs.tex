@@ -39,8 +39,9 @@
 % power set
 \newcommand{\pwset}[1]{\mathcal{P}(#1)}
 
-% prefix 
+% prefix/suffix
 \newcommand{\dwset}[1]{\lceil #1 \rceil}
+\newcommand{\upset}[1]{\lfloor #1 \rfloor}
 
 % function-to-relation
 \newcommand{\frel}[1]{#1^\uparrow}
@@ -83,11 +84,25 @@
 % predecessor function
 \newcommand{\pred}{\mathit{pred}}
 
+% maps
+\newcommand{\appmap}[2]{#1(#2)}
+\newcommand{\updmap}[3]{#1[#2 \mapsto #3]}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  LTS Defs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\LTS}{\Sigma}
+
+% (labelled) transition 
+\newcommand{\tr}[3][{}]{{#2}\xrightarrow[#1]{}{#3}}
+\newcommand{\ltr}[4][{}]{{#3}\xrightarrow[#1]{#2}{#4}}
+
+% to denote some state
+\newcommand{\state}{\sigma}
+
+% step tuple
+\newcommand{\step}[3]{\tup{#2, #1, #3}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Pomsets and Event Struct. Defs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -133,6 +148,15 @@
 % pomset language of an event structure
 \newcommand{\pomlang}[1]{\mathbf{Pom}(#1)\xspace}
 
+
+\newcommand{\pomStep}[1]{\xhookrightarrow{#1}}
+\newcommand{\esStep}[1]{\xrightarrow{#1}}
+
+% step synchronization relation
+\newcommand{\ssync}{\gg}
+\newcommand{\posync}{\underset{\lPO}{\gg}}
+\newcommand{\rfsync}{\underset{\lRF}{\gg}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Weak Memory Defs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -174,6 +198,7 @@
 \newcommand{\lVAL}{{\mathtt{val}}}
 \newcommand{\lVALR}{{\mathtt{val_r}}}
 \newcommand{\lVALW}{{\mathtt{val_w}}}
+\newcommand{\lSTEP}{{\mathtt{st}}}
 
 \newcommand{\lEQLAB}{=_{\lLAB}}
 \newcommand{\lEQTID}{=_{\lTID}}
@@ -232,6 +257,15 @@
 %%%%  Pomsets <-> Exec. Graphs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% thread component of shared mem. label
+\newcommand{\tlab}{\lab^{\lTID}}
+% data component of shared mem. label
+\newcommand{\dlab}{\lab^{\lLAB}}
+% step component of shared mem. label, i.e. s --[l]--> s'
+\newcommand{\stlab}{\lab^{\lSTEP}}
+
+\newcommand{\el}{\widehat{l}}
+
 % set of all execution graphs
 \newcommand{\ExecG}{\mathcal{G}}
 \newcommand{\PorfExecG}{\mathcal{G}_{\lPORF}}
@@ -259,7 +293,6 @@
 \newcommand{\PorfPom}[1][{}]{%
   \textsc{PorfPom}\ifthenelse{\isempty{#1}}{}{(#1)}\xspace%
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Proper Names and Abbreviations  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -358,6 +391,10 @@
 \newtheorem{theorem}{Теорема}
 \newtheorem{proposition}{Утверждение}
 \newtheorem{definition}{Определение}
+
+%% for proof trees
+\newcommand{\rulehskip}{\hskip 1.5em}
+\newcommand{\rulevspace}{\vspace{3em}}
 
 %% for comments
 \newcommand{\eupp}[1]{{\color{orange!70!black}\textbf{Evgenii: #1}}}
