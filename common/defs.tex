@@ -277,6 +277,27 @@
 \newcommand{\lBOB}{{\mathtt{bob}}}
 \newcommand{\lSC}{{\color{colorSC}\mathtt{sc}}}
 
+\tikzset{
+   every path/.style={>=stealth},
+   po/.style={->,color=colorPO,,shorten >=-0.5mm,shorten <=-0.5mm},
+   por/.style={->,color=red,shorten >=-0.5mm,shorten <=-0.5mm},
+   ppo/.style={->,color=colorPPO,,shorten >=-0.5mm,shorten <=-0.5mm},
+   cf/.style={-,snake=zigzag,segment amplitude=1pt,segment length=3pt,colorCF},
+   rmw/.style={->,color=colorRMW,,shorten >=-0.5mm,shorten <=-0.5mm},
+   ca/.style={->,color=colorPO,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   rf/.style={->,color=colorRF,dashed,,shorten >=-0.5mm,shorten <=-0.5mm},
+   rfs/.style={->,color=colorRF,thick,dashed,,shorten >=-0.5mm,shorten <=-0.5mm},
+   rb/.style={->,color=colorRB,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   cc/.style={->,color=colorCC,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   ew/.style={<->,color=colorEW,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   mo/.style={->,color=colorMO,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   sw/.style={->,color=colorSW,dashed,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   obs/.style={->,color=colorOBS,dashed,,shorten >=-0.5mm,shorten <=-0.5mm},
+   no/.style={->,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   deps/.style={->,color=colorDEPS,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   then/.style={->,snake=zigzag,segment amplitude=1pt,segment length=3pt},
+   esrect/.style={rectangle,dotted},
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Pomsets <-> Exec. Graphs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -319,6 +340,34 @@
 \newcommand{\PorfPom}[1][{}]{%
   \textsc{PorfPom}\ifthenelse{\isempty{#1}}{}{(#1)}\xspace%
 }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  Concurrent Programs Syntax  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\inarrC}[1]{\begin{array}{@{}c@{}}#1\end{array}}
+\newcommand{\inpar}[1]{\left(\begin{array}{@{}l@{}}#1\end{array}\right)}
+\newcommand{\inset}[1]{\left\{\begin{array}{@{}l@{}}#1\end{array}\right\}}
+\newcommand{\inarr}[1]{\begin{array}{@{}l@{}}#1\end{array}}
+\newcommand{\inarrII}[2]{\begin{array}{@{}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}\end{array}}
+\newcommand{\inarrIII}[3]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}\end{array}}
+\newcommand{\inarrIV}[4]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}&\inarr{#4}\end{array}}
+\newcommand{\inarrV}[5]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}&\inarr{#4}&\inarr{#5}\end{array}}
+
+\newcommand{\readExpr }[2]{{#2}^{#1}}
+\newcommand{\readInst }[3]{#2 \;{:=}\;{#3}^{#1}}
+\newcommand{\fenceInst}[1]{\kw{fence}^{#1}}
+
+\newcommand\ifGoto{\kw{if}-\kw{goto}}
+\newcommand{\ifGotoInst}[2]{\kw{if} \; #1 \; \kw{goto} \; #2}
+\newcommand{\writeInst}[3]{{#2}^{#1}\;{:=}\;#3}
+\newcommand{\assignInst}[2]{#1\;{:=}\;#2}
+\newcommand{\incInst}[1]{{#1}\texttt{++}}
+\newcommand{\binopInst}[3]{{#2} #1 {#3}}
+
+\newcommand{\faiInst}[6]{#3 \;{:=}\;\kw{FADD}_{#6}^{#1#2}({#4},{#5})}
+\newcommand{\casInst}[7]{#3 \;{:=}\;\kw{CAS}_{#7}^{#1#2}({#4},{#5},{#6})}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Proper Names and Abbreviations  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
