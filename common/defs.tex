@@ -29,6 +29,7 @@
 
 % shorter subset notation
 \newcommand{\suq}{\subseteq}
+\newcommand{\squq}{\sqsubseteq}
 
 % homomorphism arrow (TODO: change notations)
 \newcommand{\homf}[1][{}]{\underset{#1}{\leadsto}}
@@ -47,6 +48,9 @@
 \newcommand{\dwsset}[1]{\lceil{#1}\rceil}
 \newcommand{\upsset}[1]{\lfloor{#1}\rfloor}
 
+% liftings of a function
+\newcommand{\fmap}[1]{{\llceil #1 \rrceil}}
+\newcommand{\fcomap}[1]{{\llfloor #1 \rrfloor}}
 
 % function-to-relation
 \newcommand{\frel}[1]{#1^\uparrow}
@@ -59,7 +63,7 @@
 \newcommand{\Ell}{\mathcal{L}}
 
 % sequential composition (of relations)
-\newcommand{\seqc}{\;}
+\newcommand{\seqc}{;}
 
 % some math sets
 \newcommand{\N}{{\mathbb{N}}}
@@ -189,6 +193,14 @@
 \newcommand{\Lab}{\mathsf{Lab}}
 \newcommand{\Mod}{\mathsf{Mod}}
 
+\newcommand{\na}{\mathtt{na}}
+\newcommand{\pln}{\mathtt{pln}}
+\newcommand{\rlx}{\mathtt{rlx}}
+\newcommand{\rel}{{\mathtt{rel}}}
+\newcommand{\acq}{{\mathtt{acq}}}
+\newcommand{\acqrel}{{\mathtt{acqrel}}}
+\newcommand{\sco}{{\mathtt{sc}}}
+
 \newcommand{\isex}{{\mathtt{ex}}}
 \newcommand{\isnotex}{{\operatorname{\mathtt{not-ex}}}}
 
@@ -212,6 +224,11 @@
 \newcommand{\initval}{\bot}
 
 \newcommand{\lE}{{\mathtt{E}}}
+\newcommand{\lEi}{{\Init}}
+\newcommand{\Init}{\mathsf{Init}}
+\newcommand{\ESinit}{S_{\mathrm{init}}}
+
+\newcommand{\lVIS}{{\mathtt{Vis}}}
 
 \newcommand{\lLAB}{{\mathtt{lab}}}
 \newcommand{\lID}{{\mathtt{id}}}
@@ -277,6 +294,34 @@
 \newcommand{\lBOB}{{\mathtt{bob}}}
 \newcommand{\lSC}{{\color{colorSC}\mathtt{sc}}}
 
+\newcommand{\lVF}{{\color{colorVF}\mathtt{vf}}}
+\newcommand{\lSRF}{{\color{colorJF}\mathtt{sjf}}}
+
+\newcommand{\lDETOUR}{{{\color{colorDETOUR}\mathtt{detour}}}}
+\newcommand{\lDEPS}{{{\color{colorDEPS}\mathtt{deps}}}}
+\newcommand{\lCTRL}{{{\color{colorDEPS}\mathtt{ctrl}}}}
+\newcommand{\lDATA}{{{\color{colorDEPS}\mathtt{data}}}}
+\newcommand{\lADDR}{{{\color{colorDEPS}\mathtt{addr}}}}
+\newcommand{\lRMWDEP}{{{\color{colorDEPS}\mathtt{casdep}}}}
+\newcommand{\lPPO}{{{\color{colorPPO}\mathtt{ppo}}}}
+\newcommand{\lAR}{\mathtt{ar}}
+
+\newcommand{\lSCB}{{\color{colorSCB}\mathtt{scb}}}
+\newcommand{\lPSC}{{\color{colorPSC}\mathtt{psc}}}
+\newcommand{\lPSCB}{\lPSC_{\mathrm{base}}}
+\newcommand{\lPSCF}{\lPSC_\lF}
+
+\newcommand{\lmakeE}[1]{#1\mathtt{e}}
+\newcommand{\lJFE}{\lmakeE{\lJF}}
+\newcommand{\lRFE}{\lmakeE{\lRF}}
+\newcommand{\lCOE}{\lmakeE{\lCO}}
+\newcommand{\lFRE}{\lmakeE{\lFR}}
+\newcommand{\lmakeI}[1]{#1\mathtt{i}}
+\newcommand{\lJFI}{\lmakeI{\lJF}}
+\newcommand{\lRFI}{\lmakeI{\lRF}}
+\newcommand{\lCOI}{\lmakeI{\lCO}}
+\newcommand{\lFRI}{\lmakeI{\lFR}}
+
 \tikzset{
    every path/.style={>=stealth},
    po/.style={->,color=colorPO,,shorten >=-0.5mm,shorten <=-0.5mm},
@@ -285,19 +330,74 @@
    cf/.style={-,snake=zigzag,segment amplitude=1pt,segment length=3pt,colorCF},
    rmw/.style={->,color=colorRMW,,shorten >=-0.5mm,shorten <=-0.5mm},
    ca/.style={->,color=colorPO,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   jf/.style={->,color=colorJF,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    rf/.style={->,color=colorRF,dashed,,shorten >=-0.5mm,shorten <=-0.5mm},
    rfs/.style={->,color=colorRF,thick,dashed,,shorten >=-0.5mm,shorten <=-0.5mm},
    rb/.style={->,color=colorRB,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    cc/.style={->,color=colorCC,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    ew/.style={<->,color=colorEW,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    mo/.style={->,color=colorMO,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   co/.style={->,color=colorMO,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    sw/.style={->,color=colorSW,dashed,thick,shorten >=-0.5mm,shorten <=-0.5mm},
+   vf/.style={->,color=colorVF,dashed,shorten >=-0.5mm,shorten <=-0.5mm},
    obs/.style={->,color=colorOBS,dashed,,shorten >=-0.5mm,shorten <=-0.5mm},
    no/.style={->,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    deps/.style={->,color=colorDEPS,dotted,thick,shorten >=-0.5mm,shorten <=-0.5mm},
    then/.style={->,snake=zigzag,segment amplitude=1pt,segment length=3pt},
    esrect/.style={rectangle,dotted},
 }
+
+\tikzstyle{extractStyle}=[color=black,rounded corners=3pt,
+  dashed,fill=green!10]
+
+\tikzstyle{issuedStyle}=[pattern=custom north east lines, hatchcolor=colorISS, rounded corners]
+\tikzstyle{coveredStyle}=[]
+
+\newcommand{\setBox}[2]{
+    \draw[#1] ($(#2)  + (-1.2,-0.4)$) rectangle ++(2.4,0.8);
+}
+\newcommand{\bigSetBox}[2]{
+    \draw[#1] ($(#2)  + (-1.3,-0.5)$) rectangle ++(2.6,1.0);
+}
+
+\newcommand{\extractedBoxText}{{\protect\tikz \protect\draw[extractStyle] (0,0) rectangle ++(0.35,0.35);}}
+
+\newcommand{\coveredBox}[1]{
+  \setBox{coveredStyle}{#1}
+}
+\newcommand{\issuedBox}[1]{
+  \setBox{issuedStyle}{#1}
+}
+\newcommand{\issuedCoveredBox}[1]{
+  \bigSetBox{coveredStyle}{#1}
+  \issuedBox{#1}
+}
+
+
+\newcommand{\ese}[3]{e^{#1}_{#2#3}}
+\newcommand{\mese}[3]{\ese{#1}{#2}{#3}\colon}
+
+\newcommand{\thrdstep}[1]{\xrightarrow{#1}}
+\newcommand{\esaddpo}[1]{\xhookrightarrow[\lPO]{#1}}
+\newcommand{\esaddjf}[1]{\xhookrightarrow[\lJF]{#1}}
+\newcommand{\esaddew}[1]{\xhookrightarrow[\lEW]{#1}}
+\newcommand{\esaddco}[1]{\xhookrightarrow[\lCO]{#1}}
+\newcommand{\esaddrmw}[1]{\xhookrightarrow[\lRMW]{#1}}
+\newcommand{\esstep}[1]{\xhookrightarrow[\mathtt{pre}]{#1}}
+\newcommand{\esstepcons}[1]{\xhookrightarrow{#1}}
+\newcommand{\travstep}[1]{\xrightarrow{#1}}
+
+\newcommand{\TC}{TC}
+\newcommand{\TCinit}[1]{\TC_{\mathrm{init}}({#1})}
+\newcommand{\TCfinal}[1]{\TC_{\mathrm{final}}({#1})}
+
+\newcommand{\simrel}{\mathcal{I}}
+
+\newcommand{\ea}{f}
+% a shortcut to map event names of graph to event structure
+\newcommand{\gs}[1]{\underline{#1}}
+
+\newcommand{\Br}{Br}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Pomsets <-> Exec. Graphs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -368,6 +468,8 @@
 \newcommand{\faiInst}[6]{#3 \;{:=}\;\kw{FADD}_{#6}^{#1#2}({#4},{#5})}
 \newcommand{\casInst}[7]{#3 \;{:=}\;\kw{CAS}_{#7}^{#1#2}({#4},{#5},{#6})}
 
+\newcommand{\rfcomment}[1]{\color{teal}{~~\texttt{/\!\!/}\textit{#1}}}
+\newcommand{\nocomment}[1]{\color{red!60!black}{~~\texttt{/\!\!/}\textit{#1}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Proper Names and Abbreviations  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -381,6 +483,7 @@
 \newcommand{\CPP}{C/C++\xspace}
 \newcommand{\JS}{JavaScript\xspace}
 \newcommand{\LLVM}{LLVM\xspace}
+\newcommand{\LLANG}{\ensuremath{\mathsf{L}}\xspace}
 
 %% memory models abbreviations
 
@@ -447,6 +550,10 @@
 \newcommand{\CHESS}{\textsc{CHESS}\xspace}
 \newcommand{\wmc}{\textsc{WMC}\xspace}
 
+%% other abbrevations
+
+\newcommand{\CAS}{\textsc{CAS}\xspace}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Tex Utils  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -473,6 +580,7 @@
 
 %% for comments
 \newcommand{\eupp}[1]{{\color{orange!70!black}\textbf{Evgenii: #1}}}
+\newcommand{\TODO}[1]{{\color{red!70!black}\textbf{TODO: #1}}}
 
 %% labels for axioms
 
