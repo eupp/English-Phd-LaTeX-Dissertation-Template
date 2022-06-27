@@ -339,12 +339,12 @@ $$ \ExecGs{S} \defeq \ExecGs{\pomlang{S}}  $$
 Пусть ${S = \tup{E, \lab, \ca, \cf} \in \ThrdPrimeES[\TidMemLab, \lEQTID]}$
 и ${M \suq \PorfExecG}$.
 Определим простую структуру событий с предикатом консистентности
-${\wmmpes{S}{M} = \tup{E, \lab, \ca, \cons}}$ таким образом, что:
+${\wmmpes{S}{M} = \tup{E, \lab, \ca, \Cons}}$ таким образом, что:
 \begin{itemize}
   \item $E {}\defeq{} E_S$,
   \item $\lab {}\defeq{} \lab_S$,
   \item $\ca {}\defeq{} \ca_S$,
-  \item $C \in \cons {}\defeq{} C \not\in \gcf_S \wedge S\rst{C} \in \wmmlang{M}$.
+  \item $C \in \Cons {}\defeq{} C \not\in \Gcf_S \wedge S\rst{C} \in \wmmlang{M}$.
 \end{itemize}
 \end{definition}
 
