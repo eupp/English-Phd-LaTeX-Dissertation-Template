@@ -151,6 +151,7 @@
 % symbols for thread and resource LTS
 \newcommand{\thrdSymb}{\textsc{thrd}}
 \newcommand{\resSymb}{\textsc{res}}
+\newcommand{\memSymb}{\textsc{mem}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Pomsets and Event Struct. Defs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -499,6 +500,8 @@
 \newcommand{\inarrIV}[4]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}&\inarr{#4}\end{array}}
 \newcommand{\inarrV}[5]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}&\inarr{#4}&\inarr{#5}\end{array}}
 
+\newcommand{\kw}[1]{\textbf{\textcode{#1}}\;}
+
 \newcommand{\readExpr }[2]{{#2}^{#1}}
 \newcommand{\readInst }[3]{#2 \;{:=}\;{#3}^{#1}}
 \newcommand{\fenceInst}[1]{\kw{fence}^{#1}}
@@ -528,6 +531,7 @@
 \newcommand{\CPP}{C/C++\xspace}
 \newcommand{\JS}{JavaScript\xspace}
 \newcommand{\LLVM}{LLVM\xspace}
+\newcommand{\OCaml}{OCaml\xspace}
 \newcommand{\LLANG}{\ensuremath{\mathsf{L}}\xspace}
 
 %% memory models abbreviations
@@ -597,7 +601,9 @@
 
 %% other abbrevations
 
+\newcommand{\FADD}{\textsc{FADD}\xspace}
 \newcommand{\CAS}{\textsc{CAS}\xspace}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Tex Utils  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
