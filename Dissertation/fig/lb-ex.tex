@@ -1,0 +1,46 @@
+\begin{center}
+\begin{minipage}{.32\linewidth}
+{\small
+\begin{equation}
+\inarrII{
+  \readInst{}{a}{x} \rfcomment{1} \\
+  \writeInst{}{y}{1} \\
+}{\readInst{}{b}{y} \rfcomment{1} \\
+  \writeInst{}{x}{b}  \\
+}%
+\tag{LB-nodep}\label{ex:LB-nodep}
+\end{equation}
+}
+\end{minipage}
+%
+\hfill\vline\hfill
+\begin{minipage}{.32\linewidth}
+{\small
+\begin{equation}
+\inarrII{
+  \readInst{}{a}{x} \rfcomment{1} \\
+  \writeInst{}{y}{1 + a * 0} \\
+}{\readInst{}{b}{y} \rfcomment{1} \\
+  \writeInst{}{x}{b}  \\
+}
+\tag{LB-fakedep}\label{ex:LB-fakedep}
+\end{equation}
+}
+\end{minipage}
+%
+\hfill\vline\hfill
+%
+\begin{minipage}{.32\linewidth}
+{\small
+\begin{equation}
+\inarrII{
+  \readInst{}{a}{x} \nocomment{1} \\
+  \writeInst{}{y}{a} \\
+}{\readInst{}{b}{y} \nocomment{1} \\
+  \writeInst{}{x}{b}  \\
+}
+\tag{LB-dep}\label{ex:LB-dep}
+\end{equation}
+}
+\end{minipage}
+\end{center}

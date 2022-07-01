@@ -326,13 +326,16 @@
 \newcommand{\lECF}{{\color{colorECF}\mathtt{ecf}}}
 \newcommand{\lJF}{{\color{colorJF} \mathtt{jf}}}
 \newcommand{\lRF}{{\color{colorRF} \mathtt{rf}}}
-\newcommand{\lPORF}{\lPO\lRF}
 \newcommand{\lRMW}{{\color{colorRMW} \mathtt{rmw}}}
 \newcommand{\lMO}{{\color{colorMO} \mathtt{mo}}}
 \newcommand{\lEW}{{\color{colorEW} \mathtt{ew}}}
 \newcommand{\lCO}{{\color{colorMO} \mathtt{co}}}
 \newcommand{\lFR}{{\color{colorFR} \mathtt{fr}}}
 \newcommand{\lECO}{{\color{colorECO} \mathtt{eco}}}
+
+\newcommand{\lPORF}{\lPO\lRF}
+\newcommand{\lPPORF}{\lPPO\lRF}
+
 \newcommand{\lRS}{{\color{colorRS}\mathtt{rs}}}
 \newcommand{\lREL}{{\color{colorREL}\mathtt{rel}}}
 \newcommand{\lSW}{{\color{colorSYN}\mathtt{sw}}}
@@ -461,6 +464,7 @@
 % set of all execution graphs
 \newcommand{\ExecG}{\mathcal{G}}
 \newcommand{\PorfExecG}{\mathcal{G}_{\lPORF}}
+\newcommand{\PporfExecG}{\mathcal{G}_{\lPPORF}}
 
 % graph --> pomset
 \newcommand{\gpom}{\mathbf{p}}
@@ -632,6 +636,10 @@
 %% for comments
 \newcommand{\eupp}[1]{{\color{orange!70!black}\textbf{Evgenii: #1}}}
 \newcommand{\TODO}[1]{{\color{red!70!black}\textbf{TODO: #1}}}
+
+%% circle marker for tikz figures
+\newcommand*\circledb[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt,fill=blue!20] (char) {\small\textrm{#1}};}}
 
 %% labels for axioms
 

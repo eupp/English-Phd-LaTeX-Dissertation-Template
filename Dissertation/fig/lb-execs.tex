@@ -2,17 +2,15 @@
 \newcommand{\XScale}{1}
 \newcommand{\YScale}{0.7}
 
-\begin{figure}[h]
+\begin{figure}[b]
   \begin{subfigure}[b]{.44\textwidth}\centering
   \begin{tikzpicture}[xscale=\XScale,yscale=\YScale]
+
+  %% \node at (0,1.5) {$\circledb{A}$};
+
   \node (init) at (1,  1.5) {$\Init$};
-
-  %% \node (in1) at ( 0,  2) {$\ewlab{}{x}{0}{}$};
-  %% \node (in2) at ( 2,  2) {$\ewlab{}{y}{0}{}$};
-
   \node (i11) at ( 0,  0) {$\rlab{}{x}{1}{}$};
   \node (i12) at ( 0, -2) {$\wlab{}{y}{1}{}$};
-
   \node (i21) at ( 2,  0) {$\rlab{}{y}{1}{}$};
   \node (i22) at ( 2, -2) {$\wlab{}{x}{1}{}$};
 
@@ -32,14 +30,12 @@
   %
   \begin{subfigure}[b]{.55\textwidth}\centering
   \begin{tikzpicture}[xscale=\XScale,yscale=\YScale]
+
+  %% \node at (0,1.5) {$\circledb{B}$};
+
   \node (init) at (1,  1.5) {$\Init$};
-
-  %% \node (in1) at ( 0,  2) {$\ewlab{}{x}{0}{}$};
-  %% \node (in2) at ( 2,  2) {$\ewlab{}{y}{0}{}$};
-
   \node (i11) at ( 0,  0) {$\rlab{}{x}{1}{}$};
   \node (i12) at ( 0, -2) {$\wlab{}{y}{1}{}$};
-
   \node (i21) at ( 2,  0) {$\rlab{}{y}{1}{}$};
   \node (i22) at ( 2, -2) {$\wlab{}{x}{1}{}$};
 
@@ -60,7 +56,7 @@
   \label{fig:LB-dep-ppo-exec}
   \end{subfigure}
 
-\caption{Графы сценариев исполнения обосновывающие результат~${a=b=1}$.}
+\caption{Графы сценариев исполнения обосновывающие результат ${a=b=1}$.}
 \label{fig:LB-ppo-execs}
 \end{figure}
 }
