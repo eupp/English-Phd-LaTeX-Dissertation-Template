@@ -495,6 +495,9 @@
 %%%%  Concurrent Programs Syntax  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% shorter command for inline code
+\newcommand{\tcode}[1]{\texttt{#1}}
+
 \newcommand{\inarrC}[1]{\begin{array}{@{}c@{}}#1\end{array}}
 \newcommand{\inpar}[1]{\left(\begin{array}{@{}l@{}}#1\end{array}\right)}
 \newcommand{\inset}[1]{\left\{\begin{array}{@{}l@{}}#1\end{array}\right\}}
@@ -504,7 +507,7 @@
 \newcommand{\inarrIV}[4]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}&\inarr{#4}\end{array}}
 \newcommand{\inarrV}[5]{\begin{array}{@{}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{~~}||@{~~}l@{}}\inarr{#1}&\inarr{#2}&\inarr{#3}&\inarr{#4}&\inarr{#5}\end{array}}
 
-\newcommand{\kw}[1]{\textbf{\textcode{#1}}\;}
+\newcommand{\kw}[1]{\textbf{\tcode{#1}}\;}
 
 \newcommand{\readExpr }[2]{{#2}^{#1}}
 \newcommand{\readInst }[3]{#2 \;{:=}\;{#3}^{#1}}
@@ -534,9 +537,13 @@
 \newcommand{\CLANG}{C\xspace}
 \newcommand{\CPP}{C/C++\xspace}
 \newcommand{\JS}{JavaScript\xspace}
-\newcommand{\LLVM}{LLVM\xspace}
 \newcommand{\OCaml}{OCaml\xspace}
 \newcommand{\LLANG}{\ensuremath{\mathsf{L}}\xspace}
+
+%% compilers abbreviations
+
+\newcommand{\LLVM}{LLVM\xspace}
+\newcommand{\GCC}{GCC\xspace}
 
 %% memory models abbreviations
 
@@ -546,6 +553,7 @@
 \newcommand{\DRFx}{\MM{DRFx}}
 
 \newcommand{\Intel}{\MM{x86}}
+\newcommand{\IntelX}{\MM{x86/x64}}
 \newcommand{\TSO}{\MM{TSO}}
 \newcommand{\SPARC}{\MM{SPARC}}
 \newcommand{\ARM}{\MM{ARM}}

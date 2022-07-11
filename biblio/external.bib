@@ -130,6 +130,60 @@
   organization={Springer}
 }
 
+% traditional consistency models (sequential, causal, etc)
+
+@article{Lamport:TC79,
+  author =        {Leslie Lamport},
+  journal =       {{IEEE} Trans. Computers},
+  number =        {9},
+  pages =         {690--691},
+  title =         {How to Make a Multiprocessor Computer That Correctly
+                   Executes Multiprocess Programs},
+  volume =        {28},
+  year =          {1979},
+  doi       = {10.1109/TC.1979.1675439},
+}
+
+% accelerating sequential consistency
+
+@article{Marino-al:PLDI11,
+  title={A case for an {SC}-preserving compiler},
+  author={Marino, Daniel and Singh, Abhayendra and Millstein, Todd and Musuvathi, Madanlal and Narayanasamy, Satish},
+  journal={ACM SIGPLAN Notices},
+  volume={46},
+  number={6},
+  pages={199--210},
+  year={2011},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{Singh-al:ISCA12,
+  title={End-to-end sequential consistency},
+  author={Singh, Abhayendra and Narayanasamy, Satish and Marino, Daniel and Millstein, Todd and Musuvathi, Madanlal},
+  booktitle={2012 39th Annual International Symposium on Computer Architecture (ISCA)},
+  pages={524--535},
+  year={2012},
+  organization={IEEE}
+}
+
+@article{Liu-al:OOPSLA17,
+  title={A Volatile-by-default {JVM} for Server Applications},
+  author={Liu, Lun and Millstein, Todd and Musuvathi, Madanlal},
+  journal={Proceedings of the ACM on Programming Languages},
+  volume={1},
+  number={OOPSLA},
+  pages={1--25},
+  year={2017},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{Liu-al:PLDI19,
+  title={Accelerating sequential consistency for {Java} with speculative compilation},
+  author={Liu, Lun and Millstein, Todd and Musuvathi, Madanlal},
+  booktitle={Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation},
+  pages={16--30},
+  year={2019}
+}
 
 % weak memory / po
 
@@ -354,4 +408,15 @@
   booktitle={Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation},
   pages={1--15},
   year={2019}
+}
+
+% synchronization primitives, concurrent algorithms & data structures, etc
+
+@incollection{Dijkstra:68,
+  title={Cooperating sequential processes},
+  author={Dijkstra, Edsger W},
+  booktitle={The origin of concurrent programming},
+  pages={65--138},
+  year={1968},
+  publisher={Springer}
 }

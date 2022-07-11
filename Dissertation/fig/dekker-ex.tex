@@ -1,0 +1,16 @@
+\begin{equation*}
+\inarrII{
+\writeInst{}{x}{1} \\
+\readInst{}{r_1}{y} \\
+\kw{if} {r_1 = 0} ~\{ \\
+~~\rfcomment{критическая секция} \\
+\}
+}{
+\writeInst{}{y}{1} \\
+\readInst{}{r_2}{x} \\
+\kw{if} {r_2 = 0} ~\{ \\
+~~\rfcomment{критическая секция} \\
+\}
+}
+\tag{Dekker's Lock}\label{ex:Dekker}
+\end{equation*}
