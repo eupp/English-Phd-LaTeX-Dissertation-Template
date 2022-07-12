@@ -1,4 +1,4 @@
-% lts, pomsets, event structures
+%% LTS, pomsets, event structures
 
 @inproceedings{Milner:1971,
   title={An Algebraic Definition of Simulation Between Programs.},
@@ -88,7 +88,7 @@
   publisher={Elsevier}
 }
 
-% CCS
+%% CCS
 
 @inproceedings{Winskel:ICALP1982,
   title={Event structure semantics for CCS and related languages},
@@ -99,7 +99,7 @@
   organization={Springer}
 }
 
-% pi-calculus
+%% Pi-calculus
 
 @article{Varacca-Nobuko:TCS10,
   title={Typed event structures and the linear $\pi$-calculus},
@@ -130,7 +130,7 @@
   organization={Springer}
 }
 
-% traditional consistency models (sequential, causal, etc)
+%% Traditional consistency models (sequential, causal, etc)
 
 @article{Lamport:TC79,
   author =        {Leslie Lamport},
@@ -144,7 +144,7 @@
   doi       = {10.1109/TC.1979.1675439},
 }
 
-% accelerating sequential consistency
+%% Accelerating sequential consistency
 
 @article{Marino-al:PLDI11,
   title={A case for an {SC}-preserving compiler},
@@ -185,7 +185,64 @@
   year={2019}
 }
 
-% weak memory / po
+@article{Vollmer-al:PPoPP17,
+  title={{SC-Haskell}: Sequential consistency in languages that minimize mutable shared heap},
+  author={Vollmer, Michael and Scott, Ryan G and Musuvathi, Madanlal and Newton, Ryan R},
+  journal={ACM SIGPLAN Notices},
+  volume={52},
+  number={8},
+  pages={283--298},
+  year={2017},
+  publisher={ACM New York, NY, USA}
+}
+
+% Java memory model 
+
+@inproceedings{Manson-al:POPL05,
+  author =        {Jeremy Manson and William Pugh and Sarita V. Adve},
+  booktitle =     {POPL 2005},
+  pages =         {378--391},
+  publisher =     {ACM},
+  title =         {The {Java} Memory Model},
+  year =          {2005},
+  doi =           {10.1145/1040305.1040336},
+}
+
+% C++ memory model
+
+@inproceedings{Batty-al:POPL11,
+  author =        {Mark Batty and Scott Owens and Susmit Sarkar and
+                   Peter Sewell and Tjark Weber},
+  booktitle =     {POPL 2011},
+  pages =         {55--66},
+  publisher =     {ACM},
+  title =         {Mathematizing {C++} Concurrency},
+  year =          {2011},
+  doi = {10.1145/1925844.1926394},
+}
+
+@article{Boehm-Adve:PLDI08,
+  title={Foundations of the {C++} concurrency memory model},
+  author={Boehm, Hans-J and Adve, Sarita V},
+  journal={ACM SIGPLAN Notices},
+  volume={43},
+  number={6},
+  pages={68--78},
+  year={2008},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{Boehm-Demsky:MSPC14,
+  author =        {Hans-J. Boehm and Brian Demsky},
+  booktitle =     {MSPC 2014},
+  pages =         {7:1--7:6},
+  publisher =     {ACM},
+  title =         {Outlawing Ghosts: Avoiding Out-of-thin-air Results},
+  year =          {2014},
+  doi       = {10.1145/2618128.2618134},
+}
+
+% Weak memory / po
 
 @inproceedings{Lahav-al:PLDI17,
   author =        {Ori Lahav and Viktor Vafeiadis and Jeehoon Kang and
@@ -207,6 +264,17 @@
   volume =        {53},
   year =          {2010},
   doi = {10.1145/1785414.1785443},
+}
+
+@article{Lahav-al:POPL16,
+  title={Taming release-acquire consistency},
+  author={Lahav, Ori and Giannarakis, Nick and Vafeiadis, Viktor},
+  journal={ACM SIGPLAN Notices},
+  volume={51},
+  number={1},
+  pages={649--662},
+  year={2016},
+  publisher={ACM New York, NY, USA}
 }
 
 @inproceedings{Perrin-al:2016,
@@ -245,7 +313,7 @@
   publisher={ACM New York, NY, USA}
 }
 
-% weak memory / sy.dep
+%% Weak memory / sy.dep
 
 @inproceedings{Sarkar-al:PLDI11,
   author =        {Susmit Sarkar and Peter Sewell and Jade Alglave and
@@ -280,7 +348,7 @@
   publisher={ACM New York, NY, USA}
 }
 
-% weak memory / sem.dep
+%% Weak memory / sem.dep
 
 @inproceedings{Kang-al:POPL17,
   author =        {Jeehoon Kang and Chung-Kil Hur and Ori Lahav and
@@ -347,7 +415,7 @@
   publisher={ACM New York, NY, USA}
 }
 
-% weak memory / event structures
+%% Weak memory / event structures
 
 @inproceedings{Jeffrey-Riely:LICS16,
   author =        {Alan Jeffrey and James Riely},
@@ -370,7 +438,7 @@
   doi       = {10.1145/2837614.2837616},
 }
 
-% weak memory / misc
+%% Weak memory / misc
 
 @article{Alglave-al:TOPLAS14,
   author =        {Jade Alglave and Luc Maranget and Michael Tautschnig},
@@ -392,7 +460,7 @@
   year={2020}
 }
 
-% model checking
+%% Model checking
 
 @inproceedings{Norris-Demsky:OOPSLA2013,
   title={CDSchecker: checking concurrent data structures written with C/C++ atomics},
@@ -410,7 +478,7 @@
   year={2019}
 }
 
-% synchronization primitives, concurrent algorithms & data structures, etc
+%% Synchronization primitives, concurrent algorithms & data structures, etc
 
 @incollection{Dijkstra:68,
   title={Cooperating sequential processes},
@@ -419,4 +487,13 @@
   pages={65--138},
   year={1968},
   publisher={Springer}
+}
+
+%% Programming languages (general)
+
+@book{RustBook:19,
+  title={The {Rust} Programming Language (Covers {Rust} 2018)},
+  author={Klabnik, Steve and Nichols, Carol},
+  year={2019},
+  publisher={No Starch Press}
 }
