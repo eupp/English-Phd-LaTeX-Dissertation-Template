@@ -348,6 +348,14 @@
   publisher={ACM New York, NY, USA}
 }
 
+@inproceedings{Alglave-al:ASPLOS18,
+  title={Frightening small children and disconcerting grown-ups: Concurrency in the {Linux} kernel},
+  author={Alglave, Jade and Maranget, Luc and McKenney, Paul E and Parri, Andrea and Stern, Alan},
+  booktitle={Proceedings of the Twenty-Third International Conference on Architectural Support for Programming Languages and Operating Systems},
+  pages={405--418},
+  year={2018}
+}
+
 %% Weak memory / sem.dep
 
 @inproceedings{Kang-al:POPL17,
@@ -482,7 +490,35 @@
   organization={Springer}
 }
 
-%% Model checking
+%% Model checking (general)
+
+@book{Baier:2008,
+  title={Principles of model checking},
+  author={Baier, Christel and Katoen, Joost-Pieter},
+  year={2008},
+  publisher={MIT Press}
+}
+
+%% Model checking, weak memory
+
+@article{Kokologiannakis-al:POPL2017,
+  title={Effective stateless model checking for C/C++ concurrency},
+  author={Kokologiannakis, Michalis and Lahav, Ori and Sagonas, Konstantinos and Vafeiadis, Viktor},
+  journal={Proceedings of the ACM on Programming Languages},
+  volume={2},
+  number={POPL},
+  pages={1--32},
+  year={2017},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{Kokologiannakis:PLDI2019,
+  title={Model checking for weakly consistent libraries},
+  author={Kokologiannakis, Michalis and Raad, Azalea and Vafeiadis, Viktor},
+  booktitle={Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation},
+  pages={96--110},
+  year={2019}
+}
 
 @inproceedings{Norris-Demsky:OOPSLA2013,
   title={CDSchecker: checking concurrent data structures written with C/C++ atomics},
@@ -499,6 +535,33 @@
   pages={1--15},
   year={2019}
 }
+
+@inproceedings{Kokologiannakis-Vafeiadis:ASPLOS2020,
+  title={HMC: Model checking for hardware memory models},
+  author={Kokologiannakis, Michalis and Vafeiadis, Viktor},
+  booktitle={Proceedings of the Twenty-Fifth International Conference on Architectural Support for Programming Languages and Operating Systems},
+  pages={1157--1171},
+  year={2020}
+}
+
+@inproceedings{Pulte-al:PLDI2019,
+  title={Promising-ARM/RISC-V: a simpler and faster operational concurrency model},
+  author={Pulte, Christopher and Pichon-Pharabod, Jean and Kang, Jeehoon and Lee, Sung-Hwan and Hur, Chung-Kil},
+  booktitle={Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation},
+  pages={1--15},
+  year={2019}
+}
+
+@inproceedings{Abdulla-al:CAV2016,
+  title={Stateless model checking for POWER},
+  author={Abdulla, Parosh Aziz and Atig, Mohamed Faouzi and Jonsson, Bengt and Leonardsson, Carl},
+  booktitle={International Conference on Computer Aided Verification},
+  pages={134--156},
+  year={2016},
+  organization={Springer}
+}
+
+
 
 %% Synchronization primitives, concurrent algorithms & data structures, etc
 
@@ -520,11 +583,12 @@
   publisher={No Starch Press}
 }
 
-%% Model checking (general)
 
-@book{Baier:2008,
-  title={Principles of model checking},
-  author={Baier, Christel and Katoen, Joost-Pieter},
-  year={2008},
-  publisher={MIT Press}
+%% Misc
+
+@book{Muchnick:ACDI97,
+  title={Advanced compiler design and implementation},
+  author={Muchnick, Steven},
+  year={1997},
+  publisher={Morgan Kaufmann}
 }
