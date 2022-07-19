@@ -806,30 +806,38 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
     \item $\Label$ --- множество меток, также называемое \emph{алфавитом};
     \item $R \subseteq L \times S \times S$ --- помеченное отношение перехода.
   \end{itemize}
-  Для обозначения наличия перехода между состояниями используется следующая нотация:
-    \[
-    \begin{array}{lcr@{\hspace{3em}}lcr}
-    \ltr[R]{\ell}{s}{s'} & \defeq & \step{\ell}{s}{s'} \in \TrRel                     &
-    \tr[R]{s}{s'}        & \defeq & \exists \ell \ldotp \step{\ell}{s}{s'} \in \TrRel \\
-    \end{array}
-    \]
+\end{definition}
+
+Для обозначения наличия перехода между состояниями используется следующая нотация:
+\[
+\begin{array}{lcr@{\hspace{3em}}lcr}
+  \ltr[R]{\ell}{s}{s'} & \defeq & \step{\ell}{s}{s'} \in \TrRel                     &
+  \tr[R]{s}{s'}        & \defeq & \exists \ell \ldotp \step{\ell}{s}{s'} \in \TrRel \\
+\end{array}
+\]
+
+\begin{definition}
+  \label{def:lts-trace}
   \emph{Трассой} помеченной системой переходов называется чередующаяся последовательность  
   состояний $s_0, s_1, \ldots, s_n \in \Label$ 
   и меток $\ell_1, \ldots, \ell_n \in L$, 
   такая что выполняется условие
   $$s_0 \xrightarrow{\ell_1} s_1 \xrightarrow{\ell_2} s_2 \xrightarrow{\ell_3} \ldots \xrightarrow{\ell_n} s_n$$
-  Язык, принимаемый системой переходов в начальном состоянии $s_0$ 
+\end{definition}
+
+\begin{definition}
+  \label{def:lts-lang}
+  \emph{Язык принимаемый системой переходов в начальном состоянии $s_0$} ---
   это множество последовательностей слов над алфавитом $\Label$, 
   таких что для каждого слова существует соответствующая 
   трасса, начинающася в $s_0$:
   $$ \langof{\LTS, s_0} \defeq \set{ 
-       \ell_1 \ldots \ell_n ~|~ \exists s_1, \ldots, s_n \ldotp 
+      \ell_1 \ldots \ell_n ~|~ \exists s_1, \ldots, s_n \ldotp 
        s_0 \xrightarrow{\ell_1} s_1 \xrightarrow{\ell_2} \ldots \xrightarrow{\ell_n} s_n
      } 
   $$
-  
 \end{definition}
-
+  
 \input{Dissertation/fig/lts-lang-ex}
 
 На \cref{fig:lts-ex} показан пример системы помеченных переходов, 
@@ -842,7 +850,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
 
 \begin{definition}
   \label{def:lts-par}
-  Параллельной композицией двух систем переходов $\LTS_1$ и $\LTS_2$
+  \emph{Параллельной композицией двух систем переходов} $\LTS_1$ и $\LTS_2$
   будем называть систему переходов
   $\parlts{\LTS_1}{\LTS_2} \defeq \tup{\State_1 \times \State_2, \Label, \TrRel_{\parSymb}}$
   где $\TrRel_{\parSymb}$ определяется следующим образом:
@@ -861,7 +869,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
 
 \begin{definition}
   \label{def:lts-par}
-  Произведением двух систем переходов $\LTS_1$ и $\LTS_2$
+  \emph{Произведением двух систем переходов} $\LTS_1$ и $\LTS_2$
   будем называть систему переходов
   $\prodlts{\LTS_1}{\LTS_2} \defeq \tup{\State_1 \times \State_2, \Label, \TrRel_{\prodSymb}}$
   где $\TrRel_{\prodSymb}$ определяется следующим образом:
@@ -897,7 +905,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\re
 или также \emph{истинно конкурентными семантиками}
 (\emph{true concurrent semantics})~\cite{Nielsen:REX93}.
 Из данного класса семантик в рамках 
-данной диссертации интерес представляют 
+данной диссертации особый интерес представляют 
 \emph{языки частично упорядоченных мультимножеств}
 (кратко --- языки помсетов)~\cite{Pratt:CONCUR84,Gischer:TCS88}, 
 и \emph{структуры событий}~\cite{Winskel:86}.
@@ -930,9 +938,10 @@ $e_1 \co e_2$.
     \item $\ca \subseteq \Event \times \Event$ это частичный порядок 
       \emph{причинно-следственной связи} между событиями. 
   \end{itemize}
-  Множество всех помеченных частично упорядоченных множеств над алфавитом $\Label$
-  будем обозначать как $\lPoset[\Label]$. 
 \end{definition}
+
+Множество всех помеченных частично упорядоченных множеств над алфавитом $\Label$
+будем обозначать как $\lPoset[\Label]$. 
 
 Отметим, что при работе c помеченными частично упорядоченными множествами
 конкретные идентификаторы событий как правило неважны,
@@ -940,28 +949,50 @@ $e_1 \co e_2$.
 Таким образом, с помеченными частично упорядоченными множествами 
 работают по модулю переименования событий, то есть с точностью до изоморфизма.
 
+Рассмотрим $p, q \in \lPoset[\Label]$. Функция $f : E_p \fun E_q$ называется:
+\begin{itemize}
+  \item \emph{сохраняющей метки} если ${\lab_q(f(e)) = \lab_p(e)}$;
+  \item \emph{сохраняющей порядок} если ${e_1 \ca_p e_2}$ влечет ${f(e_1) \ca_q f(e_2)}$;
+  \item \emph{вкладывающей порядок} если ${e_1 \ca_p e_2}$ тогда и только тогда, когда ${f(e_1) \ca_q f(e_2)}$.
+\end{itemize}
+
 \begin{definition}
-  \label{def:lposet-morph}
-  Рассмотрим $p, q \in \lPoset[\Label]$. Функция $f : E_p \fun E_q$ называется:
-  \begin{itemize}
-    \item \emph{сохраняющей метки} если ${\lab_q(f(e)) = \lab_p(e)}$;
-    \item \emph{сохраняющей порядок} если ${e_1 \ca_p e_2}$ влечет ${f(e_1) \ca_q f(e_2)}$;
-    \item \emph{вкладывающей порядок} если ${e_1 \ca_p e_2}$ тогда и только тогда, когда ${f(e_1) \ca_q f(e_2)}$.
-  \end{itemize}
+  \label{def:lposet-hom}
   \emph{Гомоморфизмом} частично упорядоченных помеченных множеств называется
-  функция, сохраняющая метки и порядок. Если более того эта фунцкия
-  биективна и вкладываюет порядок, то она называется изоморфизмом.
-  Запись $p \iso q$ означает что $p$ и $q$ изоморфны,
-  то есть существует изоморфная функция между носителями $p$ и $q$.
+  функция, сохраняющая метки и порядок. 
+\end{definition}
+
+\begin{definition}
+  \label{def:lposet-subs}
+  Будем говорить что частично упорядоченных помеченное множество 
+  $p$ \emph{поглощается} $q$, или что $p$ \emph{более упорядочено чем} $q$, 
+  что обозначается как $p \subs q$, если существует гомоморфизм из $q$ в $p$.
+\end{definition}
+
+\begin{definition}
+  \label{def:lposet-iso}
+  \emph{Изоморфизмом} частично упорядоченных помеченных множеств называется
+  биективная функция, сохраняющая метки и вкладывающая порядок. 
+\end{definition}
+
+\begin{definition}
+  \label{def:lposet-subs}
+  Будем говорить что частично упорядоченные помеченные множества
+  $p$ и $q$ \emph{изоморфны}, что обозначается как $p \iso q$,
+  если существует изоморфная функция между ними.
 \end{definition}
 
 \begin{definition}
   \label{def:pomset}
-  Помеченные частично упорядоченные мультимножества, 
+  \emph{Помеченные частично упорядоченные мультимножества}, 
   или, кратко, \emph{помсеты} (от англ. \emph{partially ordered multiset, pomset}), 
   это классы помеченных частично упорядоченных множеств по модулю изоморфизма: 
   $${\Pom[\Label] \defeq \lPoset[\Label] / {\iso}}.$$ 
-  Язык помсетов --- это множество помсетов: 
+\end{definition}
+
+\begin{definition}
+  \label{def:pomset}
+  \emph{Язык помсетов} --- это множество помсетов: 
   $${\Pomlang[\Label] \defeq \pwset{\Pom[\Label]}}.$$ 
 \end{definition}
 
@@ -984,16 +1015,17 @@ $e_1 \co e_2$.
 
 \begin{definition}
   \label{def:pomset-lin}
-  Помсет $p$ является линеаризацией $q$, 
+  Помсет $p$ является \emph{линеаризацией} $q$, 
   что обозначается как $p \in \Lin{q}$,
   если $p$ является линейно упорядоченным и 
   поглощается $q$, $p \subs q$.
-  Линеаризация языка помсетов $P$ определяется 
-  как объединение линеаризации всех входящих в язык помсетов:
-  $$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p} $$
-  Наконец, можно сказать что язык помсетов $P \in \Pomlang[\Label]$
-  соответствует обычному языку $L \in \Lang{\Label}$, если $\Lin{P} = L$.
 \end{definition}
+
+Линеаризация языка помсетов $P$ определяется 
+как объединение линеаризации всех входящих в язык помсетов:
+$$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p} $$
+Наконец, можно сказать что язык помсетов $P \in \Pomlang[\Label]$
+соответствует обычному языку $L \in \Lang{\Label}$, если $\Lin{P} = L$.
 
 Множество помсетов можно объединить в одну \emph{структуру событий},
 и таким образом представить язык помсетов как одно частично упорядоченное множество.
@@ -1073,8 +1105,9 @@ $$X \in \Cons \iff \forall e_1~e_2 \in X \ldotp \neg e_1 \cf e_2.$$
     \item $\dwset{X} \defeq {e' ~|~ \exists e \in X \ldotp~ e' \ca e } \suq X$, 
     \item $Y \finsubseteq X$ implies $Y \in \Cons$.
   \end{itemize}
-  Будем обозначать как $\Cfg{S}$ множество всех конфигураций $S$.
 \end{definition}
+
+Будем обозначать как $\Cfg{S}$ множество всех конфигураций структуры событий $S$.
 
 \begin{definition}
   \label{def:es-pomlang}
@@ -1153,37 +1186,31 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
 Но сначала необходимо также ввести тип семантических меток (алфавита)
 для описания абстракции разделяемой памяти.
 
-\begin{definition}
-  \label{def:mem-aux}
-  Введем следующие множества:
-  \begin{itemize}
-    \item $\Tid \suq \N$ обозначает множество \emph{идентификаторов потоков}, 
-      а поток с идентификатором $t_0 \defeq 0$
-      обозначает выделенный \emph{инициализирующий} поток;
-    \item $\Loc$ обозначает множество \emph{разделяемых переменных} 
-      (или \emph{локаций});
-    \item $\Mod \defeq \set{\na, \rlx, \acq, \rel, \acqrel, \sco}$
-      обозначает множество \emph{режимов доступа} (\emph{access modes})
-      к разделяемым переменным;
-    \item $\Val$ обозначает множество возможных \emph{значений}. 
-  \end{itemize}  
-\end{definition}
+Введем следующие множества:
+\begin{itemize}
+  \item $\Tid \suq \N$ обозначает множество \emph{идентификаторов потоков}, 
+    а поток с идентификатором $t_0 \defeq 0$
+    обозначает выделенный \emph{инициализирующий} поток;
+  \item $\Loc$ обозначает множество \emph{разделяемых переменных} 
+    (или \emph{локаций});
+  \item $\Mod \defeq \set{\na, \rlx, \acq, \rel, \acqrel, \sco}$
+    обозначает множество \emph{режимов доступа} (\emph{access modes})
+    к разделяемым переменным;
+  \item $\Val$ обозначает множество возможных \emph{значений}. 
+\end{itemize}  
 
-\begin{definition}
-  \label{def:mem-lab}
-  Определим множество меток $\MemLab$, 
-  соответствующих абстракции разделяемой памяти. 
-  Метка $l \in \MemLab$ принимает одну из следующих форм:
-  \begin{itemize}
-    \item $\rlab{o}{x}{v}$ --- метка операции чтения значения $v$ из переменной $x$, 
-      аннотированная режимом доступа $o$;
-    \item $\wlab{o}{x}{v}$ --- метка операции записи значения $v$ в переменную $x$, 
-      аннотированная режимом доступа $o$;
-    \item $\lF^o$ --- метка операции барьера, аннотированная режимом $o$.
-  \end{itemize}
-  Если у метки опущен режим доступа, то будем считать что 
-  она аннотирована режимом $\rlx$.
-\end{definition}
+Также определим множество меток $\MemLab$, 
+соответствующих абстракции разделяемой памяти. 
+Метка $l \in \MemLab$ принимает одну из следующих форм:
+\begin{itemize}
+  \item $\rlab{o}{x}{v}$ --- метка операции чтения значения $v$ из переменной $x$, 
+    аннотированная режимом доступа $o$;
+  \item $\wlab{o}{x}{v}$ --- метка операции записи значения $v$ в переменную $x$, 
+    аннотированная режимом доступа $o$;
+  \item $\lF^o$ --- метка операции барьера, аннотированная режимом $o$.
+\end{itemize}
+Если у метки опущен режим доступа, то будем считать что 
+она аннотирована режимом $\rlx$.
 
 \begin{definition}
   \label{def:exec-graph}
@@ -1227,9 +1254,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
       отношение соединяющие \emph{атомарные пары событий чтения-записи}. 
       Если $\tup{r, w} \in \lRMW$ тогда считается, что данная пара событий
       возникла в ходе исполнения одной инструкции атомарного чтения-записи, 
-      например, инструкции \emph{атомарного инкремента} (\emph{fetch-and-add}, \FADD), 
-      или инструкции \emph{атомарного сравнения с обменом} 
-      (\emph{compare-and-swap}, \CAS).
+      например, инструкции \emph{атомарного сравнения с обменом} (\CAS).
 
     \item $\lRF \suq [\lW] \seqc \lEQLOC \cap \lEQVAL \seqc [\lR]$ --- отношение 
       \emph{читает-из} (\emph{reads-from}). 
@@ -1272,14 +1297,18 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
       \]
 
   \end{itemize}
-
-  Множество всех графов сценариев исполнения будем обозначать как~$\ExecG$.
 \end{definition}
+
+Множество всех графов сценариев исполнения будем обозначать как~$\ExecG$.
 
 \begin{definition}
   \label{def:ax-memory-model}
   \emph{Аксиоматическая модель памяти} (\emph{axiomatic memory model}) $M$ 
   задается как подмножество графов сценариев исполнения: $M \suq \ExecG$.
+\end{definition}
+
+\begin{definition}
+  \label{def:memory-model-cons}
   Граф $G$ называется \emph{консистентым} с точки зрения модели $M$, 
   или просто $M$-\emph{консистентым}, если $G \in M$.
 \end{definition}
@@ -1295,12 +1324,13 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
   \item $\lPO \cup \lRF$ является ацикличным отношением.
     \labelAxiom{$\lPORF$-acyclic}{ax:porf-acyc}
 \end{itemize}
+\end{definition}
+
 Обозначим множество всех таких графов как $\PorfExecG$.
 Также будем говорить, что модель памяти $M$, 
 заданная в аксиоматическом стиле, сохраняет программный порядок, 
 если любой $M$-консистентный граф сохраняет программный порядок, 
 то есть ${M \suq \PorfExecG}$.
-\end{definition}
 
 Например, среди графов, показанных на Рис.\cref{fig:LB-nodep-execs}, 
 графы \circledb{A}, \circledb{B} и \circledb{C} сохраняют программный порядок, 
@@ -1321,7 +1351,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
 данное отношение включает отношения зависимости по данным, по управлению, и другие. 
 
 \begin{definition}
-  \label{def:imm-exec-graph}
+  \label{def:ext-exec-graph}
   \emph{Расширенным графом сценария исполнения} будем называть
   обычный граф сценария исполнения (\cref{def:exec-graph}), дополненный отношениями 
   \emph{зависимости по данным} (\emph{data dependency}) $\lDATA$, 
@@ -1330,11 +1360,17 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
   и \emph{зависимость по операции \CAS} (\emph{\CAS dependency}) $\lRMWDEP$.
 \end{definition}
 
-\input{Dissertation/fig/lb-execs}
-
 В контексте моделей памяти, сохраняющих синтаксические зависимости,
 под графом сценария исполнения будем подразумевать расширенный граф, 
 который дополнен отношениями зависимости. 
+
+\begin{definition}
+  \label{def:dep-rel}
+  Для расширенного графа сценария исполнения 
+  объединенное отношение \emph{зависимости} (\emph{dependency}) 
+  определяется следующим образом: 
+  $$ \lDEPS \defeq \lDATA \cup \lCTRL \cup \lADDR \seqc \lPO^? \cup \lRMWDEP. $$  
+\end{definition}
 
 Точное определение сохраняемого программного порядка может 
 варьироваться в зависимости от конкретной модели памяти, 
@@ -1354,12 +1390,15 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
   \item $\lPPO \cup \lRFE$ является ацикличным отношением.
     \labelAxiom{$\lPPORF$-acyclic}{ax:pporf-acyc}
 \end{itemize}
+\end{definition}
+
 Обозначим множество всех таких графов как $\PporfExecG$.
 Также будем говорить, что модель памяти $M$, 
 заданная в аксиоматическом стиле, сохраняет программный порядок, 
 если любой $M$-консистентный граф сохраняет программный порядок, 
 то есть ${M \suq \PporfExecG}$.
-\end{definition}
+
+\input{Dissertation/fig/lb-execs}
 
 Рассмотрим, например, пару $\lPO \cup \lRF$ цикличных графов, 
 изображенных на Рис.\cref{fig:LB-ppo-execs}.

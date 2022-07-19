@@ -191,23 +191,7 @@ $G \vdash \TCinit{G} \travstep{}^* \TCfinal{G}$.
 
 %% \input{Dissertation/fig/lb-execs}
 
-Далее приводится формальное определение понятия 
-зависимостей и модели \IMM.
-
-\begin{definition}
-  \label{def:imm-exec-graph}
-  Графом сценария исполнения в модели \IMM называется 
-  обычный граф сценария исполнения, дополненный отношениями 
-  \emph{зависимости по данным} (\emph{data dependency}) $\lDATA$, 
-  \emph{зависимости по потоку управления} (\emph{control dependency}) $\lCTRL$, 
-  и \emph{зависимости по целевому адресу} (\emph{address dependency}) $\lADDR$, 
-  и \emph{зависимость по операции \CAS} (\emph{\CAS dependency}) $\lRMWDEP$.
-  Объединенное отношение \emph{зависимости} (\emph{dependency}) 
-  определяется следующим образом: 
-  $$ \lDEPS \defeq \lDATA \cup \lCTRL \cup \lADDR \seqc \lPO^? \cup \lRMWDEP. $$
-  В контексте модели \IMM под графом сценария исполнения будем 
-  подразумевать граф, дополненный отношениями зависимости. 
-\end{definition}
+Далее приводится модели \IMM.
 
 \begin{definition}
   \label{def:imm-aux-rel}
