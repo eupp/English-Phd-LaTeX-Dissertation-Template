@@ -1,0 +1,38 @@
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[xscale=3.5,yscale=1.5]
+
+    \node (0)   at (1, 1.8) {$[\Init]$};
+
+    \node (rxO) at (0, 1) {$\mese{1}{1}{1} \rlab{}{x}{0}$};
+    \node (wyA) at (0, 0) {$\mese{1}{2}{1} \wlab{}{y}{1}$};
+
+    \node (rxI) at (1, 1) {$\mese{1}{1}{2} \rlab{}{x}{1}$};
+    \node (wyB) at (1, 0) {$\mese{1}{2}{2} \wlab{}{y}{1}$};
+
+    \node (ryI) at (2, 1) {$\mese{2}{1}{} \rlab{}{y}{1}$};
+    \node (wx)  at (2, 0) {$\mese{2}{2}{} \wlab{}{x}{1}$};
+
+    \draw[po] (0) edge (rxO) edge (rxI) edge (ryI);
+    \draw[jf] (0) edge[bend right] (rxO);
+
+    \draw[po] (rxO) edge (wyA);
+    \draw[po] (rxI) edge (wyB);
+    \draw[po] (ryI) edge (wx);
+
+    \draw[cf] (rxO) -- node[below] {\small$\lCF$} (rxI);
+
+    \draw[jf] (wyA) edge node[below]          {}             (ryI);
+    \draw[jf] (wx)  edge node[below, pos=0.8] {\small$\lJF$} (rxI);
+
+    \draw[ew] (wyA) edge node[below] {\small$\lEW$} (wyB);
+
+    \begin{scope}[on background layer]
+      \draw[extractStyle] ($(rxI.north west)$) ++(0, 0.8) rectangle ($(wx.south east)$);
+    \end{scope}
+  \end{tikzpicture}
+  \caption{\Wkm-консистентная структура событий программы \ref{ex:lb-nodep} 
+           и извлеченный из нее граф сценария исполнения.}
+  \label{fig:es-lb}
+\end{figure}
+
