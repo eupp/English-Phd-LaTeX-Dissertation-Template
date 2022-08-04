@@ -1,16 +1,16 @@
 \begin{table}[t]
-\small
+\centering
+\scriptsize
 
 \newcommand{\rotateAngle}{270}
 
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
-\def\arraystretch{2}
-\setlength\tabcolsep{3pt} %\setlength\tabcolsep{2pt}
-\setlength\extrarowheight{6pt}
+\def\arraystretch{1}
+\setlength\tabcolsep{1pt} 
 
-\begin{center}
-\begin{tabularx}{\linewidth}{|*{7}{Y|}} 
+%% \begin{center}
+\begin{tabularx}{0.7\linewidth}{c*{6}{|Y}} 
 
 %% \hline
 
@@ -40,8 +40,6 @@
 
 %% \\
 
-\hline 
-
 Сlass  & 
 Compil. &
 Transf.~ &
@@ -53,19 +51,19 @@ Auto. Ver.
 \\
 \hline
 
-\makecell{Program\\Order\\Preserving} & 
+\makecell{Program Order\\Preserving} & 
  \badcell & \badcell & \okcell & \okcell & \okcell & \okcell
 
 \\
 \hline
 
-\makecell{Syntax.\\Dep.\\Preserving} &
+\makecell{Syntax. Dep.\\Preserving} &
  \okcell & \badcell & \okcell & \badcell & \okcell & \okcell
 
 \\
 \hline
 
-\makecell{Semantic\\Dep.\\Preserving} & 
+\makecell{Semantic Dep.\\Preserving} & 
  \okcell & \okcell & \okcell & \badcell & \okcell & \textbf{\unkwcell}
 
 \\
@@ -75,17 +73,18 @@ Auto. Ver.
  \okcell & \okcell & \badcell & \badcell & \badcell & \badcell
 
 \\
+
 \midrule
 
 \makecell{\Wkm} & 
  \textbf{\unkwcell} & \okcell & \okcell & \badcell & \okcell & \textbf{\unkwcell}
 
 \\
-\hline
+
 
 
 \end{tabularx}
-\end{center}
+%% \end{center}
 
 \captionsetup{justification=centering}
 \caption{Классы моделей памяти и их свойства}
