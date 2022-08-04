@@ -149,12 +149,23 @@
 }{}%
 
 %%% Интервалы между заголовками
-\setbeforesecskip{\theintvl\curtextsize}% Заголовки отделяют от текста сверху и снизу тремя интервалами (ГОСТ Р 7.0.11-2011, 5.3.5).
-\setaftersecskip{\theintvl\curtextsize}
-\setbeforesubsecskip{\theintvl\curtextsize}
-\setaftersubsecskip{\theintvl\curtextsize}
-\setbeforesubsubsecskip{\theintvl\curtextsize}
-\setaftersubsubsecskip{\theintvl\curtextsize}
+
+% Заголовки отделяют от текста сверху и снизу тремя интервалами (ГОСТ Р 7.0.11-2011, 5.3.5).
+%% \setbeforesecskip{\theintvl\curtextsize} 
+%% \setaftersecskip{\theintvl\curtextsize}
+%% \setbeforesubsecskip{\theintvl\curtextsize}
+%% \setaftersubsecskip{\theintvl\curtextsize}
+%% \setbeforesubsubsecskip{\theintvl\curtextsize}
+%% \setaftersubsubsecskip{\theintvl\curtextsize}
+
+% Вместо рекомендации ГОСТ используем одиночный интервал
+\setbeforesecskip{\curtextsize} 
+\setaftersecskip{\curtextsize}
+\setbeforesubsecskip{\curtextsize}
+\setaftersubsecskip{\curtextsize}
+\setbeforesubsubsecskip{\curtextsize}
+\setaftersubsubsecskip{\curtextsize}
+
 
 %%% Вертикальные интервалы глав (\chapter) в оглавлении как и у заголовков
 % раскомментировать следующие 2
