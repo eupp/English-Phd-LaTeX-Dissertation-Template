@@ -1,0 +1,28 @@
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[xscale=1.4,yscale=0.8]
+
+  %% \node at (0,1.8) {$\circledb{C}$};
+
+  \node (init) at (1,  1.5) {$\Init$};
+
+  \node[color=colorRACE] (i11) at (0,  0) {$r_x: \rlab{}{x}{0}{}$};
+  \node                  (i12) at (0, -2) {$w_y: \wlab{}{y}{1}{}$};
+
+  \node                  (i21) at (2,  0) {$r_y: \rlab{}{y}{1}{}$};
+  \node[color=colorRACE] (i22) at (2, -2) {$w_x: \wlab{}{x}{1}{}$};
+
+  \draw[po] (i11) edge node[right] {\small$\lPO$} (i12);
+  \draw[po] (i21) edge node[left ] {\small$\lPO$} (i22);
+  %% \draw[ppo,bend left=10] (i21) edge node[right] {\small$\lPPO$} (i22);
+
+  \draw[rf] (init) edge node[below] {} (i11);
+  \draw[rf] (i12)  edge node[below] {\small$\lRF$} (i21);
+
+  \draw[po] (init) edge node[left]  {\small$\lPO$} (i11);
+  \draw[po] (init) edge node[right] {\small$\lPO$} (i21);
+
+\end{tikzpicture}
+\caption{Пример гонки с буферизацией операции чтения.}
+\label{fig:lbr-ex}
+\end{figure}

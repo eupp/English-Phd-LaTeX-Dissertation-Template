@@ -1,0 +1,117 @@
+%!TEX root = ../main.tex
+
+\begin{figure}[t]\centering\small
+\begin{minipage}{.35\textwidth}
+\vspace{-12pt}
+\begin{equation}
+\inarrIII{
+  \writeInst{}{z}{1}
+}{
+  \ifStmt{\readExpr{}{z}}  \\
+  \quad\readInst{}{r}{x}   \\
+  \quad\writeInst{}{y}{r}  \\
+  \elseStmt                \\
+  \quad\writeInst{}{y}{1}  \\
+}{
+  \ifStmt{\readExpr{}{y}}  \\
+  \quad\writeInst{}{x}{1}  \\
+}
+\tag{\LBRF-cex}\label{prog:lbf-cex}
+\end{equation}
+\end{minipage}\hfill
+\begin{minipage}{.5\textwidth}
+  \begin{tikzpicture}[yscale=1,xscale=1.4]
+    \node at (-1,1) {$\circledb{A}$};
+    \node (0)  at (0,1) {$[init]$};
+    \node (wz) at (-1, 0) {$\wlab{}{z}{\!\,1}$};
+    \node (rz) at (0, 0) {$\rlab{}{z}{0}$};
+    \node (wy) at (0, -1) {$\wlab{}{y}{1}$};
+    \node (ry) at (1, 0) {$\rlab{}{y}{0}$};
+%    \node (wx) at (1, -1) {$\wlab{}{x}{0}$};
+    \node      at (0, -2) {\phantom{$\rlab{}{y}{0}$}};
+    \draw[po] (0) edge (wz) edge (rz) edge (ry);
+    \draw[po] (rz) edge (wy);
+%    \draw[po] (ry) edge (wx);
+    \draw[rf] (0) edge[bend left=20] (rz);
+    \draw[rf] (0) edge[bend left=20] (ry);
+  \end{tikzpicture}
+  \hfill
+  \begin{tikzpicture}[yscale=1,xscale=1.4]
+    \node at (-1,1) {$\circledb{B}$};
+    \node (0)  at (0,1) {$[init]$};
+    \node (wz) at (-1, 0) {$\wlab{}{z}{\!\,1}$};
+    \node (rz) at (0, 0) {$\rlab{}{z}{0}$};
+    \node (wy) at (0, -1) {$\wlab{}{y}{1}$};
+    \node (ry) at (1, 0) {$\rlab{}{y}{1}$};
+    \node (wx) at (1, -1) {$\wlab{}{x}{1}$};
+    \node      at (0, -2) {\phantom{$\rlab{}{y}{0}$}};
+    \draw[po] (0) edge (wz) edge (rz) edge (ry);
+    \draw[po] (rz) edge (wy);
+    \draw[po] (ry) edge (wx);
+    \draw[rf, bend left=20] (0) edge (rz);
+    \draw[rf] (wy) edge (ry);
+  \end{tikzpicture}
+\end{minipage}
+
+  \begin{tikzpicture}[yscale=1,xscale=1.4]
+    \node at (-1,1) {$\circledb{C}$};
+    \node (0)  at (0,1) {$[init]$};
+    \node (wz) at (-1, 0) {$\wlab{}{z}{1}$};
+    \node (rz) at (0, 0) {$\rlab{}{z}{1}$};
+    \node (rx) at (0, -1) {$\rlab{}{x}{0}$};
+    \node (wy) at (0, -2) {$\wlab{}{y}{0}$};
+    \node (ry) at (1, 0) {$\rlab{}{y}{0}$};
+%    \node (wx) at (1, -1) {$\wlab{}{x}{0}$};
+    \draw[po] (0) edge (wz) edge (rz) edge (ry);
+    \draw[po] (rz) edge (rx);
+    \draw[po] (rx) edge (wy);
+%    \draw[po] (ry) edge (wx);
+    \draw[rf] (wz) edge (rz);
+    \draw[rf, bend left=30] (0) edge (rx);
+    \draw[rf, bend left=20] (0) edge (ry);
+  \end{tikzpicture}
+  \hfill
+  \begin{tikzpicture}[yscale=1,xscale=1.4]
+    \node at (-1,1) {$\circledb{D}$};
+    \node (0)  at (0,1) {$[init]$};
+    \node (wz) at (-1, 0) {$\wlab{}{z}{1}$};
+    \node (rz) at (0, 0) {$\rlab{}{z}{1}$};
+    \node (rx) at (0, -1) {$\rlab{}{x}{0}$};
+    \node (wy) at (0, -2) {$\wlab{}{y}{0}$};
+    \node (ry) at (1, 0) {$\rlab{}{y}{0}$};
+%    \node (wx) at (1, -1) {$\wlab{}{x}{0}$};
+    \draw[po] (0) edge (wz) edge (rz) edge (ry);
+    \draw[po] (rz) edge (rx);
+    \draw[po] (rx) edge (wy);
+%    \draw[po] (ry) edge (wx);
+    \draw[rf] (wz) edge (rz);
+    \draw[rf, bend left=30] (0) edge (rx);
+    \draw[rf] (wy) edge (ry);
+  \end{tikzpicture}
+  \hfill 
+  \begin{tikzpicture}[yscale=1,xscale=1.6]
+%    \draw[color=brown,fill=yellow!20,dashed,thick] (-2.4,0.5) rectangle (-1.6,-2.5);
+    \node at (-1,1) {$\circledr{E}$};
+    \node (0)  at (0,1) {$[init]$};
+    \node (wz) at (-1, 0) {$\wlab{}{z}{1}$};
+    \node (rz) at (0, 0) {$\rlab{}{z}{1}$};
+    \node (rx) at (0, -1) {$\rlab{}{x}{1}$};
+    \node (wy) at (0, -2) {$\wlab{}{y}{1}$};
+    \node (ry) at (1, 0) {$\rlab{}{y}{1}$};
+    \node (wx) at (1, -1) {$\wlab{}{x}{1}$};
+%    \node (crz) at (-2, 0) {$\rlab{}{z}{1}$};
+%    \node (cwy) at (-2, -2) {$\wlab{}{y}{1}$};
+    \draw[po] (0) edge (wz) edge (rz) edge (ry);
+    \draw[po] (rz) edge (rx);
+    \draw[po] (rx) edge (wy);
+    \draw[po] (ry) edge (wx);
+%    \draw[po] (crz) edge (cwy);
+    \draw[rf,bend left=20] (wz) edge (rz);
+    \draw[rf] (wx) edge (rx);
+    \draw[rf] (wy) edge (ry);
+%    \draw[rf] (wz) edge (crz);
+  \end{tikzpicture}
+  \caption{Пример свободной от буферизации операций чтения программы и 
+    соответствующих ей \Wkm консистентных графов сценариев исполнения.}
+  \label{fig:lbf-cex}
+\end{figure}

@@ -298,6 +298,7 @@
 \newcommand{\lEQVAL}{=_{\lVAL}}
 
 \colorlet{colorPO}{gray!60!black}
+\colorlet{colorRPO}{brown!60!black}
 \colorlet{colorCF}{red!60!black}
 \colorlet{colorECF}{red!60!black}
 \colorlet{colorJF}{blue!60!black}
@@ -322,6 +323,7 @@
 \colorlet{colorCOV}{magenta!20}
 \colorlet{colorISS}{blue!10!white}
 \colorlet{colorVF}{purple!70!black}
+\colorlet{colorRACE}{red!60!black}
 
 \newcommand{\lPO}{{\color{colorPO}\mathtt{po}}}
 \newcommand{\lPOimm}{{\color{colorPO}\mathtt{po_{imm}}}}
@@ -336,9 +338,7 @@
 \newcommand{\lCO}{{\color{colorMO} \mathtt{co}}}
 \newcommand{\lFR}{{\color{colorFR} \mathtt{fr}}}
 \newcommand{\lECO}{{\color{colorECO} \mathtt{eco}}}
-
 \newcommand{\lPORF}{\lPO\lRF}
-\newcommand{\lPPORF}{\lPPO\lRF}
 
 \newcommand{\lRS}{{\color{colorRS}\mathtt{rs}}}
 \newcommand{\lREL}{{\color{colorREL}\mathtt{rel}}}
@@ -358,11 +358,16 @@
 \newcommand{\lRMWDEP}{{{\color{colorDEPS}\mathtt{casdep}}}}
 \newcommand{\lPPO}{{{\color{colorPPO}\mathtt{ppo}}}}
 \newcommand{\lAR}{\mathtt{ar}}
+\newcommand{\lPPORF}{\lPPO\lRF}
 
 \newcommand{\lSCB}{{\color{colorSCB}\mathtt{scb}}}
 \newcommand{\lPSC}{{\color{colorPSC}\mathtt{psc}}}
 \newcommand{\lPSCB}{\lPSC_{\mathrm{base}}}
 \newcommand{\lPSCF}{\lPSC_\lF}
+
+\newcommand{\lRPO}{{\color{colorRPO}\mathtt{rpo}}}
+\newcommand{\lLBRACE}{{\color{colorRACE}\mathtt{lbrace}}}
+\newcommand{\lLBPAT}{{\mathtt{lbpat}}}
 
 \newcommand{\lmakeE}[1]{#1\mathtt{e}}
 \newcommand{\lJFE}{\lmakeE{\lJF}}
@@ -520,8 +525,8 @@
 
 \newcommand{\kw}[1]{\textbf{\tcode{#1}}\;}
 
-\newcommand{\readExpr }[2]{{#2}^{#1}}
-\newcommand{\readInst }[3]{#2 \;{:=}\;{#3}^{#1}}
+\newcommand{\readExpr}[2]{{#2}^{#1}}
+\newcommand{\readInst}[3]{#2 \;{:=}\;{#3}^{#1}}
 \newcommand{\fenceInst}[1]{\kw{fence}^{#1}}
 
 \newcommand\ifGoto{\kw{if}-\kw{goto}}
@@ -537,6 +542,10 @@
 
 \newcommand{\rfcomment}[1]{\color{teal}{~~\texttt{/\!\!/}\textit{#1}}}
 \newcommand{\nocomment}[1]{\color{red!60!black}{~~\texttt{/\!\!/}\textit{#1}}}
+
+\newcommand{\ifStmt}[1]{\kw{if}#1\;\kw{then}}
+\newcommand{\elseIfStmt}[1]{\kw{else}\; \kw{if}\; #1\;}
+\newcommand{\elseStmt}{\kw{else}\;}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Proper Names and Abbreviations  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -591,6 +600,7 @@
 
 \newcommand{\DRF}{\ensuremath{\mathsf{DRF}}\xspace}
 \newcommand{\DRFM}[1]{\ensuremath{\mathsf{DRF}}-\ensuremath{\mathsf{#1}}\xspace}
+\newcommand{\LBRF}{\ensuremath{\mathsf{LBRF}}\xspace}
 
 %% proof assistants 
 
@@ -669,6 +679,11 @@
 %% circle marker for tikz figures
 \newcommand*\circledb[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=1pt,fill=blue!20] (char) {\small\textrm{#1}};}}
+\newcommand*\circledr[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt,fill=red!20] (char) {\small\textrm{#1}};}}
+\newcommand*\circledg[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt,fill=green!20] (char) {\small\textrm{#1}};}}
+
 
 %% check-mark, cross-mark and other symbols used in the tables
 

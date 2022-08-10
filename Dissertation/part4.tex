@@ -52,9 +52,109 @@
 \section{Cвобода от буферизации операций чтения}
 \label{sec:lbrf}
 
-Введение свойства свободы от буферизации операция чтения.
-Мотивация: отсеять часть необоснованных сценариев исполнения.
-Формальное определение. Примеры. 
+Свойство свободы от буферизации операций чтения 
+(\emph{load buffering race freedom}, \LBRF) 
+допускает использование спекулятивного исполнения только в случае, 
+если программа содержит гонку особого вида, 
+называемую \emph{гонкой с буферизацией операции чтения}.
+Свойство свободы от буферизации операций 
+является частным случаем свойства свободы от гонок. 
+Далее введем формальное определение этого понятия.
+
+\begin{definition}
+  Рассмотрим граф сценария исполнения $G$. 
+  Будем называть $\lPO$ ребро от операции чтения $r$ к операции записи $w$
+  \emph{переупорядочиваемым} (\emph{reordarable}) и обозначать 
+  соответствующее отношение как $\lRPO$ 
+  если $r$ и $w$ это ослабленные (relaxed) обращения и между ними нет барьеров.  
+
+  $$ \lRPO \defeq
+     [\lR^{\rlx}] \seqc (\lPO \setminus (\lPO \seqc [\lF] \seqc \lPO)) \seqc [\lW^{\rlx}]
+  $$
+\end{definition}
+
+\begin{definition}
+\label{def:lb-race}
+  Пара событий $r$ и $w$ образуют \emph{гонку с буферизацией операции чтения}, 
+  что обозначается как $\tup{r, w} \in \lLBRACE$,
+  в графе $G$ если $r$ это операция чтения, а $w$ это конкурентная ей операция записи,
+  такая что от $r$ к $w$ существует $\lPORF$ путь, начинающийся с 
+  переупорядиваемого ребра $\lRPO$.
+
+  \begin{equation*}
+    \lLBRACE \defeq 
+      ([\lR] \seqc {=_{\lLOC}} \seqc [\lW]) \cap 
+      (\lRPO \seqc (\lRF \setminus \lPO) \seqc \lPORF)) \setminus 
+      (\lHB \cup \lHB^{-1})
+  \end{equation*}
+
+\end{definition}
+
+На рисунке \ref{fig:lbr-ex} показан пример графа, 
+содержащего гонку с буферизацией операции чтения
+(такую гонку образуют события $r_x$ и $w_x$).
+
+\input{Dissertation/fig/lbr-ex}
+
+\begin{definition}
+Программа $P$ называется свободной от буферизации операций чтения 
+в модели памяти $M$ если все консистентные с точки зрения 
+модели $M$ графы этой программы не содержат 
+гонки с буферизацией операции чтения.
+\end{definition}
+
+\begin{definition}[\LBRF]
+Будем говорить, что модель памяти $M$ предоставляет 
+свойство свободы от буферизации операций чтения 
+относительно более строгой модели $M'$,
+что обозначается как $M \in \LBRF_{M'}$, если 
+для любой программы $P$ свободной от буферизации операций чтения 
+согласно модели $M'$, множество консистентных сценариев исполнения 
+программы $P$ с точки зрения модели $M$ совпадает 
+с множеством консистентных сценариев исполнения 
+с точки зрения модели~$M'$.
+\end{definition}
+
+В качестве более строгой модели $M'$ рассмотрим 
+модель памяти \RCMM, сохраняющую программный порядок
+(то есть запрещающую $\lPORF$ циклы).
+Тогда свойство $\LBRF_{\RCMM}$ для модели \Wkm 
+утверждает, что если ни один \RCMM консистентный граф 
+программы $P$ не содержит гонки с буферизацией операции чтения,
+тогда модель \Wkm также должна допускать для программы $P$ 
+только \RCMM консистентные графы, то есть 
+все такие графы должны быть $\lPORF$ ацикличны.
+
+К сожалению, как показывает следующий пример, 
+модель \Wkm не обладает свойством 
+свободы от буферизации операций чтения, 
+то есть ${\Wkm \not\in \LBRF_{M'}}$.
+Рассмотрим программу \ref{prog:lbf-cex} и соответствующие ей 
+\Wkm консистентные графы сценариев исполнения, 
+показанные на рисунке~\ref{fig:lbf-cex}. 
+Среди этих графов \circledb{A}, \circledb{B}, \circledb{C}, \circledb{D} 
+также являются \RCMM консистентными и при этом не содержат 
+гонок с буферизацией операций чтения.
+Несмотря на это, модель \Wkm также допускает граф \circledr{E},
+который содержит $\lPORF$ цикл и, следовательно, не является \RCMM консистентным. 
+
+%% This execution can arise in the following manner. First, thread 2
+%% promises the $\wlab{}{y}{1}$ store; the promise is allowed because thread 2
+%% can read $z = 0$ and fulfill it.
+%% Then, thread 3 executes: it reads $y = 1$ and writes $1$ to $x$.
+%% Finally, threads 1 and 2 execute: thread 2 reads $z = 1$ and $x = 1$,
+%% and subsequently writes $1$ to $y$ thereby fulfilling its promise.
+
+\input{Dissertation/fig/lbf-cex}
+
+%% Normally, we take $M'$ to be some standard model that forbids $\lPORF$ cycles,
+%% such as \RCMM\@.
+%% Similar to $\drf$, $\lbf_\RCMM$ allows programmers to program defensively
+%% against $M$ avoiding LB races, and relieves them from the need to learn and
+%% understand the definition of $M$.
+%% Since absence of LB races is to be checked with respect to \RCMM, one can use
+%% any of the existing tools and methodologies that reason about program
+%% correctness under \RCMM (\eg \igps, \Herd, \rcmc, \genmc, etc).
 
 \section{Локальность сертификации}
 \label{sec:cert-loc}
