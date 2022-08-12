@@ -823,8 +823,8 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
   \emph{Трассой} помеченной системой переходов называется чередующаяся последовательность  
   состояний $s_0, s_1, \ldots, s_n \in \Label$ 
   и меток $\ell_1, \ldots, \ell_n \in L$, 
-  такая что выполняется условие
-  $$s_0 \xrightarrow{\ell_1} s_1 \xrightarrow{\ell_2} s_2 \xrightarrow{\ell_3} \ldots \xrightarrow{\ell_n} s_n$$
+  такая, что выполняется следующее условие:
+  $$s_0 \xrightarrow{\ell_1} s_1 \xrightarrow{\ell_2} s_2 \xrightarrow{\ell_3} \ldots \xrightarrow{\ell_n} s_n.$$
 \end{definition}
 
 \begin{definition}
@@ -836,7 +836,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
   $$ \langof{\LTS, s_0} \defeq \set{ 
       \ell_1 \ldots \ell_n ~|~ \exists s_1, \ldots, s_n \ldotp 
        s_0 \xrightarrow{\ell_1} s_1 \xrightarrow{\ell_2} \ldots \xrightarrow{\ell_n} s_n
-     } 
+     }. 
   $$
 \end{definition}
   
@@ -858,7 +858,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
   где $\TrRel_{\parSymb}$ определяется следующим образом:
   \begin{itemize}
     \item $\ltr[\TrRel_1]{\ell}{s_1}{s'_1}$ влечет
-          $\ltr[\TrRel_{\parSymb}]{\ell}{\tup{s_1, s_2}}{\tup{s'_1, s_2}}$, и
+          $\ltr[\TrRel_{\parSymb}]{\ell}{\tup{s_1, s_2}}{\tup{s'_1, s_2}}$,
     \item $\ltr[\TrRel_2]{\ell}{s_2}{s'_2}$ влечет
           $\ltr[\TrRel_{\parSymb}]{\ell}{\tup{s_1, s_2}}{\tup{s_1, s'_2}}$.
   \end{itemize}
@@ -933,11 +933,11 @@ $e_1 \co e_2$.
 \begin{definition}
   \label{def:lposet}
   \emph{Помеченное частично упорядоченное множество} над множеством меток $\Label$, 
-  это тройка $\tup{\Event, \lab, \ca}$, где 
+  это тройка $\tup{\Event, \lab, \ca}$, где: 
   \begin{itemize}
-    \item $\Event$ это множество \emph{событий};
-    \item $\lab : \Event \fun \Label$ \emph{функция разметки событий};
-    \item $\ca \subseteq \Event \times \Event$ это частичный порядок 
+    \item $\Event$ ---это множество \emph{событий};
+    \item $\lab : \Event \fun \Label$ \emph{является функцией разметки событий};
+    \item $\ca \subseteq \Event \times \Event$ --- это частичный порядок 
       \emph{причинно-следственной связи} между событиями. 
   \end{itemize}
 \end{definition}
@@ -1026,7 +1026,7 @@ $e_1 \co e_2$.
 
 Линеаризация языка помсетов $P$ определяется 
 как объединение линеаризации всех входящих в язык помсетов:
-$$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p} $$
+$$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p}. $$
 Наконец, можно сказать что язык помсетов $P \in \Pomlang[\Label]$
 соответствует обычному языку $L \in \Lang{\Label}$, если $\Lin{P} = L$.
 
@@ -1103,7 +1103,7 @@ $$X \in \Cons \iff \forall e_1~e_2 \in X \ldotp \neg e_1 \cf e_2.$$
   с предикатом консистентности. Тогда подмножество событий 
   $X \suq \Event$ называется \emph{конфигурацией} структуры $S$ 
   если оно является префикс-замкнутым, а все его конечные подмножества 
-  являются консистентными, то есть 
+  являются консистентными: 
   \begin{itemize}
     \item $\dwset{X} \defeq {e' ~|~ \exists e \in X \ldotp~ e' \ca e } \suq X$, 
     \item $Y \finsubseteq X$ влечет $Y \in \Cons$.
@@ -1116,7 +1116,7 @@ $$X \in \Cons \iff \forall e_1~e_2 \in X \ldotp \neg e_1 \cf e_2.$$
   \label{def:es-pomlang}
   Язык помсетов, порождаемый структурой событий $S = \tup{\Event, \lab, \ca, \Cons}$, 
   определяется следующим образом:
-  $$ \pomlang{S} \defeq \set{p ~|~ \exists X \in \Cfg{S} \ldotp p = S\rst{X} }$$
+  $$ \pomlang{S} \defeq \set{p ~|~ \exists X \in \Cfg{S} \ldotp p = S\rst{X} },$$
   где $S\rst{X} \defeq {X, \lab\rst{X}, \ca\rst{X}}$ это сужение 
   структуры событий $S$ на консистентное подмножество событий $X$.
 \end{definition}
