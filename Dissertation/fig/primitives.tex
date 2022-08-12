@@ -1,8 +1,12 @@
 \begin{center}
-\begin{table}[hb]
+\begin{table}[t]
 \begin{tabular}{l@{\hskip 40pt}|l} 
 
     \hline
+
+    Синтаксис инструкции & Описание семантики инструкции \\
+
+    \midrule
 
       $\writeInst{o}{x}{v}$ 
     & \makecell[l]{
@@ -58,6 +62,15 @@
       } 
     \\ 
     \hline
+
+      $\fenceInst{o}$ 
+    & \makecell[l]{
+        Инструкция барьера памяти                       \\
+        аннотированная режимом доступа $o$.             \\ 
+      } 
+    \\ 
+    \hline
+
 
 \end{tabular}
 \captionsetup{justification=centering}
