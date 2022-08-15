@@ -1,0 +1,27 @@
+\begin{table}[h]
+\centering\small
+\resizebox{.5\textwidth}{!}{
+\begin{tabular}{@{}l@{\hsep}S[table-format=3.2]@{\hsep}|S[table-format=3.2]@{\hsep}S[table-format=3.2]@{}}
+
+\toprule
+
+~                          &
+\multicolumn{1}{c}{\genmc} &
+\multicolumn{1}{c}{\hmc}   &
+\multicolumn{1}{c}{\wmc}   
+%% \multicolumn{1}{c}{\hmclbf}
+\\
+
+\midrule
+
+LB-racy          &  0.53    &  0.71    &  0.55     \\
+LB-race-free     &  111.82  &  235.85  &  134.09   \\
+
+\bottomrule
+\end{tabular}
+}
+
+\captionsetup{justification=centering}
+\caption{Время работы на тестовом наборе \genmc}
+\label{tab:overhead}
+\end{table}
