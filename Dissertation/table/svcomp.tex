@@ -1,0 +1,45 @@
+\begin{table}
+\centering\small
+\vspace{-8pt}
+\resizebox{.7\textwidth}{!}{%
+\begin{tabular}{@{}l@{\sep}S[table-format=3.2]@{\hsep}|S[table-format=3.2]@{\hsep}S[table-format=3.2]@{\hsep}S[table-format=3.2]@{\hsep}S[table-format=4.2]@{\hsep}S[table-format=4.2]}
+
+\toprule
+
+~                               &
+\multicolumn{1}{c}{\genmc}      &
+\multicolumn{1}{c}{\hmc}        &
+\multicolumn{1}{c}{\Nidhugg}    &
+\multicolumn{1}{c}{\rmem}       &
+\multicolumn{1}{c}{\CDSChecker} &
+\multicolumn{1}{c}{\wmc}        \\
+
+\midrule
+
+reorder(2)     &  .06      & .11       &   1.37   & 77.10    & 0.04     &  .06   \\
+singleton      & .01       &  .01      &  .12     &  96.21   &  0.00    & .01    \\
+fib\_bench     &  13.09    & 25.98     &   237.73 & \timeout & \timeout &  37.66 \\
+szymanski(1)   &  .05      & .07       &   .13    & 5.56     & 0.28     &  .06   \\
+szymanski(2)   &  246.23   & 399.79    &   3.74   & 529.85   & 1688.60  &  321.23\\
+szymanski(3)   &  \timeout & \timeout  &   170.88 & \timeout & \timeout &  \timeout     \\
+peterson(10)   & .03       &  .06      &  .65     & \timeout &  0.25    & .14    \\
+peterson(20)   & .12       &  .31      &  3.81    & \timeout &  1.36    & 1.09   \\
+peterson(30)   & .32       &  .84      &  13.54   & \timeout &  3.86    & 4.43   \\
+dekker         & .01       &  .02      &  .14     & 30.09    &  0.23     & .02   \\
+%
+\midrule
+%
+sigma          & 141.56    &  352.86   &          & \timeout &  \timeout & 157.91 \\ %% mo/wb difference
+indexer(12)    &  .02      & .02       &          & \timeout & 0.90      &  .02   \\
+indexer(13)    &  .05      & .07       &          & \timeout & 116.71    &  .05   \\
+indexer(14)    &  .30      & .48       &          & \timeout & \timeout  &  .34   \\
+indexer(15)    &  2.45     & 4.03      &          & \timeout & \timeout  &  2.85  \\
+
+\bottomrule
+\end{tabular}
+}
+
+\captionsetup{justification=centering}
+\caption{Время работы на тестовом наборе \SVCOMP~\cite{SVCOMP}}
+\label{tab:svcomp}
+\end{table}

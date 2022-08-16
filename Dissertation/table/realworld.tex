@@ -1,0 +1,38 @@
+\begin{table}
+\centering\small
+\vspace{-8pt}
+\resizebox{.6\textwidth}{!}{%
+\begin{tabular}{@{}l@{\hsep}S[table-format=0.1]@{\hsep}|S[table-format=2.2]@{\hsep}S[table-format=2.2]@{\hsep}S[table-format=2.2]@{\hsep}S[table-format=2.2]@{}}
+
+\toprule
+
+~                               &
+\multicolumn{1}{c}{\genmc}      &
+\multicolumn{1}{c}{\hmc}        &
+\multicolumn{1}{c}{\CDSChecker} &
+\multicolumn{1}{c}{\wmc} \\
+
+\midrule
+
+barrier-bnd              & 1.29   & 2.67   & 4.13     & 1.34  \\
+mpmc-queue-bnd           & 1.87   & 4.18   & 19.78    & 2.09  \\
+treiber-stack-bnd        & 0.56   & 1.28   & \timeout & 0.58  \\
+linuxrwlocks-bnd         & 0.29   & 0.57   & \timeout & 0.46  \\
+seqlock-bnd              & 45.40  & 109.24 & \timeout & 47.78 \\
+
+%% Executions
+%% barrier-bnd           & 30720  & 30720  & 30720  & 40743    & 30720 %% I think the discrepancy is due to SCs
+%% mpmc-queue-bounded/   &  15752 &  15752 & 15752  & 26212    & 15752 %% Many infeasible (not shown here)
+%% treiber-stack-bnd     & 3120   &  *     & 3120   & 3120     & 3120  %% There are many infeasible promises (2 OOM at least); still the number of executions is not the same.
+%% linuxrwlocks-bounded/ &  7334  &  7334  & 7334   & *        & 7334  %% (relaxed accesses seem to play some role here)
+%% seqlock-bnd           & 517640 & 517640 & 517640 & *        & 517640 \\
+
+\bottomrule
+\end{tabular}
+}
+
+\captionsetup{justification=centering}
+\caption{Время работы на тестовом наборе многопоточных 
+алгоритмов и структур данных из работы~\cite{Norris-Demsky:OOPSLA2013}}
+\label{tab:datastructures}
+\end{table}
