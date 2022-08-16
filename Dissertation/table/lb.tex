@@ -1,0 +1,40 @@
+\begin{table}
+\centering
+
+\newcommand{\execs}{Уникальные}
+\newcommand{\dupls}{Повторяющиеся}
+\newcommand{\blckd}{Блокированные}
+\newcommand{\pcent}{\%\!\!\!\!}
+\resizebox{.4\textwidth}{!}{
+\begin{tabular}{@{}l@{\sep}S[table-format=4]@{\hsep}S[table-format=2.1]@{\hsep}S[table-format=2.1]@{}}
+
+\toprule
+
+~ & \multicolumn{1}{c}{\execs} & \multicolumn{1}{c}{\dupls} & \multicolumn{1}{c}{\blckd} \\
+
+\midrule
+%
+LB+ctrl(10)   &    11 & 0 & 0  \\
+LB+ctrl(12)   &    13 & 0 & 0  \\
+LB+ctrl(14)   &    15 & 0 & 0  \\
+%
+LB+data(10)   &  1024 & 0 & 0  \\
+LB+data(12)   &  4096 & 0 & 0  \\
+LB+data(14)   & 16384 & 0 & 0  \\
+%
+LB-nodep(10)   &   1024 &   0.9 \pcent &  0.9 \pcent \\
+LB-nodep(12)   &   4096 &   0.3 \pcent &  0.3 \pcent \\
+LB-nodep(14)   &  16384 &   0.1 \pcent &  0.1 \pcent \\
+%
+LB-pairs(10)   &   1024 & 205.2 \pcent & 33.3 \pcent \\
+LB-pairs(12)   &   4096 & 281.5 \pcent & 33.3 \pcent \\
+LB-pairs(14)   &  16384 & 376.8 \pcent & 33.3 \pcent \\
+
+\bottomrule
+\end{tabular}%
+}
+%
+
+\caption{Количество исследуемых \wmc сценариев исполнения для синтетических программ}
+\label{tab:lb}
+\end{table}

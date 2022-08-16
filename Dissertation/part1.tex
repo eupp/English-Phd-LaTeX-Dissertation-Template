@@ -430,11 +430,11 @@ sequential consistency.
 
 \begin{equation*}
 \inarrII{
-  \readInst{}{r_1}{x}     \\
-  \writeInst{}{y}{1}      \\
+  \readInst{}{r_1}{x}   \\
+  \writeInst{}{y}{1}    \\
 }{
-  \readInst{}{r_2}{y}     \\
-  \writeInst{}{x}{r_2}    \\
+  \readInst{}{r_2}{y}   \\
+  \writeInst{}{x}{1}    \\
 }
 \tag{LB}\label{ex:lb-spec}
 \end{equation*}
