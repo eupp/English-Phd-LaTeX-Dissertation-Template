@@ -812,11 +812,12 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
 \begin{definition}
   \label{def:lts}
   \emph{Система помеченных переходов} --- это тройка
-    $\LTS \defeq \tup{\State, \Label, \TrRel}$, где 
+    $\LTS \defeq \tup{\State, \Label, \TrRel}$, где компоненты 
+    этой тройки заданы следующим образом: 
   \begin{itemize}
-    \item $\State$ --- множество состояний;
-    \item $\Label$ --- множество меток, также называемое \emph{алфавитом};
-    \item $R \subseteq L \times S \times S$ --- помеченное отношение перехода.
+    \item $\State$ --- это множество состояний;
+    \item $\Label$ --- это множество меток, также называемое \emph{алфавитом};
+    \item $R \subseteq L \times S \times S$ --- это помеченное отношение перехода.
   \end{itemize}
 \end{definition}
 
@@ -943,7 +944,8 @@ $e_1 \co e_2$.
 \begin{definition}
   \label{def:lposet}
   \emph{Помеченное частично упорядоченное множество} над множеством меток $\Label$ ---
-  это тройка $\tup{\Event, \lab, \ca}$, где: 
+  это тройка $\tup{\Event, \lab, \ca}$, где компоненты 
+  этой тройки заданы следующим образом:
   \begin{itemize}
     \item $\Event$ --- это множество \emph{событий};
     \item $\lab : \Event \fun \Label$ \emph{является функцией разметки событий};
@@ -1342,7 +1344,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
 Также будем говорить, что модель памяти $M$, 
 заданная в аксиоматическом стиле, сохраняет программный порядок, 
 если любой $M$-консистентный граф сохраняет программный порядок, 
-то есть ${M \suq \PorfExecG}$.
+то есть верно, что ${M \suq \PorfExecG}$.
 
 Например, среди графов, показанных на рисунке~\ref{fig:lb-nodep-execs}, 
 графы \circledb{A}, \circledb{B} и \circledb{C} сохраняют программный порядок, 
@@ -1409,7 +1411,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
 Также будем говорить, что модель памяти $M$, 
 заданная в аксиоматическом стиле, сохраняет программный порядок, 
 если любой $M$-консистентный граф сохраняет программный порядок, 
-то есть ${M \suq \PporfExecG}$.
+то есть выполняется ${M \suq \PporfExecG}$.
 
 \input{Dissertation/fig/lb-execs}
 
