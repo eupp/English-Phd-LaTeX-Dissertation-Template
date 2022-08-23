@@ -1,0 +1,44 @@
+\begin{table}
+\centering\small
+%% \resizebox{.5\textwidth}{!}{
+\begin{tabular}{@{}l@{\hsep}|p{20pt}@{}}
+
+\toprule
+
+%% Название программы         &
+%% Не содержит \LB гонок?     \\
+%% \midrule
+
+% Kokologiannakis:PLDI2019 (?)
+
+qu               & \cmark \\
+qu-opt           & \cmark \\
+ms-queue         & \cmark \\
+mpmc-queue       & \cmark \\
+fcombiner-async  & \cmark \\
+
+% Ou-Demsky:OOPSLA18 (?)
+
+cds-barrier      & \cmark \\
+cds-chase-lev    & \cmark \\
+cds-mcs          & \cmark \\
+cds-msqueue      & \cmark \\
+cds-rwlock       & \cmark \\ 
+cds-seqlock      & \cmark \\ 
+cds-spinlock     & \cmark \\ 
+cds-ticket       & \cmark \\ 
+cds-treiber      & \cmark \\
+rigtorp-mpmc     & \cmark \\ 
+rigtorp-spsc     & \cmark \\
+
+% Oberhauser-al:ASPLOS2021 (?)
+
+\bottomrule
+\end{tabular}
+%% }
+
+\captionsetup{justification=centering}
+\caption{Отсутствие (\cmark) или наличие (\xmark) 
+  гонок с буферизацией операций чтения в тестовых программах.}
+\label{tab:lbraces}
+\end{table}
