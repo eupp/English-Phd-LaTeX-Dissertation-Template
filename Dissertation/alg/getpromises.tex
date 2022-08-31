@@ -1,0 +1,16 @@
+\begin{algorithm}
+\caption{Вычисление множества обещаний}  \label{alg:getpromises}
+
+\begin{algorithmic}[1]
+\Function{\calcPromises}{$G, r, S$}
+\State \Return
+  $\{ \tup{w',G} ~|~ 
+      \tup{r,w'} \in G.\lPO \wedge 
+      w' \in \dom{G.\lRFE}
+      \wedge w' \in \dom{G.\lPORF; [S]} \}$
+  \label{calcpromises:return}
+\EndFunction
+\end{algorithmic}
+
+\end{algorithm}
+

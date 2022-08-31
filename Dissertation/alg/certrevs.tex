@@ -1,0 +1,16 @@
+\begin{algorithm}
+\caption{\small Вычисление множества перепосещений после окончания сертификации} 
+\label{alg:certrevs}
+
+\begin{algorithmic}[1]
+\Function{\getCertRevs}{$G,e$}
+\State $Revs \gets \{ \tup{r, w} ~|~ 
+  \tup{r,e} \in \lPO \land G.\lRF;[r] \suq G.\lRF^?;G.\lHB
+  \land w \in G.\lW_{\lLOC(r)} \}\ $
+\State $W \gets \lW \cap \dom{G.\lPO \seqc [e]}$
+\State \Return $Revs \cup \bigcup_{w \in W} \getRevisitable(G, w)$
+\label{certrevs:return}
+\EndFunction
+\end{algorithmic}
+
+\end{algorithm}
