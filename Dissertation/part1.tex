@@ -1449,7 +1449,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
 модели данного класса вынуждены рассматривать сразу 
 несколько сценариев исполнения, которые 
 моделируют спекулятивное исполнение программы.
-В рамках модели \Wkm это множество сценариев исполнения 
+В рамках модели \Wkm это множество сценариев
 объединяется в структуру событий особого вида.
 
 \begin{definition}
@@ -1529,11 +1529,11 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
       только с точностью до отношения эквивалентности на записях.
       \begin{equation*}
        \forall x \in \Loc \ldotp~ \forall w_1,w_2 \in \lW_{x} \ldotp~
-          \tup{w_1, w_2} \in \lEW \cup \lCO \cup \lCO^{-1}
+          \tup{w_1, w_2} \in \lEW \cup \lCO \cup \lCO^{-1}.
       \end{equation*}
       Также полагается, что отношение $\lCO$ замкнуто
-      относительно отношения $\lEW$:
-      $$\lEW \seqc \lCO \seqc \lEW \subseteq \lCO.$$
+      относительно отношения $\lEW$, т.е.
+      \lEW \seqc \lCO \seqc \lEW \subseteq \lCO.$
 
   \end{itemize}
 \end{definition}
@@ -1608,7 +1608,7 @@ c различной семантикой.
 \begin{definition}
 \label{def:wkm-cfg}
 \emph{Обоснованной конфигурацией} структуры событий $S$
-называется подмножество событий $C \subseteq S.\lE$, такое что:
+называется подмножество событий $C \subseteq S.\lE$ такое, что:
 \begin{itemize}
   \item $C$ бесконфликтно: $\lCF \cap C \times C = \emptyset$;
   \item $C$ замкнуто относительно $\lPO$: $\dom{\lPO \seqc [C]} \suq C$;
