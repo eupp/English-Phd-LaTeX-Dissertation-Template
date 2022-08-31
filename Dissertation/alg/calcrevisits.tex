@@ -12,21 +12,21 @@
 % \ignorespaces}
 %
 \begin{algorithmic}[1]
-\Procedure{\calcRevisits}{$\prog, G, \alghl{\pSet}, \alghl{\pSet'}, a$}
+\Procedure{\calcRevisits}{$\prog, G, \alghl{\pSet}, a$}
   \tikzmk{A}
-  \If {$\pSet' \neq \emptyset$}
-    \State $\tup{Rs,\pSet_c} \gets \tup{\emptyset, \emptyset}$ \label{calcrevisits:cert-not-over}
-  \ElsIf {$\pSet \neq \emptyset$} 
-    \State $\tup{Rs,\pSet_c} \gets \tup{\getCertRevs(G, a), \set{a}}$ \label{calcrevisits:get-nonlocal-revs}
+  %% \If {$\pSet' \neq \emptyset$}
+  %%   \State $\tup{Rs,\pSet_c} \gets \tup{\emptyset, \emptyset}$ \label{calcrevisits:cert-not-over}
+  \If {$\pSet \neq \emptyset$} 
+    \State $\tup{Rs,\pSet_a} \gets \tup{\getCertRevs(G, a), \set{a}}$ \label{calcrevisits:get-nonlocal-revs}
   \Else 
     \tikzmk{B}\boxit{.53\linewidth}{0.65\linewidth}
-    \State $\tup{Rs,\alghl{\pSet_c}} \gets \tup{\getRevisitable(G, a), \alghl{\emptyset}}$
+    \State $\tup{Rs,\alghl{\pSet_a}} \gets \tup{\getRevisitable(G, a), \alghl{\emptyset}}$
        \label{calcrevisits:push-normal-revs}
   \EndIf
   \For{$\tup{w, r} \in Rs$}                               \label{calcrevisits:loop}
     \State $G' \gets \restrict(G,r,w) \alghl{{}\setminus{} \cod{[r];G.\lPO}}$\label{calcrevisits:restrict}
     \tikzmk{A}
-    \State $\pSet' \gets \calcPromises(G, r, \set{w} \cup \pSet_c \cup \getLastCycle(G,r))$\label{calcrevisits:promises}%
+    \State $\pSet' \gets \calcPromises(G, r, \set{w} \cup \pSet_a \cup \getLastCycle(G,r))$\label{calcrevisits:promises}%
     \tikzmk{B}\boxit{.595\linewidth}{.11\linewidth}
     \State $\visit(\prog, G', \alghl{\pSet'})$\tikzmk{A}\label{calcrevisits:visit-revs}
   \EndFor

@@ -31,8 +31,12 @@
       \State $\pSet' \gets \set{\tup{w,G_w} \in \pSet ~|~ w \neq a }$\label{visit:p-pop}
       \tikzmk{B}\boxit{.22\linewidth}{0.3\linewidth}
       \State $\visit(\prog, G, \alghl{\pSet'})$\label{visit:visit-w}
-      \State $\calcRevisits(\prog, G, \alghl{\pSet}, \alghl{\pSet'}, a)$
-         \label{visit:calcrevisits}
+      \tikzmk{A}
+      \If {$\pSet' = \emptyset$} \label{visit:cert-not-over}
+        \tikzmk{B}\boxit{.29\linewidth}{0.47\linewidth}
+        \State $\calcRevisits(\prog, G, \alghl{\pSet}, a)$
+           \label{visit:calcrevisits}
+      \EndIf
     \EndCase
     \DefaultCase $\visit(\prog, G, \alghl{\pSet})$
     \EndCase
