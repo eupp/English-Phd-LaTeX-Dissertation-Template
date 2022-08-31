@@ -121,10 +121,10 @@
 \newcommand{\state}{\sigma}
 
 % set of states
-\newcommand{\State}{\mathbb{S}}
+\newcommand{\StateType}{\mathbb{S}}
 
 % set of labels 
-\newcommand{\Label}{\mathsf{L}}
+\newcommand{\LabelType}{\mathsf{L}}
 
 % transition relation
 \newcommand{\TrRel}{\mathsf{R}}
@@ -261,6 +261,7 @@
 \newcommand{\lWex}{\lW_{\isex}}
 \newcommand{\lTS}{\mathtt{TS}}
 \newcommand{\lTE}{\mathtt{TE}}
+\newcommand{\lERR}{{\mathtt{Error}}}
 
 \newcommand{\wlab}[3]{{\lW}^{#1}({#2},{#3})}
 \newcommand{\rlab}[3]{{\lR}^{#1}({#2},{#3})}
@@ -656,6 +657,111 @@
 \newcommand{\CAS}{\textsc{CAS}\xspace}
 \newcommand{\EXCHG}{\textsc{EXCHG}\xspace}
 \newcommand{\FADD}{\textsc{FADD}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  Algorithms  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\algnewcommand\algorithmicswitch{\textbf{switch}}
+\algnewcommand\algorithmiccase{\textbf{case}}
+\algnewcommand\algorithmicdefaultcase{\textbf{otherwise}}
+\algnewcommand\algorithmicassert{\textbf{assert}}
+\algnewcommand\Assert[1]{\algorithmicassert(#1)}%
+\algnewcommand\algorithmicoutput{\textbf{output}}
+\algnewcommand\Output[1]{\algorithmicoutput(#1)}
+\algnewcommand\algorithmicexit{\textbf{exit}}
+\algnewcommand\Exit[1]{\algorithmicexit(#1)}
+\algnewcommand\algorithmiccontinue{\textbf{continue}}
+\algnewcommand\Continue{\algorithmiccontinue}
+
+\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}%
+\algdef{SE}[SWITCH]{Switch}{EndSwitch}[1]{\algorithmicswitch\ #1\ \algorithmicdo}{\algorithmicend\ \algorithmicswitch}%
+\algdef{SE}[CASE]{Case}{EndCase}[1]{\algorithmiccase\ #1}{\algorithmicend\ \algorithmiccase}%
+\algdef{SE}[CASE]{DefaultCase}{EndCase}{\algorithmicdefaultcase\ }{\algorithmicend\ \algorithmiccase}%
+\algtext*{EndSwitch}%
+\algtext*{EndCase}%
+
+\algrenewcommand\algorithmicindent{.6em}%
+
+\colorlet{lightcyan}{cyan!20}
+\DeclareRobustCommand{\alghl}[1]{%
+  {\sethlcolor{lightcyan}%
+  \ifmmode\text{\hl{$#1$}}\else\hl{#1}\fi%
+  }
+}
+
+\newcommand{\Gext}{G_{\text{ext}}}
+
+% Procedure **names**
+\newcommand{\restrict}{\ensuremath{\textsc{Restrict}}\xspace}
+\newcommand{\inCert}{\ensuremath{\textsc{InCertification}}\xspace}
+\newcommand{\certOK}{\ensuremath{\textsc{CertOK}}\xspace}
+\newcommand{\equivW}{\ensuremath{\textsc{EW}}\xspace}
+\newcommand{\filterEW}{\ensuremath{\textsc{FilterEW}}\xspace}
+\newcommand{\getReadsFrom}{\ensuremath{\textsc{GetRFs}}\xspace}
+\newcommand{\getRevisitable}{\ensuremath{\textsc{GetRevs}}\xspace}
+\newcommand{\isLocalWrite}{\ensuremath{\textsc{isLocalWrite}}}
+\newcommand{\getRevisitableAcyclic}{\ensuremath{\textsc{GetRevsAC}}}
+% \newcommand{\pushRevisits}{\ensuremath{\textsc{VisitRevisitsHelp}}\xspace}
+\newcommand{\calcRevisits}{\ensuremath{\textsc{VisitRevisits}}\xspace}
+\newcommand{\calcPromises}{\ensuremath{\textsc{Promises}}\xspace}
+\newcommand{\getLastCycle}{\ensuremath{\textsc{InCyc}}\xspace}
+\newcommand{\getCertRevs}{\ensuremath{\textsc{CertRevs}}\xspace}
+\newcommand{\isLocal}{\ensuremath{\textsc{IsLocal}}\xspace}
+\newcommand{\visit}{\ensuremath{\textsc{Visit}}\xspace}
+\newcommand{\verify}{\ensuremath{\textsc{Verify}}\xspace}
+\newcommand{\removeExternalRead}{\ensuremath{\textsc{RemoveExternalRead}}\xspace}
+
+% Program
+\newcommand{\prog}{\mathit{P}}
+
+% Workset
+\newcommand{\wSetName}{\Gamma}
+\newcommand{\wSet}{\ensuremath{\wSetName}}
+%\newcommand{\wSetEmpty}{\ensuremath{\varnothing}}
+\newcommand{\wSetEmpty}{\ensuremath{\wSet_0}}
+\newcommand{\wSetPop}{\ensuremath{\mathsf{pop}(\wSetName)}}
+\newcommand{\wSetPush}[1]{\ensuremath{\mathsf{push}(\wSetName, #1)}}
+
+% Promise set
+\newcommand{\pSetName}{\Pi}
+\newcommand{\pSet}{\ensuremath{\pSetName}}
+\newcommand{\pSetEmpty}{\ensuremath{\varnothing}}
+\newcommand{\pSetRemove}[1]{\ensuremath{\mathsf{pop}(\pSetName, #1)}}
+\newcommand{\pSetPush}[1]{\ensuremath{\mathsf{push}(\pSetName, #1)}}
+\newcommand{\pSetPeek}{\ensuremath{\mathsf{peek}(\pSetName)}}
+
+% Delayed revisits
+\newcommand{\dSetName}{\Delta}
+\newcommand{\dSet}{\ensuremath{\dSetName}}
+\newcommand{\dSetEmpty}{\ensuremath{\varnothing}}
+\newcommand{\dSetPop}{\ensuremath{\mathsf{pop}(\dSetName)}}
+\newcommand{\dSetPush}[1]{\ensuremath{\mathsf{push}(\dSetName, #1)}}
+
+
+% Graph
+\newcommand{\mm}{\ensuremath{\mathcal{M}}\xspace}
+%\newcommand{\cmm}{\textsf{m}\xspace} %% \mm leads to a line break in algo
+\newcommand{\cmm}{\ensuremath{\mathsf{m}}\xspace} %% \mm leads to a line break in algo
+\newcommand{\pmm}{\ensuremath{\mathsf{P}}}
+\newcommand{\initG}{\ensuremath{G_0}}
+\newcommand{\addE}[2]{\ensuremath{\mathsf{add}(#1, #2)}}
+\newcommand{\setRF}[1]{\ensuremath{\mathsf{SetRF}({#1})}}
+\newcommand{\cons}[2][]{\mathsf{cons}_{\mathsf{#1}}{({#2})}}
+\newcommand{\nextE}[2]{\ensuremath{\mathsf{next}_{\mathsf{#1}}{({#2})}}}
+\newcommand{\chooseE}[1]{\ensuremath{\mathsf{choose}({#1})}}
+
+% Algorithm highlight
+
+\newcommand*{\tikzmk}[1]{\tikz[remember picture,overlay,] \node (#1) {};\ignorespaces}
+
+% define a boxing command, argument = colour of box
+\newcommand{\boxit}[2]{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[yshift=3pt,fill=cyan,opacity=.2 %% UGLY HACK: with this opacity it will boil down to lightcyan
+    ,fit={($(A)-({#1},.8\baselineskip)$)($(B)+({#2},-0.2\baselineskip)$)}] {};
+  \end{tikzpicture}%
+  \ignorespaces}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Tex Utils  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

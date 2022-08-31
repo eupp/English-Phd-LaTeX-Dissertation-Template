@@ -812,11 +812,11 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
 \begin{definition}
   \label{def:lts}
   \emph{Система помеченных переходов} --- это тройка
-    $\LTS \defeq \tup{\State, \Label, \TrRel}$, где компоненты 
+    $\LTS \defeq \tup{\StateType, \LabelType, \TrRel}$, где компоненты 
     этой тройки заданы следующим образом: 
   \begin{itemize}
-    \item $\State$ --- это множество состояний;
-    \item $\Label$ --- это множество меток, также называемое \emph{алфавитом};
+    \item $\StateType$ --- это множество состояний;
+    \item $\LabelType$ --- это множество меток, также называемое \emph{алфавитом};
     \item $R \subseteq L \times S \times S$ --- это помеченное отношение перехода.
   \end{itemize}
 \end{definition}
@@ -832,7 +832,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
 \begin{definition}
   \label{def:lts-trace}
   \emph{Трассой} помеченной системой переходов называется чередующаяся последовательность  
-  состояний $s_0, s_1, \ldots, s_n \in \Label$ 
+  состояний $s_0, s_1, \ldots, s_n \in \LabelType$ 
   и меток $\ell_1, \ldots, \ell_n \in L$, 
   такая, что выполняется следующее условие:
   $$s_0 \xrightarrow{\ell_1} s_1 \xrightarrow{\ell_2} s_2 \xrightarrow{\ell_3} \ldots \xrightarrow{\ell_n} s_n.$$
@@ -841,7 +841,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
 \begin{definition}
   \label{def:lts-lang}
   \emph{Язык принимаемый системой переходов в начальном состоянии $s_0$} ---
-  это множество последовательностей слов над алфавитом $\Label$, 
+  это множество последовательностей слов над алфавитом $\LabelType$, 
   таких что для каждого слова существует соответствующая 
   трасса, начинающаяся в $s_0$:
   $$ \langof{\LTS, s_0} \defeq \set{ 
@@ -865,7 +865,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
   \label{def:lts-par}
   \emph{Параллельной композицией двух систем переходов} $\LTS_1$ и $\LTS_2$
   будем называть систему переходов
-  $\parlts{\LTS_1}{\LTS_2} \defeq \tup{\State_1 \times \State_2, \Label, \TrRel_{\parSymb}}$
+  $\parlts{\LTS_1}{\LTS_2} \defeq \tup{\StateType_1 \times \StateType_2, \LabelType, \TrRel_{\parSymb}}$
   где $\TrRel_{\parSymb}$ определяется следующим образом:
   \begin{itemize}
     \item $\ltr[\TrRel_1]{\ell}{s_1}{s'_1}$ влечет
@@ -884,7 +884,7 @@ $\writeInst{}{y}{1 + a * 0}$ в инструкцию $\writeInst{}{y}{1}$,
   \label{def:lts-par}
   \emph{Произведением двух систем переходов} $\LTS_1$ и $\LTS_2$
   будем называть систему переходов
-  $\prodlts{\LTS_1}{\LTS_2} \defeq \tup{\State_1 \times \State_2, \Label, \TrRel_{\prodSymb}}$
+  $\prodlts{\LTS_1}{\LTS_2} \defeq \tup{\StateType_1 \times \StateType_2, \LabelType, \TrRel_{\prodSymb}}$
   где $\TrRel_{\prodSymb}$ определяется следующим образом:
   \begin{itemize}
     \item $\ltr[\TrRel_{\prodSymb}]{\ell}{\tup{s_1, s_2}}{\tup{s'_1, s'_2}}$ 
@@ -943,19 +943,19 @@ $e_1 \co e_2$.
 
 \begin{definition}
   \label{def:lposet}
-  \emph{Помеченное частично упорядоченное множество} над множеством меток $\Label$ ---
+  \emph{Помеченное частично упорядоченное множество} над множеством меток $\LabelType$ ---
   это тройка $\tup{\Event, \lab, \ca}$, где компоненты 
   этой тройки заданы следующим образом:
   \begin{itemize}
     \item $\Event$ --- это множество \emph{событий};
-    \item $\lab : \Event \fun \Label$ \emph{является функцией разметки событий};
+    \item $\lab : \Event \fun \LabelType$ \emph{является функцией разметки событий};
     \item $\ca \subseteq \Event \times \Event$ --- это частичный порядок 
       \emph{причинно-следственной связи} между событиями. 
   \end{itemize}
 \end{definition}
 
-Множество всех помеченных частично упорядоченных множеств над алфавитом $\Label$
-будем обозначать как $\lPoset[\Label]$. 
+Множество всех помеченных частично упорядоченных множеств над алфавитом $\LabelType$
+будем обозначать как $\lPoset[\LabelType]$. 
 
 Отметим, что при работе c помеченными частично упорядоченными множествами
 конкретные идентификаторы событий как правило неважны,
@@ -963,7 +963,7 @@ $e_1 \co e_2$.
 Таким образом, с помеченными частично упорядоченными множествами 
 работают по модулю переименования событий, то есть с точностью до изоморфизма.
 
-Рассмотрим $p, q \in \lPoset[\Label]$. Функция $f : E_p \fun E_q$ называется:
+Рассмотрим $p, q \in \lPoset[\LabelType]$. Функция $f : E_p \fun E_q$ называется:
 \begin{itemize}
   \item \emph{сохраняющей метки} если ${\lab_q(f(e)) = \lab_p(e)}$;
   \item \emph{сохраняющей порядок} если ${e_1 \ca_p e_2}$ влечет ${f(e_1) \ca_q f(e_2)}$;
@@ -1001,13 +1001,13 @@ $e_1 \co e_2$.
   \emph{Помеченные частично упорядоченные мультимножества}, 
   или, кратко, \emph{помсеты} (от англ. \emph{partially ordered multiset, pomset}) --- 
   это классы помеченных частично упорядоченных множеств по модулю изоморфизма: 
-  $${\Pom[\Label] \defeq \lPoset[\Label] / {\iso}}.$$ 
+  $${\Pom[\LabelType] \defeq \lPoset[\LabelType] / {\iso}}.$$ 
 \end{definition}
 
 \begin{definition}
   \label{def:pomset}
   \emph{Язык помсетов} --- это множество помсетов: 
-  $${\Pomlang[\Label] \defeq \pwset{\Pom[\Label]}}.$$ 
+  $${\Pomlang[\LabelType] \defeq \pwset{\Pom[\LabelType]}}.$$ 
 \end{definition}
 
 \input{Dissertation/fig/pom-es-ex}
@@ -1039,8 +1039,8 @@ $e_1 \co e_2$.
 Линеаризация языка помсетов $P$ определяется 
 как объединение линеаризации всех входящих в язык помсетов:
 $$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p}. $$
-Наконец, можно сказать что язык помсетов $P \in \Pomlang[\Label]$
-соответствует обычному языку $L \in \Lang{\Label}$, если $\Lin{P} = L$.
+Наконец, можно сказать что язык помсетов $P \in \Pomlang[\LabelType]$
+соответствует обычному языку $L \in \Lang{\LabelType}$, если $\Lin{P} = L$.
 
 Множество помсетов можно объединить в одну \emph{структуру событий},
 и таким образом представить язык помсетов как одно частично упорядоченное множество.
@@ -1066,7 +1066,7 @@ $$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p}. $$
 
 \begin{definition}
   \label{def:prime-es}
-  \emph{Простая структура событий с бинарным конфликтом} над множеством меток $\Label$ ---
+  \emph{Простая структура событий с бинарным конфликтом} над множеством меток $\LabelType$ ---
   это кортеж $\tup{\Event, \lab, \ca, \cf}$, где 
   $\tup{\Event, \lab, \ca}$ --- это префикс-конечное помеченное 
   частично упорядоченное множество, 
@@ -1083,7 +1083,7 @@ $$ \Lin{P} \defeq \bigcup_{p \in P}\Lin{p}. $$
 
 \begin{definition}
   \label{def:prime-cons-es}
-  \emph{Простая структура событий с предикатом консистентности} над множеством меток $\Label$ ---
+  \emph{Простая структура событий с предикатом консистентности} над множеством меток $\LabelType$ ---
   это кортеж $\tup{\Event, \lab, \ca, \Cons}$, где 
   $\tup{\Event, \lab, \ca}$ --- это префикс-конечное помеченное 
   частично упорядоченное множество, 
