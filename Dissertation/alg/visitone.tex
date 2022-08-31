@@ -8,22 +8,22 @@
     % \State \alghl{$\dSet \gets \dSetEmpty$}
     \If{$\lnot \cons{G}$} \Return \label{visit:cons}
     \EndIf
-    \Switch{$a \gets \nextE{\prog,\alghl{\pSet}}{G}$}      \label{visit:switch}
+    \Switch{$a \gets \nextE_{\prog,\alghl{\pSet}}(G)$}      \label{visit:switch}
     \Case{$a = \bot$}\tikzmk{A} \label{visit:done}
       \If {$\pSet = \emptyset$}
         \tikzmk{B}\boxit{.22\linewidth}{0.49\linewidth}                    
-        \State \Output{``Consistent execution''}\label{visit:output}
+        \State \Output{``Consistent execution'', $G$}\label{visit:output}
       \EndIf
       %% \State $\alghl{\textbf{if}\; \pSet = \emptyset \;\textbf{then}}$
       %%   \Output{``Consistent execution''}\label{visit:output}
     \EndCase
     \Case {$a \in \lERR$}
-      \State \Exit{``Erroneous execution''}                \label{visit:error}
+      \State \Exit{``Erroneous execution'', $G$}     \label{visit:error}
     \EndCase
     % \State $G.\lE \gets G.\lE \concat [a]$               \label{visit:add}
     \Case{$a \in \lR$}
         \For{$w \in \getReadsFrom(G, \alghl{\pSet}, a)$}\label{visit:getrfs}
-            \State $\visit(\prog, \setRF{G,w,a}, \alghl{\pSet})$\label{visit:visit-rfs}
+            \State $\visit(\prog, \setRF({G,w,a}), \alghl{\pSet})$\label{visit:visit-rfs}
         \EndFor
     \EndCase
     \Case{$a \in \lW$}
@@ -38,7 +38,7 @@
            \label{visit:calcrevisits}
       \EndIf
     \EndCase
-    \DefaultCase $\visit(\prog, G, \alghl{\pSet})$
+    \DefaultCase $\visit(\prog, G, \alghl{\pSet})$ \label{visit:default}
     \EndCase
     \EndSwitch
     \EndProcedure

@@ -663,6 +663,10 @@
 %%%%  Algorithms  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\makeatletter
+\renewcommand{\ALG@name}{Листинг}
+\makeatother
+
 \algnewcommand\algorithmicswitch{\textbf{switch}}
 \algnewcommand\algorithmiccase{\textbf{case}}
 \algnewcommand\algorithmicdefaultcase{\textbf{otherwise}}
@@ -746,11 +750,12 @@
 \newcommand{\cmm}{\ensuremath{\mathsf{m}}\xspace} %% \mm leads to a line break in algo
 \newcommand{\pmm}{\ensuremath{\mathsf{P}}}
 \newcommand{\initG}{\ensuremath{G_0}}
+\newcommand{\setRF}{\ensuremath{\mathsf{SetRF}}}
+\newcommand{\nextE}{\ensuremath{\mathsf{next}}}
+
 \newcommand{\addE}[2]{\ensuremath{\mathsf{add}(#1, #2)}}
-\newcommand{\setRF}[1]{\ensuremath{\mathsf{SetRF}({#1})}}
-\newcommand{\cons}[2][]{\mathsf{cons}_{\mathsf{#1}}{({#2})}}
-\newcommand{\nextE}[2]{\ensuremath{\mathsf{next}_{\mathsf{#1}}{({#2})}}}
 \newcommand{\chooseE}[1]{\ensuremath{\mathsf{choose}({#1})}}
+\newcommand{\cons}[2][]{\mathsf{cons}_{\mathsf{#1}}{({#2})}}
 
 % Algorithm highlight
 
