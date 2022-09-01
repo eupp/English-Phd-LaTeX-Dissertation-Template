@@ -1,0 +1,26 @@
+{\centering\small$
+\inarr{\begin{tikzpicture}
+  \node at (-1.35,1) {\circledb{7}};
+  \node (0)  at (0,1) {$\Init$};
+  \node (11)  at (-1,0) {$\rlab{}{x}{0}$};
+  \node (12)  at (-1,-1) {$\wlab{}{y}{1}$};
+  \node (21)  at (1,0) {$\rlab{}{y}{1}$};
+  \draw[po] (0) edge (11) edge (21);
+  \draw[po] (11) edge (12);
+  \draw[rf, bend right=20] (0) edge node[left=-2pt] {\small$\lRF$}  (11);
+  \draw[rf] (12) edge node[below=-2pt] {\small$\lRF$}  (21);
+\end{tikzpicture}}
+\leadsto
+\inarr{\begin{tikzpicture}
+  \node at (-1.35,1) {\circledb{8}};
+  \node (0)  at (0,1) {$\Init$};
+  \node (11)  at (-1,0) {$\rlab{}{x}{0}$};
+  \node (12)  at (-1,-1) {$\wlab{}{y}{1}$};
+  \node (21)  at (1,0) {$\rlab{}{y}{1}$};
+  \node (22)  at (1,-1) {$\wlab{}{x}{1}$};
+  \draw[po] (0) edge (11) edge (21);
+  \draw[po] (11) edge (12);
+  \draw[po] (21) edge (22);
+  \draw[rf, bend right=20] (0) edge node[left=-2pt] {\small$\lRF$}  (11);
+  \draw[rf] (12) edge node[below=-2pt] {\small$\lRF$}  (21);
+\end{tikzpicture}}$\par}
