@@ -1,6 +1,6 @@
-\begin{table}
+\begin{table}[b]
 \centering\small
-%% \resizebox{.5\textwidth}{!}{
+
 \begin{tabular}{@{}l@{\hsep}|p{20pt}@{}}
 
 \toprule
@@ -22,6 +22,22 @@ fcombiner-async  & \cmark \\
 cds-barrier      & \cmark \\
 cds-chase-lev    & \cmark \\
 cds-mcs          & \cmark \\
+
+\bottomrule
+\end{tabular}
+%
+\qquad\qquad\qquad\qquad
+%
+\begin{tabular}{@{}l@{\hsep}|p{20pt}@{}}
+
+\toprule
+
+%% Название программы         &
+%% Не содержит \LB гонок?     \\
+%% \midrule
+
+% Ou-Demsky:OOPSLA18 (?)
+
 cds-msqueue      & \cmark \\
 cds-rwlock       & \cmark \\ 
 cds-seqlock      & \cmark \\ 
@@ -35,7 +51,6 @@ rigtorp-spsc     & \cmark \\
 
 \bottomrule
 \end{tabular}
-%% }
 
 \captionsetup{justification=centering}
 \caption{Отсутствие (\cmark) или наличие (\xmark) 
