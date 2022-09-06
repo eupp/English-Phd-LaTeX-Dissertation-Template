@@ -10,7 +10,7 @@
     \EndIf
     \Switch{$a \gets \nextE_{\prog,\alghl{\pSet}}(G)$}      \label{visit:switch}
     \Case{$a = \bot$}\tikzmk{A} \label{visit:done}
-      \If {$\pSet = \emptyset$}
+      \If {$\pSet = \emptyset$} \label{visit:done-certified}
         \tikzmk{B}\boxit{.22\linewidth}{0.49\linewidth}                    
         \State \Output{``Consistent execution'', $G$}\label{visit:output}
       \EndIf
@@ -32,7 +32,7 @@
       \tikzmk{B}\boxit{.22\linewidth}{0.3\linewidth}
       \State $\visit(\prog, G, \alghl{\pSet'})$\label{visit:visit-w}
       \tikzmk{A}
-      \If {$\pSet' = \emptyset$} \label{visit:cert-not-over}
+      \If {$\pSet' = \emptyset$} \label{visit:cert-over}
         \tikzmk{B}\boxit{.29\linewidth}{0.47\linewidth}
         \State $\calcRevisits(\prog, G, \alghl{\pSet}, a)$
            \label{visit:calcrevisits}
