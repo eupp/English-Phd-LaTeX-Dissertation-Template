@@ -16,7 +16,7 @@
   \tikzmk{A}
   %% \If {$\pSet' \neq \emptyset$}
   %%   \State $\tup{Rs,\pSet_c} \gets \tup{\emptyset, \emptyset}$ \label{calcrevisits:cert-not-over}
-  \If {$\pSet \neq \emptyset$} 
+  \If {$\pSet \neq \emptyset$} \label{calcrevisits:cert-finished}
     \State $\tup{Rs,\pSet_a} \gets \tup{\getCertRevs(G, a), \set{a}}$ \label{calcrevisits:get-nonlocal-revs}
   \Else 
     \tikzmk{B}\boxit{.49\linewidth}{0.65\linewidth}

@@ -546,7 +546,7 @@
 \newcommand{\rfcomment}[1]{\color{teal}{~~\texttt{/\!\!/}\textit{#1}}}
 \newcommand{\nocomment}[1]{\color{red!60!black}{~~\texttt{/\!\!/}\textit{#1}}}
 
-\newcommand{\ifStmt}[1]{\kw{if}#1\;\kw{then}}
+\newcommand{\ifStmt}[1]{\kw{if}\;#1\;\kw{then}}
 \newcommand{\elseIfStmt}[1]{\kw{else}\; \kw{if}\; #1\;}
 \newcommand{\elseStmt}{\kw{else}\;}
 
@@ -768,6 +768,9 @@
     ,fit={($(A)-({#1},.8\baselineskip)$)($(B)+({#2},-0.2\baselineskip)$)}] {};
   \end{tikzpicture}%
   \ignorespaces}
+
+% color for non-certifiable promises
+\colorlet{fail}{red!60!black}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Tex Utils  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

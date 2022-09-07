@@ -1,0 +1,47 @@
+\begin{figure}
+
+\begin{subfigure}[b]{.48\textwidth}
+\small\centering
+\begin{equation*}
+  \inarrIII{
+    \writeInst{}{z}{1}
+  }{
+    \readInst{}{r}{z}         \\
+    \readInst{}{s}{x}         \\
+    \ifStmt{r = 0 \lor s = 1} \\
+    \quad \writeInst{}{y}{1}
+  }{
+    \readInst{}{a}{y}         \\
+    \writeInst{}{x}{a}
+  }
+\tag{LB-cyc}\label{ex:lb-cyc}
+\end{equation*}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}[b]{.48\textwidth}\centering
+  \begin{tikzpicture}[xscale=2]
+    \node (0)  at (0,1) {$\Init$};
+    \node (wz) at (-1, 0) {$\wlab{}{z}{1}$};
+    \node (rz) at (0, 0) {$\rlab{}{z}{1}$};
+    \node (rx) at (0, -1) {$\rlab{}{x}{1}$};
+    \node (wy) at (0, -2) {$\wlab{}{y}{1}$};
+    \node (ry) at (1, 0) {$\rlab{}{y}{1}$};
+    \node (wx) at (1, -1) {$\wlab{}{x}{1}$};
+
+    \draw[po] (0) edge (wz) edge (rz) edge (ry);
+    \draw[po] (rz) edge (rx);
+    \draw[po] (rx) edge (wy);
+    \draw[po] (ry) edge (wx);
+%    \draw[po] (crz) edge (cwy);
+    \draw[rf,bend left=20] (wz) edge (rz);
+    \draw[rf] (wx) edge (rx);
+    \draw[rf] (wy) edge (ry);
+%    \draw[rf] (wz) edge (crz);
+  \end{tikzpicture}
+\end{subfigure}
+
+\caption{Программа и один из ее \WkmS-консистентных графов сценариев исполнения.}
+\label{fig:lb-cyc}
+\end{figure}

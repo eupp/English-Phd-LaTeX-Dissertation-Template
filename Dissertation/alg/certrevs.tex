@@ -4,12 +4,15 @@
 
 \begin{algorithmic}[1]
 \Function{\getCertRevs}{$G,e$}
-\State $Revs \gets \{ \tup{r, w} ~|~ 
+%% \State $Delayed \gets \bigcup_{w \in \lW \cap \dom{G.\lPO;[e]}}\getRevisitable(G, T, w)$
+\State $Delayed \gets \bigcup \set{\getRevisitable(G, T, w) ~|~ w \in \lW \cap \dom{G.\lPO;[e]}}$
+  \label{certrevs:delayed}
+\State $Local \gets \{ \tup{r, w} ~|~ 
   \tup{r,e} \in \lPO \land G.\lRF;[r] \suq G.\lRF^?;G.\lHB
   \land w \in G.\lW_{\lLOC(r)} \}\ $
-\State $W \gets \lW \cap \dom{G.\lPO \seqc [e]}$
-\State \Return $Revs \cup \bigcup_{w \in W} \getRevisitable(G, w)$
-\label{certrevs:return}
+  \label{certrevs:non-local}
+\State \Return $Delayed \cup Local$
+  \label{certrevs:return}
 \EndFunction
 \end{algorithmic}
 
