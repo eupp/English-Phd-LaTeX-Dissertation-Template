@@ -1,0 +1,43 @@
+\begin{figure}
+
+\begin{subfigure}[t]{.48\textwidth}
+\vskip 0pt
+\centering
+\begin{equation*}
+  \inarrII{
+    \writeInst{\rlx}{x}{1}         \\
+    \writeInst{\rel}{y}{1}         \\
+  }{
+    \readInst{\acq}{a}{y}          \\
+    \readInst{\rlx}{b}{x}
+  }
+\tag{MP}\label{ex:mp}
+\end{equation*}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}[t]{.48\textwidth}\centering
+\vskip 0pt
+  \begin{tikzpicture}[xscale=3,yscale=1.5]
+    \node (0)  at (0.5, 2) {$\Init$};
+
+    \node (wx) at (0, 1) {$\wlab{\rlx}{x}{1}$};
+    \node (wy) at (0, 0) {$\wlab{\rel}{y}{1}$};
+    \node (ry) at (1, 1) {$\rlab{\acq}{y}{1}$};
+    \node (rx) at (1, 0) {$\rlab{\rlx}{x}{0}$};
+
+    \draw[po] (0) edge (wx) edge (ry);
+    \draw[po] (wx) edge (wy);
+    \draw[po] (ry) edge (rx);
+
+    \draw[sw] (wy) edge node[below] {\small$\lSW$} (ry);
+    \draw[rb] (rx) edge node[above] {\small$\lRB$} (wx);
+
+    \draw[rf,bend left=50] (0) edge (rx);
+  \end{tikzpicture}
+\end{subfigure}
+
+\caption{Пример \textbf{некогерентного} графа сценария исполнения.}
+\label{fig:coh-ex}
+\end{figure}
