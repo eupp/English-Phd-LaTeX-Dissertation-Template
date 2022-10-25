@@ -1,0 +1,46 @@
+\begin{figure}[b]
+
+\begin{subfigure}[t]{.48\textwidth}
+\vskip 0pt
+\centering
+\begin{equation*}
+  \inarrII{
+    \writeInst{}{x}{2}        \\
+    \readInst{}{a}{x}         \\
+  }{
+    \faiInst{}{b}{x}{1}       \\
+  }
+\tag{INC}\label{ex:inc}
+\end{equation*}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}[t]{.48\textwidth}\centering
+\vskip 0pt
+  \begin{tikzpicture}[xscale=3,yscale=1.5]
+    \node (0)  at (0.5, 2) {$\Init$};
+
+    \node (wx) at (0, 1) {$\wlab{}{x}{2}$};
+    \node (rx) at (0, 0) {$\rlab{}{x}{1}$};
+
+    \node (exrx) at (1, 1) {$\rlab{}{x}{0}$};
+    \node (exwx) at (1, 0) {$\wlab{}{x}{1}$};
+
+    \draw[po] (0) edge (wx) edge (exrx);
+    \draw[po] (wx) edge (rx);
+
+    \draw[rmw] (exrx) edge node[right] {\small$\lRMW$} (exwx);
+
+    \draw[rb] (exrx) edge node[above] {\small$\lRB$} (wx);
+    \draw[co] (wx)   edge node[below] {\small$\lCO$} (exwx);
+
+    \draw[rf] (exwx) edge (rx);
+    \draw[rf,bend left=20] (0) edge (exrx);
+
+  \end{tikzpicture}
+\end{subfigure}
+
+\caption{Пример \textbf{неатомарного} графа сценария исполнения.}
+\label{fig:atom-ex}
+\end{figure}

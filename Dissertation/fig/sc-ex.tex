@@ -1,0 +1,47 @@
+\begin{figure}[t]
+
+\begin{subfigure}[t]{.48\textwidth}
+\vskip 0pt
+\centering
+\begin{equation*}
+  \inarrII{
+    \writeInst{\sco}{x}{1}   \\
+    \readInst{\sco}{r_1}{y}  \\
+  }{
+    \writeInst{\sco}{y}{1}   \\
+    \readInst{\sco}{r_2}{x}  \\
+  }
+\tag{SB-SC}\label{ex:sb-sc}
+\end{equation*}
+\end{subfigure}
+%
+\hfill
+%
+\begin{subfigure}[t]{.48\textwidth}\centering
+\vskip 0pt
+  \begin{tikzpicture}[xscale=3,yscale=1.5]
+    \node (0)  at (0.5, 2) {$\Init$};
+
+    \node (wx) at (0, 1) {$\wlab{\sco}{x}{1}$};
+    \node (ry) at (0, 0) {$\rlab{\sco}{y}{0}$};
+
+    \node (wy) at (1, 1) {$\wlab{\sco}{y}{1}$};
+    \node (rx) at (1, 0) {$\rlab{\sco}{x}{0}$};
+
+    \draw[po] (0) edge (wx) edge (wy);
+    \draw[po] (wx) edge (ry);
+    \draw[po] (wy) edge (rx);
+
+    \draw[rb] (rx) edge (wx);
+    \draw[rb] (ry) edge node[below] {\small$\lRB$} (wy);
+
+    \draw[rf,bend left =50] (0) edge (rx);
+    \draw[rf,bend right=50] (0) edge (ry);
+
+  \end{tikzpicture}
+\end{subfigure}
+
+\caption{Пример графа сценария исполнения, 
+который не является \textbf{последовательно согласованным}.}
+\label{fig:sc-ex}
+\end{figure}

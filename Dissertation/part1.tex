@@ -1435,9 +1435,7 @@ $(\LTS_{\thrdSymb} \parSymb \dots \parSymb \LTS_{\thrdSymb}) \prodSymb \LTS_{\me
 Далее рассмотрим некоторые другие часто встречаемые
 в различных моделях памяти свойства консистентности.
 
-\paragraph{Когерентность.}
-
-Когерентность --- это базовое свойство моделей памяти,
+\paragraph{Когерентность} --- это базовое свойство моделей памяти,
 гарантирующее последовательную согласованность
 по каждой отдельной локации в памяти
 (напомним, что это свойство также упоминалось
@@ -1456,7 +1454,7 @@ $\lPO\rst{\lLOC} \cup \lRF \cup \lCO \cup \lRB$
   $$ \lRB \defeq \lRF^{-1} \seqc \lCO $$
 \end{definition}
 
-Модели памяти для языков программирования усиливают свойство 
+Модели памяти языков программирования усиливают свойство 
 когерентности и в определении выше вместо отношения программного порядка 
 рассматривают отношение ``происходит-до'' $\lHB$ (\emph{happens-before}),
 которое является объединением программного порядка 
@@ -1513,7 +1511,7 @@ $\lPO\rst{\lLOC} \cup \lRF \cup \lCO \cup \lRB$
 Будем говорить, что граф сценария исполнения $G$ является
 \emph{когерентным} (\emph{coherent}), если выполняются следующее условие: 
 \begin{itemize}
-  \item $\lHB_{\IMM} \seqc \lECO^?$ является иррефлексивным отношением;
+  \item $\lHB \seqc \lECO^?$ является иррефлексивным отношением;
       \labelAxiom{Coherent}{ax:coh}
 \end{itemize}
 \end{definition}
@@ -1538,6 +1536,128 @@ $\lHB\rst{\lLOC} \cup \lRF \cup \lCO \cup \lRB$ было ацикличным.
 $\wlab{\rlx}{x}{1} \arrowHB \rlab{\rlx}{x}{0} \arrowRB \wlab{\rlx}{x}{1}$ 
 
 \input{Dissertation/fig/coh-ex}
+
+\paragraph{Атомарность} 
+
+гарантирует, что операция чтения 
+в атомарной инструкции чтения-записи (например, \CAS)
+всегда читает из самой последней согласно порядку когерентности записи.
+
+\begin{definition}
+Будем говорить, что граф сценария исполнения $G$ является
+\emph{\RMW-атомарным} (\emph{\RMW-atomic}), если выполняются следующее условие: 
+\begin{itemize}
+  \item $\lRMW \cap (\lRB \seq \lCO) = \emptyset$;
+      \labelAxiom{\RMW-Atomic}{ax:atom}
+\end{itemize}
+\end{definition}
+
+На рисунке~\ref{fig:atom-ex}, показан пример графа сценария исполнения, 
+который нарушает свойство \RMW-атомарности.
+
+\input{Dissertation/fig/atom-ex}
+
+\paragraph{Последовательная согласованность.}
+
+Для программ, которые используют только обращения к памяти, 
+аннотированные режимом доступа $\sco$, модели памяти 
+языков программирования гарантируют семантику последовательной согласованности. 
+Последовательная согласованность также гарантируется если 
+между каждой парой инструкций обращения к памяти вставить 
+полный барьер памяти --- инструкцию $\fenceInst{\sco}$.
+
+Если в программе не смешиваются обращения к одной и той же локации, 
+аннотированные режимом $\sco$ и более слабыми режимами, 
+данные гарантии можно формализовать согласно следующему определению. 
+
+\begin{definition}
+Частиный порядок \emph{строгой последовательной упорядоченности} $\lPSCS$
+(\emph{strong sequential consistency order}) 
+задан следующим образом:
+$$ \lPSCS \defeq ([\lE^\sco] \cup [\lF^\sco] \seqc \lHB^?) \seqc 
+                 (\lHB \cup \lECO) \seqc 
+                 (\lHB^? \seqc [\lF^\sco] \cup [\lE^\sco])
+$$
+\end{definition}
+
+\begin{definition}
+Будем говорить, что граф сценария исполнения $G$ является
+\emph{строго последовательно согласованным} (\emph{strongly sequential consistent}), 
+если выполняются следующее условие: 
+\begin{itemize}
+  \item $\lPSCS$ является ацикличным отношением;
+      \labelAxiom{Strong-SeqCst}{ax:sc-strong}
+\end{itemize}
+\end{definition}
+
+На рисунке~\ref{fig:sc-ex}, показан пример графа сценария исполнения, 
+который не является строго последовательно согласованным.
+Действительно, в этом графе существует цикл 
+$\wlab{\sco}{x}{1} \arrowPO \rlab{\sco}{y}{0} \arrowRB \wlab{\sco}{y}{1}
+                   \arrowPO \rlab{\sco}{x}{0} \arrowRB \wlab{\sco}{x}{1}$.
+
+В случае если в программе к одной и той же локации происходят 
+и $\sco$ обращения, и другие типы обращений, тогда определение 
+последовательной согласованности усложняется.
+Детальное обсуждение этой проблемы выходит за рамки диссертации
+и может быть найдено в работе~\cite{Lahav-al:PLDI17}. 
+Далее приводятся лишь необходимые формальные определения без дополнительных пояснений. 
+
+\begin{definition}
+Отношение \emph{``последовательно-упорядочен-до''} $\lSCB$ 
+(\emph{sequentially consistent before}) задается как:
+
+$$ \lSCB \defeq \lPO \cup
+                \lPO\rst{\neq \lLOC} \seqc \lHB \seqc 
+                \lPO\rst{\neq \lLOC} \cup
+                \lHB\rst{\lLOC} \cup
+                \lCO \cup \lRB. 
+$$
+
+\end{definition}
+
+\begin{definition}
+Частиный порядок \emph{базовой последовательной упорядоченности} $\lPSCB$
+(\emph{basic partial sequential consistency order}) 
+определяется следующим образом:
+
+$$ \lPSCB \defeq ([\lE^\sco] \cup [\lF^\sco] \seqc \lHB^?) \seqc 
+                 \lSCB \seqc 
+                 (\lHB^?\seqc[\lF^\sco] \cup [\lE^\sco]). 
+$$ 
+
+\end{definition}
+
+\begin{definition}
+Частиный порядок \emph{последовательной упорядоченности барьеров} $\lPSCF$
+(\emph{barrier partial sequential consistency order}) 
+определяется как:
+
+$$ \lPSCF \defeq [\lF^\sco] \seqc 
+                 (\lHB \cup \lHB \seqc \lECO \seqc \lHB) \seqc 
+                 [\lF^\sco]. 
+$$ 
+
+\end{definition}
+
+\begin{definition}
+Частиный порядок \emph{последовательной упорядоченности} $\lPSC$
+(\emph{partial sequential consistency order}) 
+задан как объединение двух предыдущих отношений частичного порядка:
+$$ \lPSC \defeq \lPSCB \cup \lPSCF. $$ 
+\end{definition}
+
+\begin{definition}
+Будем говорить, что граф сценария исполнения $G$ является
+\emph{последовательно согласованным} (\emph{sequentially consistent}), 
+если выполняются следующее условие: 
+\begin{itemize}
+  \item $\lPSC$ является ацикличным отношением;
+      \labelAxiom{SeqCst}{ax:sc}
+\end{itemize}
+\end{definition}
+
+\input{Dissertation/fig/sc-ex}
 
 \subsection{Структуры событий в модели \Wkm}
 \label{sec:wkmo-eventstruct}
