@@ -232,12 +232,12 @@ $G \vdash \TCinit{G} \travstep{}^* \TCfinal{G}$.
     \item Отношение \emph{произошло-до} (\emph{happens-before}):
       $$ \lHB \defeq (\lPO \cup \lSW)^+. $$
 
-    \item Отношение \emph{читает-до} (\emph{reads-before} или \emph{from-reads}):
-      $$ \lFR \defeq \lRF^{-1} \seqc \lCO. $$
+    \item Отношение \emph{читает-перед} (\emph{reads-before}):
+      $$ \lRB \defeq \lRF^{-1} \seqc \lCO. $$
 
     \item \emph{Расширенный порядок когерентности} 
       (\emph{extended coherence order}):
-      $$ \lECO \defeq (\lCO \cup \lRF \cup \lFR)^+. $$
+      $$ \lECO \defeq (\lCO \cup \lRF \cup \lRB)^+. $$
 
     \item Отношение \emph{последовательно-упорядочен-до}
       (\emph{sequentially consistent before}):
@@ -245,7 +245,7 @@ $G \vdash \TCinit{G} \travstep{}^* \TCfinal{G}$.
                       \lPO\rst{\neq \lLOC} \seqc \lHB \seqc 
                       \lPO\rst{\neq \lLOC} \cup
                       \lHB\rst{\lLOC} \cup
-                      \lCO \cup \lFR. $$
+                      \lCO \cup \lRB. $$
 
     \item Частиный порядок \emph{базовой последовательной упорядоченности}:
       $$ \lPSCB \defeq ([\lE^\sco] \cup [\lF^\sco] \seqc \lHB^?) \seqc 
@@ -285,7 +285,7 @@ $G \vdash \TCinit{G} \travstep{}^* \TCfinal{G}$.
     \item $\lHB_{\IMM} \seqc \lECO^?$ иррефлексивно;
       \labelAxiom{imm-coherent}{ax:imm-coh}
 
-    \item $\lRMW \cap (\lFR \seqc \lCO) = \emptyset$;
+    \item $\lRMW \cap (\lRB \seqc \lCO) = \emptyset$;
       \labelAxiom{rmw-atomic}{ax:imm-atom}
 
     \item $\lPSC$ ациклично.
