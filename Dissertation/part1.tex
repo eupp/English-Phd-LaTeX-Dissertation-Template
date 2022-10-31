@@ -1652,12 +1652,42 @@ $$ \lPSC \defeq \lPSCB \cup \lPSCF. $$
 \emph{последовательно согласованным} (\emph{sequentially consistent}), 
 если выполняются следующее условие: 
 \begin{itemize}
-  \item $\lPSC$ является ацикличным отношением;
+  \item $\lPSC$ является ацикличным отношением.
       \labelAxiom{Sequentially Consistent}{ax:sc}
 \end{itemize}
 \end{definition}
 
 \input{Dissertation/fig/sc-ex}
+
+\paragraph{Модель \RCMM.}
+
+В заключении данного подраздела в качестве примера 
+приведем определение консистентности в 
+уже упоминавшейся модели \RCMM~\cite{Lahav-al:PLDI17}.
+Данное определение по сути объединяет все приведенные выше свойства.  
+
+\begin{definition}
+  \label{def:rc11-cons}
+  Граф $G$ является консистентным с точки зрения модели \RCMM
+  если выполняются следующие условия:  
+
+  \begin{itemize}
+
+    \item $\lPO \cup \lRF$ является ацикличным отношением;
+      \labelAxiom{\RCMM-No-Thin-Air}{ax:rc11-noota}
+
+    \item $\lHB \seqc \lECO^?$ является иррефлексивным отношением;
+      \labelAxiom{Coherent}{ax:rc11-coh}
+
+    \item $\lRMW \cap (\lRB \seqc \lCO) = \emptyset$;
+      \labelAxiom{\RMW-Atomic}{ax:rc11-atom}
+
+    \item $\lPSC$ является ацикличным отношением.
+      \labelAxiom{Sequentially Consistent}{ax:rc11-sc}
+
+  \end{itemize}
+\end{definition}
+
 
 \subsection{Структуры событий в модели \Wkm}
 \label{sec:wkmo-eventstruct}
@@ -1905,7 +1935,7 @@ ${\ese{1}{2}{1} \arrowJF \ese{2}{1}{}}$
    \labelAxiom{Well-Justified}{ax:wkm-jf-necf}
 
   \item $\lPO \cup \lJF$ является ацикличным отношением;
-    \labelAxiom{No-Thin-Air}{ax:wkm-noota}
+    \labelAxiom{\Wkm-No-Thin-Air}{ax:wkm-noota}
 
   \item $\dom{\lJFE} \subseteq \lVIS$;
     \labelAxiom{Visibly-Justified}{ax:wkm-jf-vis}
