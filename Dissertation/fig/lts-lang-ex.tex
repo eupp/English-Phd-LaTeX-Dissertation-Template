@@ -32,11 +32,13 @@
       \draw[->] (s3) edge[bend left ,below,pos=0.5] node {$d$} (s4);
 
     \end{tikzpicture}
-    \label{fig:lts-ex}
+
     \caption{Система помеченных переходов}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[t]{0.48\textwidth}
+    \label{fig:lts-ex}
+    \end{subfigure}
+    \hfill
+    %
+    \begin{subfigure}[t]{0.48\textwidth}
     \centering
     \begin{tikzpicture}[xscale=1.5,yscale=1.5]
       \node (a1) at (0, 2) {$a$};
@@ -67,46 +69,11 @@
       \draw[po] (a4) edge (d4);
       \draw[po] (d4) edge (b4);
     \end{tikzpicture}
-    \label{fig:lang-ex}
+
     \caption{Язык принимаемый системой переходов в начальном состоянии $s_0$.}
-  \end{subfigure}
+    \label{fig:lang-ex}
+    \end{subfigure}
 
-  
-  %% \begin{subfigure}[t]{0.48\textwidth}
-  %%   \centering
-  %%   \begin{tikzpicture}[xscale=0.6]
-  %%     \node (a1) at (1, 1) {$a$};
-  %%     \node (b1) at (0, 0) {$b$};
-  %%     \node (c1) at (2, 0) {$c$};
-
-  %%     \draw[po] (a1) edge (b1);
-  %%     \draw[po] (a1) edge (c1);
-
-  %%     \node (a2) at (4, 1) {$a$};
-  %%     \node (b2) at (3, 0) {$b$};
-  %%     \node (d2) at (5, 0) {$d$};
-
-  %%     \draw[po] (a2) edge (b2);
-  %%     \draw[po] (a2) edge (d2);
-  %%   \end{tikzpicture}
-  %%   \caption{Язык помеченных частично упорядоченных мультимножеств}
-  %% \end{subfigure}
-  %% \hfill
-  %% \begin{subfigure}[t]{0.48\textwidth}
-  %%   \centering
-  %%   \begin{tikzpicture}[xscale=0.8]
-  %%     \node (a) at (1, 1) {$a$};
-  %%     \node (b) at (0, 0) {$b$};
-  %%     \node (c) at (1, 0) {$c$};
-  %%     \node (d) at (2, 0) {$d$};
-
-  %%     \draw[po] (a) edge (b);
-  %%     \draw[po] (a) edge (c);
-  %%     \draw[po] (a) edge (d);
-  %%     \draw[cf] (c) -> (d);
-  %%   \end{tikzpicture}
-  %%   \caption{Простая структура событий}
-  %% \end{subfigure}
   \label{fig:lts-lang-ex}
   \caption{
     Пример системы помеченных переходов и принимаемого ей языка
