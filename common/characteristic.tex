@@ -68,7 +68,7 @@
 % По этой причине актуальна  верификация многопоточных программ, а
 % решение этой задачи, в свою очередь, требует построения  для них 
 % строгой математической  семантики.
-Nowadays, multithreading is used in a wide variety of software, such as banking systems, real-time systems, operating system cores, database management systems, and many others. Multithreading enables effective use of modern multi-core processors and significantly increases the execution speed and responsiveness of programs. However, the \emph{semantics} of multithreaded programs is fundamentally more complicated than the semantics of sequential programs. This is due to non-deterministic thread switching during program execution and the absence of a single linear instruction execution order. As a result, it is difficult not only to develop, but also to test multithreaded programs \todo{link needed} --- many errors of multithreaded programming manifest themselves only in a small percentage of scenarios and are not reproduced when the program is restarted. For this reason, verification of multithreaded programs is a relevant problem, and its solution requires the construction of a strict mathematical semantics.
+Nowadays, multithreading is used in a wide variety of software, such as banking systems, real-time systems, operating system cores, database management systems, and many others. Multithreading enables effective use of modern multi-core processors and significantly increases the execution speed and responsiveness of programs. However, the \emph{semantics} of multithreaded programs is fundamentally more complicated than the semantics of sequential programs. This is due to non-deterministic thread switching during program execution and the absence of a single linear instruction execution order. As a result, it is difficult not only to develop, but also to test multithreaded programs \todo{link needed} --- many errors of multithreaded programming manifest themselves only in a small percentage of scenarios and are not reproduced when the program is restarted. For this reason, verification of multithreaded programs is a relevant problem, and its solution requires the construction of a rigorous mathematical semantics.
 
 % Формальная семантика многопоточной системы, оперирующей с общей разделяемой памятью,
 % называется \emph{моделью памяти (memory model)}. 
@@ -90,7 +90,7 @@ The main purpose of the memory model is to determine the set of valid \emph{exec
 % который переключается в вычислителе при смене текущего потока, 
 % но глобальное состояние разделяемой памяти является общим для всех потоков.
 The most well-known and intuitive memory model is the \emph{sequential consistency model} proposed by Leslie Lamport in 1979 \cite{Lamport:TC79}. This model assumes that any result of executing a multithreaded program can be obtained by sequentially executing some sequence of instructions of program threads by a single computer (for example, a processor core): it does one or more calculation steps in one thread, then switches to another thread, executes a few instructions there, then switches to the next thread, and so on until all threads are fully executed.
-During execution, each thread can have its own local context (instruction counter and register state), which switches in the computer when the current thread is changed, but the global state of shared memory is shared between all threads.
+During execution, each thread can have its own local context (instruction counter and state of registers), which switches in the computer when the current thread is changed, but the global state of memory is shared between all threads.
 
 % К сожалению, простая и интуитивная модель последовательной согласованности 
 % не может описать все возможные сценарии исполнения многопоточных программ, 
@@ -122,7 +122,7 @@ Execution scenarios of multithreaded programs that go beyond the sequential cons
 % \OCaml~\autocite{Dolan-al:PLDI18},
 % а также для распределенных систем%
 % ~\autocite{Jagadeesan-al:ESOP2018,Lahav-Boker:PLDI2020}.
-The question of which weak behaviour scenarios should be allowed and which should not is not unambiguous: its answer depends on the programming language and the target processor architecture.
+The question of which weak behaviour scenarios should be allowed and which should not is ambiguous: its answer depends on the programming language and the target processor architecture.
 For this reason, many different memory models have appeared in recent years, both for multiprocessors such as \Intel~\autocite{Sewell-al:CACM10},
 \ARM~\autocite{Pulte-al:POPL18},
 \POWER~\autocite{Sarkar-al:PLDI11}, and for programming languages such as
@@ -130,7 +130,7 @@ For this reason, many different memory models have appeared in recent years, bot
 \Java~\autocite{Manson-al:POPL05},
 \JS~\autocite{Watt-al:PLDI2020},
 \OCaml~\autocite{Dolan-al:PLDI18},
-as well as distributed systems
+as well as distributed systems%
 ~\autocite{Jagadeesan-al:ESOP2018,Lahav-Boker:PLDI2020}.
 
 % В связи с этим актуальна задача по формализации 
@@ -219,7 +219,7 @@ Such tools systematically examine program traces searching for various errors, s
 For example, tools like \genmc~\autocite{Kokologiannakis:CAD2021}
 or \CDSChecker~\autocite{Norris-Demsky:OOPSLA2013} are able to perform verification of
 multithreaded programs written in \CPP.
-However, such tools either support only a fragment of the \CPP memory model ~\autocite{Lahav-al:PLDI17} that does not take into account all possible weak behaviour scenarios, or they demonstrate low efficiency even for small programs.
+However, such tools either support only a fragment of the \CPP memory model~\autocite{Lahav-al:PLDI17} that does not take into account all possible weak behaviour scenarios, or they demonstrate low efficiency even for small programs.
 The fact is that, as already mentioned, the memory models proposed today for \CPP and \Java allow too many
 weak execution scenarios, which complicates the process of building effective verification tools. This, in turn, raises the question of the need to refine these models
 in order to simplify the program verification process.
@@ -242,11 +242,12 @@ in order to simplify the program verification process.
 % в рамках классической теории структур событий?
 A promising approach to solving the problem of conceptual complexity of weak memory models is the theory of \emph{event structures}~\autocite{Winskel:86}.
 This theory makes it possible to declaratively describe the semantics of a multithreaded system.
-In the simplest version , the event structure consists of the following elements:
+In the simplest version, the event structure consists of the following:
 a set of atomic events;
 a function that assigns a semantic label to each event;
-relations of causality; relations of conflict between events.
-Note, however, that weak memory models using event structures introduce new types of such structures that turn out to be incompatible with classical theory%
+causality and conflict relations between events.
+Note, however, that existing weak memory models based on event structures 
+introduce new types of such structures that turn out to be incompatible with classical theory%
 ~\cite{Winskel:86,Nielsen-al:1981,Boudol-Castellani:1991,Langerak:91,Baldan-al:IC01}.
 And this, in turn, makes it impossible to use known theoretical results
 on event structures~\autocite{Vaandrager:TCS1991,Sassone:MFCS1993,Nielsen:REX93,Winskel-TCS:09}.
@@ -257,7 +258,7 @@ In this regard, the question arises whether these models or some of their meanin
 % формализации этих моделей в системах доказательства теорем
 % и разработки на основе этих исследований инструментов верификации многопоточных программ.
 Thus, this proves the relevance of the tasks of constructing and refining memory models for \CPP and \Java, formalizing these models in automated proof systems, 
-and developing of verification tools for multithreaded programs based on these studies.
+and development of verification tools for multithreaded programs based on these studies.
 
 {\progress}
 
@@ -301,8 +302,9 @@ These models, in turn, can be divided into several classes.
 % к увеличению времени исполнения программ~\autocite{Ou-Demsky:OOPSLA18}. 
 Models that \emph{preserve program order} constitute a large class, which includes the \TSO model of \Intel processors~\autocite{Sewell-al:CACM10}, sequential consistency models~\autocite{Lamport:TC79}, causal consistency~\autocite{Lahav-Boker:PLDI2020} and eventual consistency~\autocite{Jagadeesan-al:ESOP2018}.
 It also includes memory models of some programming languages, for example, \OCaml~\autocite{Dolan-al:PLDI18}.
-The common disadvantage of all listed models is that they do not support \emph{optimal compilation} to target code of two widespread multiprocessors: \ARM and \POWER.
-This means that the implementation of these models for these multiprocessors incurs additional overhead and may increase program run time~\autocite{Ou-Demsky:OOPSLA18}.
+The common disadvantage of all listed models is that they do not support \emph{optimal compilation} to target code of two widespread multiprocessor architectures: \ARM and \POWER.
+This means that the implementation of these models for these multiprocessors incurs additional overhead and 
+may reduce program performance~\autocite{Ou-Demsky:OOPSLA18}.
 
 % Модели памяти мультипроцессоров,
 % в частности, \ARM~\autocite{Pulte-al:POPL18} и \POWER~\autocite{Sarkar-al:PLDI11}, 
@@ -342,7 +344,7 @@ They usually support optimal compilation for modern multiprocessors and a wide r
 % В частности, для них, фактически, не изучены
 % вопросы построения эффективных инструментов автоматической и интерактивной верификации. 
 
-Models that preserve program order and syntactic dependencies are well studied. On the contrary, models preserving semantic dependencies are still being actively investigated. In fact, building effective tools for automatic and interactive verification for these models has not been studied at all.
+Models that preserve program order and syntactic dependencies are well studied. On the contrary, models preserving semantic dependencies are still being actively investigated. In fact, development of effective tools for automatic and interactive verification for these models has not been studied in depth.
 
 % Рассмотрим в качестве примера язык \CPP.
 % Для описания модели памяти данного языка исследовательским
@@ -375,7 +377,8 @@ However, this model does not support optimal compilation schemes in \ARM and \PO
 For the present work, we chose the  \Wkm~\autocite{Chakraborty-Vafeiadis:POPL19} model, which was proposed as a memory model for the \CPP and \LLVM languages%
 ~\autocite{Chakraborty-Vafeiadis:CGO17}.
 The \Wkm model is based on the theory of event structures~\autocite{Winskel:86,Winskel:ICALP1982}.
-The advantage of using this formalism is its declarativeness, which makes it easier to modify this model in order to add new properties to it.
+The advantage of using this formalism is its declarative nature, which makes it easier 
+to modify this model in order to add new properties to it.
 
 % Ранее было доказано, что модель \Wkm обладает рядом важных для практики свойств%
 % ~\autocite{Chakraborty-Vafeiadis:POPL19}.
@@ -388,7 +391,8 @@ The advantage of using this formalism is its declarativeness, which makes it eas
 Earlier it was proved that the \Wkm model has a number of important properties for practical use%
 ~\autocite{Chakraborty-Vafeiadis:POPL19}.
 However, this model has a number of disadvantages:
-the correctness of optimal compilation to the model of modern multiprocessors has not been proven for it before, there are no software verification tools for this model,
+the correctness of optimal compilation to the model of modern multiprocessors has not been proven yet, 
+there are no software verification tools for this model,
 and it does not fit into the classical theory of event structures~\cite{Winskel:86}.
 
 % {\aim} данной работы является  исследование и
@@ -405,7 +409,7 @@ To achieve this goal, the following {\tasks} were formulated.
 %     Формализовать в системе интерактивного доказательства теорем \coq модель памяти \Wkm и
 %     доказательство корректности оптимальной схемы компиляции
 %     из модели \Wkm в модели памяти современных мультипроцессоров.
-Formalize the \Wkm memory model and the proof of correctness of the optimal compilation from \Wkm to the memory models of modern multiprocessors using the \coq interactive theorem prover.
+Formalize the \Wkm memory model and the proof of correctness of the optimal compilation scheme from \Wkm to the memory models of modern multiprocessors using the \coq interactive theorem prover.
    \item
 %     Разработать строгую версию модели \Wkm, 
 %     допускающую реализацию эффективных инструментов автоматической верификации
@@ -413,26 +417,31 @@ Formalize the \Wkm memory model and the proof of correctness of the optimal comp
 %     (в частности, корректность компиляции, корректность локальных трансформаций программ, 
 %      теорема о свободе от гонок).
 Develop a strict version of the \Wkm model,
-enabling implementation of effective automatic verification tools, and prove that the basic properties of \Wkm are preserved in it (in particular, correctness of compilation, correctness of local transformations of programs,
+enabling implementation of effective automatic verification tools, 
+and prove that it preserves the properties of the original \Wkm model 
+(in particular, correctness of compilation, correctness of local transformations of programs,
 the data race freedom theorem).
    \item
 %     Разработать инструмент проверки моделей (model~checking) для предложенной модели.
 Develop a model checking tool for the proposed model.
 %   \item
 %     Исследовать применимость классической теории структур в контексте слабых моделей памяти.
-Investigate the applicability of the classical theory of structures in the context of weak memory models.
+   \item 
+Investigate the applicability of the classical theory of event structures in the context of weak memory models.
 \end{enumerate}
 
 % {\methods} Диссертационное исследование базируется на теории формальных семантик
 % для математически строгого описания сценариев поведения  программ. 
-{\methods} This dissertation is based on the theory of formal semantics for mathematically rigorous description of program behaviour scenarios.
+{\methods} This dissertation is based on the theory of formal semantics for mathematically rigorous 
+description of program behaviour.
 
 % В работе используются классические формализмы, в частности, 
 % системы помеченных переходов, языки помеченных частично 
 % упорядоченных мультимножеств и структуры событий. Для формализации некоторых теорем и доказательств, представленных в данной работе, 
 % использовалась система интерактивного доказательства теорем \coq 
 % и библиотека формализованных математических теорий \mathcomp. Представленные в работе  программные средства верификации  реализованы на языке \CLANG и используют инструмент \genmc.  
-The paper uses classical formalisms, in particular, labeled transition systems, languages of labeled partially ordered multisets, and event structures. To formalize some of the theorems and proofs presented in this paper, we used the \coq proof assistant and the \mathcomp library which provides access to formalized mathematical theories. The verification software tools presented in the paper are implemented in  \CLANG  and use the \genmc tool.
+The paper uses classical formalisms, in particular, labeled transition systems, languages of labeled partially ordered multisets, and event structures. To formalize some of the theorems and proofs presented in this paper, we used the \coq proof assistant and the \mathcomp library which provides access to formalized mathematical theories. 
+The software verification tool presented in the dissertation is implemented in \CLANG on top of \genmc tool.
 
 
 {\defpositions}
@@ -442,7 +451,7 @@ The paper uses classical formalisms, in particular, labeled transition systems, 
 % Доказана корректность оптимальной схемы компиляции из модели \Wkm
 %     в модели современных мультипроцессоров \TSO, \ARM и \POWER;
 %     выполнена формализация модели \Wkm, а также  предложенного доказательства  в системе \coq.
-We prove the correctness of optimal compilation from \Wkm 
+We prove the correctness of optimal compilation schemes from \Wkm 
 to the model of modern multiprocessors \TSO, \ARM and \POWER;
 we formalize \Wkm, as well as the proposed proof, in \coq.
 %   \item Предложена модель \WkmS, расширяющая модель \Wkm 
@@ -458,14 +467,14 @@ and \emph{certification locality} required for verification; we prove the preser
 %     написанных на языке \CLANG, методом проверки моделей относительно модели памяти \WkmS;
 %     экспериментально показана эффективность данного инструмента по сравнению с аналогами.
 \item We develop the \wmc tool, which performs verification of multithreaded programs
-written in \CLANG using the method of checking models with regards to the \WkmS memory model; we show the
+written in \CLANG using the model checking with regards to the \WkmS memory model; we show the
 the effectiveness of this tool in comparison with its counterparts.
 %   \item Предложен метод кодирования слабых моделей памяти 
 %     с помощью классических простых структур событий с предикатом консистентности.
 %     Теория данного класса структур событий формализована в системе \coq.
 %     Выделен фрагмент модели памяти \Wkm, укладывающийся в эту теорию. 
 
-\item We propose a method for encoding weak memory models using classical simple event structures with a consistency predicate.The theory of this class of event structures is formalized in \coq. The fragment of the \Wkm memory model that fits into this theory is identified.
+\item We propose a method for encoding weak memory models using classical prime event structures with a consistency predicate. The theory of this class of event structures is formalized in \coq. The fragment of the \Wkm memory model that fits into this theory is identified.
 \end{enumerate}
 
 {\novelty}
@@ -474,11 +483,11 @@ the effectiveness of this tool in comparison with its counterparts.
 %   \item Впервые доказана корректность оптимальной схемы компиляции
 %     из модели памяти, основанной на структурах событий (\Wkm), 
 %     в модели памяти современных мультипроцессоров.
-\item For the first time, we prove the correctness of optimal compilation from the memory model based on event structures (\Wkm) to the memory model of modern multiprocessors.
+\item For the first time, we prove the correctness of optimal compilation from the memory model based on event structures (\Wkm) to the memory models of modern multiprocessors.
 %   \item Впервые предложена модель памяти (\WkmS),
 %     принадлежащая к классу моделей, сохраняющих семантические зависимости, 
 %     и при этом допускающая реализацию эффективных методов автоматической верификации программ. 
-\item For the first time, we propose a memory model (\WkmS) which preserves semantic dependencies, and at the same time allows the implementation of effective methods of automatic verification of programs.
+\item For the first time, we propose a memory model (\WkmS) which preserves semantic dependencies, and at the same time allows the implementation of effective methods for automatic verification of programs.
 %   \item Разработан инструмент проверки моделей \wmc для модели памяти \WkmS,
 %     который является существенно более эффективным по сравнению с аналогами 
 %     поддерживающими класс моделей памяти, 
@@ -490,7 +499,7 @@ the effectiveness of this tool in comparison with its counterparts.
 \item The \wmc model checking tool for the \WkmS memory model has been developed, which is significantly more efficient compared to its counterparts that support a class of memory models preserving syntactic or semantic dependencies
 %   \item Впервые выполнена формализация классической теории 
 %     простых структур событий в системе \coq. 
-\item For the first time, we formalize the classical simple event structures theory in \coq.
+\item For the first time, we formalize the classical prime event structures theory~in~\coq.
 \end{enumerate}
 
 {\influence}
@@ -511,18 +520,20 @@ The formalization of the \Wkm memory model in \coq opens the path to further dev
 New properties proposed within the \WkmS model ---
 load buffering race freedom and certification locality ---
 can also be added to other memory models in order to develop methods for automatic verification of programs in these models.
-These properties make it possible to optimize the model verification algorithm and thus significantly increase its efficiency.
+These properties make it possible to optimize the model checking algorithm and thus significantly increase its efficiency.
 
 % Предложенный инструмент проверки моделей может быть использован на практике
 % для отладки и верификации многопоточных программ, 
 % написанных на языке \CLANG, с учетом слабых сценариев исполнения, 
 % допустимых стандартом этого языка.
-The proposed model verification tool can be used in practice for debugging and verification of multithreaded programs written in \CLANG, taking into account weak execution scenarios allowed by the standard of this language.
+The proposed model checking tool can be used in practice for debugging and verification of multithreaded programs written in \CLANG, taking into account weak execution scenarios allowed by the language standard.
 % Исследование фрагмента модели памяти \Wkm, укладывающегося в
 % классическую теорию структур событий, закладывает основы
 % для разработки обобщенной теории структур событий для
 % описания слабых сценариев исполнения. 
-The presented study of a fragment of the \Wkm memory model, which fits into the classical theory of event structures, lays the foundations for the development of a generalized theory of event structures for
+The presented study of a fragment of the \Wkm memory model, 
+which fits into the classical theory of event structures, 
+lays the foundations for the development of a generalized theory of event structures for
 descriptions of weak execution scenarios.
 
 % {\reliability} полученных результатов обеспечивается 
