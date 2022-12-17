@@ -257,8 +257,8 @@
 \newcommand{\lR}{{\mathtt{R}}}
 \newcommand{\lW}{{\mathtt{W}}}
 \newcommand{\lF}{{\mathtt{F}}}
-\newcommand{\lRex}{\lR_{\isex}}
-\newcommand{\lWex}{\lW_{\isex}}
+\newcommand{\lRex}{\lR^{\isex}}
+\newcommand{\lWex}{\lW^{\isex}}
 \newcommand{\lTS}{\mathtt{TS}}
 \newcommand{\lTE}{\mathtt{TE}}
 \newcommand{\lERR}{{\mathtt{Error}}}
@@ -444,9 +444,10 @@
   \issuedBox{#1}
 }
 
-
 \newcommand{\ese}[3]{e^{#1}_{#2#3}}
 \newcommand{\mese}[3]{\ese{#1}{#2}{#3}\colon}
+
+\newcommand{\thrdst}{\sigma}
 
 \newcommand{\thrdstep}[1]{\xrightarrow{#1}}
 \newcommand{\esaddpo}[1]{\xhookrightarrow[\lPO]{#1}}
@@ -458,17 +459,48 @@
 \newcommand{\esstepcons}[1]{\xhookrightarrow{#1}}
 \newcommand{\travstep}[1]{\xrightarrow{#1}}
 
+\newcommand{\deltapo}{\Delta_{\lPO}}
+\newcommand{\deltajf}{\Delta_{\lJF}}
+\newcommand{\deltaew}{\Delta_{\lEW}}
+\newcommand{\deltaco}{\Delta_{\lCO}}
+\newcommand{\deltarmw}{\Delta_{\lRMW}}
+
+\newcommand{\lCONT}{{\Psi}}
+
 \newcommand{\TC}{TC}
 \newcommand{\TCinit}[1]{\TC_{\mathrm{init}}({#1})}
 \newcommand{\TCfinal}[1]{\TC_{\mathrm{final}}({#1})}
 
 \newcommand{\simrel}{\mathcal{I}}
+\newcommand{\simrelcert}{\mathcal{I}^{\mathrm{cert}}}
 
 \newcommand{\ea}{f}
 % a shortcut to map event names of graph to event structure
 \newcommand{\gs}[1]{\underline{#1}}
 
 \newcommand{\Br}{Br}
+
+\newcommand{\Coverable}{\mathit{Coverable}}
+\newcommand{\Issuable}{\mathit{Issuable}}
+
+\newcommand{\IssueStep}{(Issue)\xspace}
+\newcommand{\CoverStep}{(Cover)\xspace}
+\newcommand{\ReleaseCoverStep}{(Release-Cover)\xspace}
+\newcommand{\RMWCoverStep}{(RMW-Cover)\xspace}
+
+\newcommand{\AddPORule}{(Add $\lPO$)\xspace}
+\newcommand{\AddJFRule}{(Add $\lJF$)\xspace}
+\newcommand{\AddEWRule}{(Add $\lEW$)\xspace}
+\newcommand{\AddCORule}{(Add $\lCO$)\xspace}
+\newcommand{\AddRMWRule}{(Add $\lRMW$)\xspace}
+\newcommand{\AddFRule}{(Add $\lF$)\xspace}
+\newcommand{\AddRRule}{(Add $\lR$)\xspace}
+\newcommand{\AddWRule}{(Add $\lW$)\xspace}
+\newcommand{\AddEventRule}{(Add Event)\xspace}
+
+\newcommand{\progTrav}{P_{\mathtt{trav}}}
+\newcommand{\GTrav}{G_{\mathtt{trav}}}
+\newcommand{\GCert}{G_{\mathtt{cert}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%  Pomsets <-> Exec. Graphs  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -616,18 +648,19 @@
 
 \newcommand{\coq}{\textsc{Coq}\xspace}
 \newcommand{\gallina}{\textsc{Gallina}\xspace}
+\newcommand{\agda}{\textsc{Agda}\xspace}
+\newcommand{\lean}{\textsc{Lean}\xspace}
+\newcommand{\arend}{\textsc{Arend}\xspace}
+\newcommand{\idris}{\textsc{Idris}\xspace}
+\newcommand{\isabelle}{\textsc{Isabelle/HOL}\xspace}
+
 \newcommand{\mathcomp}{\textsc{MathComp}\xspace}
 \newcommand{\analysis}{\textsc{MathComp-Analysis}\xspace}
 \newcommand{\finmap}{\textsc{finmap}\xspace}
 \newcommand{\relationalgebra}{\textsc{relation-algebra}\xspace}
 \newcommand{\ssreflect}{\textsc{SSReflect}\xspace}
 \newcommand{\equations}{\textsc{Equations}\xspace}
-
-\newcommand{\agda}{\textsc{Agda}\xspace}
-\newcommand{\lean}{\textsc{Lean}\xspace}
-\newcommand{\arend}{\textsc{Arend}\xspace}
-\newcommand{\idris}{\textsc{Idris}\xspace}
-\newcommand{\isabelle}{\textsc{Isabelle/HOL}\xspace}
+\newcommand{\hahn}{\textsc{Hahn}\xspace}
 
 %% tools 
 
@@ -791,15 +824,15 @@
 \newcommand{\aka}{\textit{a.k.a.}\xspace}
 \newcommand{\corr}{\textit{corr.}\xspace}
 
-% definitions/lemmas/theorems etc
-\newtheorem{lemma}{Лемма}
-\newtheorem{theorem}{Теорема}
-\newtheorem{proposition}{Утверждение}
-\newtheorem{definition}{Определение}
+% definitions, lemmas, theorems, etc
+\newtheorem{lemma}{Лемма}[chapter]
+\newtheorem{theorem}[lemma]{Теорема}
+\newtheorem{proposition}[lemma]{Утверждение}
+\newtheorem{definition}[lemma]{Определение}
 
 %% for proof trees
 \newcommand{\rulehskip}{\hskip 1.5em}
-\newcommand{\rulevspace}{\vspace{3em}}
+\newcommand{\rulevspace}{\vspace{2em}}
 
 %% for comments
 \newcommand{\eupp}[1]{{\color{orange!70!black}\textbf{Evgenii: #1}}}
@@ -859,3 +892,12 @@
 }
 }
 \makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%  Additional settings  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+% same numeration for figures and tables
+\let\c@figure\c@table
+\makeatother 
